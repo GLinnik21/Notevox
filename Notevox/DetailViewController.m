@@ -22,6 +22,7 @@
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissViewController)];
     self.navigationItem.rightBarButtonItem = doneButton;
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithDisplayP3Red:241.0/255.0 green:90.0/255.0 blue:36.0/255.0 alpha:1];
 }
 
 

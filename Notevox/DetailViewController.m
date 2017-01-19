@@ -19,6 +19,9 @@
     if (self.detailItem) {
         self.detailDescriptionLabel.text = [self.detailItem description];
     }
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissViewController)];
+    self.navigationItem.rightBarButtonItem = doneButton;
 }
 
 
@@ -32,6 +35,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dismissViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

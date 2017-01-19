@@ -8,10 +8,13 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "CustomTableViewCell.h"
 
 @interface MasterViewController ()
 
 @property NSMutableArray *objects;
+@property UIColor *buttonTintColor;
+
 @end
 
 @implementation MasterViewController
@@ -19,10 +22,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    self.buttonTintColor = [UIColor colorWithDisplayP3Red:241.0/255.0 green:90.0/255.0 blue:36.0/255.0 alpha:1];
+    
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    self.navigationItem.leftBarButtonItem.tintColor = self.buttonTintColor;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
+    self.navigationItem.rightBarButtonItem.tintColor = self.buttonTintColor;
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
 
@@ -57,8 +65,6 @@
         NSDate *object = self.objects[indexPath.row];
         DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
         [controller setDetailItem:object];
-        controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
-        controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
 }
 
@@ -76,10 +82,14 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReminderCell" forIndexPath:indexPath];
 
     NSDate *object = self.objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    static int count = 0;
+    cell.taskTextView.text = [NSString stringWithFormat:@"%i cell", count];
+    cell.dateLabel.text = [object description];
+    cell.timeLabel.text = @"0:00";
+    count++;
     return cell;
 }
 

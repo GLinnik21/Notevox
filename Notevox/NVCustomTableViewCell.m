@@ -1,14 +1,14 @@
 //
-//  CustomTableViewCell.m
+//  NVCustomTableViewCell.m
 //  Notevox
 //
 //  Created by Глеб Линник on 19.01.17.
 //  Copyright © 2017 ARobot. All rights reserved.
 //
 
-#import "CustomTableViewCell.h"
+#import "NVCustomTableViewCell.h"
 
-@implementation CustomTableViewCell
+@implementation NVCustomTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

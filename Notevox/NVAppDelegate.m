@@ -1,19 +1,19 @@
 //
-//  AppDelegate.m
+//  NVAppDelegate.m
 //  Notevox
 //
 //  Created by Глеб Линник on 19.01.17.
 //  Copyright © 2017 ARobot. All rights reserved.
 //
 
-#import "AppDelegate.h"
-#import "DetailViewController.h"
+#import "NVAppDelegate.h"
+#import "NVDetailViewController.h"
 
-@interface AppDelegate () <UISplitViewControllerDelegate>
+@interface NVAppDelegate () <UISplitViewControllerDelegate>
 
 @end
 
-@implementation AppDelegate
+@implementation NVAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -56,7 +56,7 @@
 #pragma mark - Split view
 
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
-    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[DetailViewController class]] && ([(DetailViewController *)[(UINavigationController *)secondaryViewController topViewController] detailItem] == nil)) {
+    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[NVDetailViewController class]] && ([(NVDetailViewController *)[(UINavigationController *)secondaryViewController topViewController] detailItem] == nil)) {
         // Return YES to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
         return YES;
     } else {

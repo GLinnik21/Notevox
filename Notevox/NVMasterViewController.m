@@ -1,23 +1,23 @@
 //
-//  MasterViewController.m
+//  NVNVMasterViewController.m
 //  Notevox
 //
 //  Created by Глеб Линник on 19.01.17.
 //  Copyright © 2017 ARobot. All rights reserved.
 //
 
-#import "MasterViewController.h"
-#import "DetailViewController.h"
-#import "CustomTableViewCell.h"
+#import "NVMasterViewController.h"
+#import "NVDetailViewController.h"
+#import "NVCustomTableViewCell.h"
 
-@interface MasterViewController ()
+@interface NVMasterViewController ()
 
 @property NSMutableArray *objects;
 @property UIColor *buttonTintColor;
 
 @end
 
-@implementation MasterViewController
+@implementation NVMasterViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,7 +31,7 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.navigationItem.rightBarButtonItem.tintColor = self.buttonTintColor;
-    self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    self.detailViewController = (NVDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
 
 
@@ -63,7 +63,7 @@
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSDate *object = self.objects[indexPath.row];
-        DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
+        NVDetailViewController *controller = (NVDetailViewController *)[[segue destinationViewController] topViewController];
         [controller setDetailItem:object];
     }
 }
@@ -82,7 +82,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReminderCell" forIndexPath:indexPath];
+    NVCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReminderCell" forIndexPath:indexPath];
 
     NSDate *object = self.objects[indexPath.row];
     static int count = 0;

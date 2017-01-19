@@ -1,18 +1,18 @@
 //
-//  DetailViewController.m
+//  NVDetailViewController.m
 //  Notevox
 //
 //  Created by Глеб Линник on 19.01.17.
 //  Copyright © 2017 ARobot. All rights reserved.
 //
 
-#import "DetailViewController.h"
+#import "NVDetailViewController.h"
 
-@interface DetailViewController ()
+@interface NVDetailViewController ()
 
 @end
 
-@implementation DetailViewController
+@implementation NVDetailViewController
 
 - (void)configureView {
     // Update the user interface for the detail item.

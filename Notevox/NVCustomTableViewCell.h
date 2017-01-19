@@ -1,5 +1,5 @@
 //
-//  CustomTableViewCell.h
+//  NVCustomTableViewCell.h
 //  Notevox
 //
 //  Created by Глеб Линник on 19.01.17.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CustomTableViewCell : UITableViewCell
+@interface NVCustomTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UITextField *taskTextView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;

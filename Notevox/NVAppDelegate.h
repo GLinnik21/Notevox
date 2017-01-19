@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  NVAppDelegate.h
 //  Notevox
 //
 //  Created by Глеб Линник on 19.01.17.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface NVAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

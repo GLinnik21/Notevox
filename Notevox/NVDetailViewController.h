@@ -1,5 +1,5 @@
 //
-//  DetailViewController.h
+//  NVDetailViewController.h
 //  Notevox
 //
 //  Created by Глеб Линник on 19.01.17.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DetailViewController : UIViewController
+@interface NVDetailViewController : UIViewController
 
 @property (strong, nonatomic) NSDate *detailItem;
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;

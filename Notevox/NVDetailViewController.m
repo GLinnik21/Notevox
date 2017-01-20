@@ -16,19 +16,17 @@
 
 - (void)configureView {
     // Update the user interface for the detail item.
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
-    }
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissViewController)];
     self.navigationItem.rightBarButtonItem = doneButton;
-    self.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithDisplayP3Red:241.0/255.0 green:90.0/255.0 blue:36.0/255.0 alpha:1];
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    [[self taskDescription] setDelegate:self];
+    
     [self configureView];
 }
 
@@ -42,6 +40,9 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    return [textField resignFirstResponder];
+}
 
 #pragma mark - Managing the detail item
 

@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NVDetailViewController : UIViewController
+@interface NVDetailViewController : UITableViewController <UITextFieldDelegate>
 
 @property (strong, nonatomic) NSDate *detailItem;
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UITextField *taskDescription;
+@property (weak, nonatomic) IBOutlet UIDatePicker *remindDatePicker;
 
 @end
 

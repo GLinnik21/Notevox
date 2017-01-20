@@ -13,7 +13,6 @@
 @interface NVMasterViewController ()
 
 @property NSMutableArray *objects;
-@property UIColor *buttonTintColor;
 
 @end
 
@@ -23,14 +22,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.buttonTintColor = [UIColor colorWithDisplayP3Red:241.0/255.0 green:90.0/255.0 blue:36.0/255.0 alpha:1];
-    
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    self.navigationItem.leftBarButtonItem.tintColor = self.buttonTintColor;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
-    self.navigationItem.rightBarButtonItem.tintColor = self.buttonTintColor;
     self.detailViewController = (NVDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
 
@@ -46,6 +41,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    return [textField resignFirstResponder];
+}
 
 - (void)insertNewObject:(id)sender {
     if (!self.objects) {
@@ -90,6 +88,7 @@
     cell.dateLabel.text = [object description];
     cell.timeLabel.text = @"0:00";
     count++;
+    [cell.taskTextView setDelegate:self];
     return cell;
 }
 

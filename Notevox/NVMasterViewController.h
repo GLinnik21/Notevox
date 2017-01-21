@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "NVReminder+Add.h"
 
 @class NVDetailViewController;
 

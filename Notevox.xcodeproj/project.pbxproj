@@ -1,0 +1,394 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EDDCAE951E30F773000FE262 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAE941E30F773000FE262 /* main.m */; };
+		EDDCAE981E30F773000FE262 /* NVAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAE971E30F773000FE262 /* NVAppDelegate.m */; };
+		EDDCAE9B1E30F773000FE262 /* NVMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAE9A1E30F773000FE262 /* NVMasterViewController.m */; };
+		EDDCAE9E1E30F773000FE262 /* NVDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAE9D1E30F773000FE262 /* NVDetailViewController.m */; };
+		EDDCAEA11E30F773000FE262 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDDCAE9F1E30F773000FE262 /* Main.storyboard */; };
+		EDDCAEA31E30F773000FE262 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDDCAEA21E30F773000FE262 /* Assets.xcassets */; };
+		EDDCAEA61E30F773000FE262 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDDCAEA41E30F773000FE262 /* LaunchScreen.storyboard */; };
+		EDDCAEB01E31048F000FE262 /* NVCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAEAF1E31048F000FE262 /* NVCustomTableViewCell.m */; };
+		EDDCAEDC1E323AC1000FE262 /* Notevox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAEDA1E323AC1000FE262 /* Notevox.xcdatamodeld */; };
+		EDDCAEE11E32B9E6000FE262 /* NVReminder.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAEE01E32B9E6000FE262 /* NVReminder.m */; };
+		EDDCAEE91E32D44C000FE262 /* NVReminder+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAEE81E32D44C000FE262 /* NVReminder+Add.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		EDDCAE901E30F773000FE262 /* Notevox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notevox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDDCAE941E30F773000FE262 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EDDCAE961E30F773000FE262 /* NVAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NVAppDelegate.h; sourceTree = "<group>"; };
+		EDDCAE971E30F773000FE262 /* NVAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NVAppDelegate.m; sourceTree = "<group>"; };
+		EDDCAE991E30F773000FE262 /* NVMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NVMasterViewController.h; sourceTree = "<group>"; };
+		EDDCAE9A1E30F773000FE262 /* NVMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NVMasterViewController.m; sourceTree = "<group>"; };
+		EDDCAE9C1E30F773000FE262 /* NVDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NVDetailViewController.h; sourceTree = "<group>"; };
+		EDDCAE9D1E30F773000FE262 /* NVDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NVDetailViewController.m; sourceTree = "<group>"; };
+		EDDCAEA01E30F773000FE262 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EDDCAEA21E30F773000FE262 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EDDCAEA51E30F773000FE262 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EDDCAEA71E30F773000FE262 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EDDCAEAE1E31048F000FE262 /* NVCustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVCustomTableViewCell.h; sourceTree = "<group>"; };
+		EDDCAEAF1E31048F000FE262 /* NVCustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVCustomTableViewCell.m; sourceTree = "<group>"; };
+		EDDCAEDB1E323AC1000FE262 /* Notevox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notevox.xcdatamodel; sourceTree = "<group>"; };
+		EDDCAEDF1E32B9E6000FE262 /* NVReminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVReminder.h; sourceTree = "<group>"; };
+		EDDCAEE01E32B9E6000FE262 /* NVReminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVReminder.m; sourceTree = "<group>"; };
+		EDDCAEE71E32D44C000FE262 /* NVReminder+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NVReminder+Add.h"; sourceTree = "<group>"; };
+		EDDCAEE81E32D44C000FE262 /* NVReminder+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NVReminder+Add.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EDDCAE8D1E30F773000FE262 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EDDCAE871E30F773000FE262 = {
+			isa = PBXGroup;
+			children = (
+				EDDCAE921E30F773000FE262 /* Notevox */,
+				EDDCAE911E30F773000FE262 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EDDCAE911E30F773000FE262 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EDDCAE901E30F773000FE262 /* Notevox.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EDDCAE921E30F773000FE262 /* Notevox */ = {
+			isa = PBXGroup;
+			children = (
+				EDDCAE961E30F773000FE262 /* NVAppDelegate.h */,
+				EDDCAE971E30F773000FE262 /* NVAppDelegate.m */,
+				EDDCAEAD1E310433000FE262 /* View Controllers */,
+				EDDCAE9F1E30F773000FE262 /* Main.storyboard */,
+				EDDCAEA21E30F773000FE262 /* Assets.xcassets */,
+				EDDCAEA41E30F773000FE262 /* LaunchScreen.storyboard */,
+				EDDCAEA71E30F773000FE262 /* Info.plist */,
+				EDDCAE931E30F773000FE262 /* Supporting Files */,
+				EDDCAEDD1E32AAF4000FE262 /* Views */,
+				EDDCAEDE1E32AB06000FE262 /* Model */,
+			);
+			path = Notevox;
+			sourceTree = "<group>";
+		};
+		EDDCAE931E30F773000FE262 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EDDCAE941E30F773000FE262 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EDDCAEAD1E310433000FE262 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EDDCAE991E30F773000FE262 /* NVMasterViewController.h */,
+				EDDCAE9A1E30F773000FE262 /* NVMasterViewController.m */,
+				EDDCAE9C1E30F773000FE262 /* NVDetailViewController.h */,
+				EDDCAE9D1E30F773000FE262 /* NVDetailViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		EDDCAEDD1E32AAF4000FE262 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EDDCAEAE1E31048F000FE262 /* NVCustomTableViewCell.h */,
+				EDDCAEAF1E31048F000FE262 /* NVCustomTableViewCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		EDDCAEDE1E32AB06000FE262 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EDDCAEDA1E323AC1000FE262 /* Notevox.xcdatamodeld */,
+				EDDCAEDF1E32B9E6000FE262 /* NVReminder.h */,
+				EDDCAEE01E32B9E6000FE262 /* NVReminder.m */,
+				EDDCAEE71E32D44C000FE262 /* NVReminder+Add.h */,
+				EDDCAEE81E32D44C000FE262 /* NVReminder+Add.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EDDCAE8F1E30F773000FE262 /* Notevox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EDDCAEAA1E30F773000FE262 /* Build configuration list for PBXNativeTarget "Notevox" */;
+			buildPhases = (
+				EDDCAE8C1E30F773000FE262 /* Sources */,
+				EDDCAE8D1E30F773000FE262 /* Frameworks */,
+				EDDCAE8E1E30F773000FE262 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Notevox;
+			productName = Notevox;
+			productReference = EDDCAE901E30F773000FE262 /* Notevox.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EDDCAE881E30F773000FE262 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = NV;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = ARobot;
+				TargetAttributes = {
+					EDDCAE8F1E30F773000FE262 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Y36SSAEYM4;
+						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = EDDCAE8B1E30F773000FE262 /* Build configuration list for PBXProject "Notevox" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EDDCAE871E30F773000FE262;
+			productRefGroup = EDDCAE911E30F773000FE262 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EDDCAE8F1E30F773000FE262 /* Notevox */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EDDCAE8E1E30F773000FE262 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDDCAEA61E30F773000FE262 /* LaunchScreen.storyboard in Resources */,
+				EDDCAEA31E30F773000FE262 /* Assets.xcassets in Resources */,
+				EDDCAEA11E30F773000FE262 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EDDCAE8C1E30F773000FE262 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDDCAE981E30F773000FE262 /* NVAppDelegate.m in Sources */,
+				EDDCAEE91E32D44C000FE262 /* NVReminder+Add.m in Sources */,
+				EDDCAEDC1E323AC1000FE262 /* Notevox.xcdatamodeld in Sources */,
+				EDDCAE9B1E30F773000FE262 /* NVMasterViewController.m in Sources */,
+				EDDCAEE11E32B9E6000FE262 /* NVReminder.m in Sources */,
+				EDDCAE951E30F773000FE262 /* main.m in Sources */,
+				EDDCAEB01E31048F000FE262 /* NVCustomTableViewCell.m in Sources */,
+				EDDCAE9E1E30F773000FE262 /* NVDetailViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		EDDCAE9F1E30F773000FE262 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EDDCAEA01E30F773000FE262 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EDDCAEA41E30F773000FE262 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EDDCAEA51E30F773000FE262 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EDDCAEA81E30F773000FE262 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EDDCAEA91E30F773000FE262 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EDDCAEAB1E30F773000FE262 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = Y36SSAEYM4;
+				INFOPLIST_FILE = Notevox/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.arobot.Notevox;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		EDDCAEAC1E30F773000FE262 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = Y36SSAEYM4;
+				INFOPLIST_FILE = Notevox/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.arobot.Notevox;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EDDCAE8B1E30F773000FE262 /* Build configuration list for PBXProject "Notevox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDDCAEA81E30F773000FE262 /* Debug */,
+				EDDCAEA91E30F773000FE262 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EDDCAEAA1E30F773000FE262 /* Build configuration list for PBXNativeTarget "Notevox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDDCAEAB1E30F773000FE262 /* Debug */,
+				EDDCAEAC1E30F773000FE262 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EDDCAEDA1E323AC1000FE262 /* Notevox.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EDDCAEDB1E323AC1000FE262 /* Notevox.xcdatamodel */,
+			);
+			currentVersion = EDDCAEDB1E323AC1000FE262 /* Notevox.xcdatamodel */;
+			path = Notevox.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = EDDCAE881E30F773000FE262 /* Project object */;
+}

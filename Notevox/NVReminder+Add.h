@@ -10,6 +10,6 @@
 
 @interface NVReminder (Add)
 
-+ (NVReminder *)addReminderFromDictionary:(NSDictionary *)reminderInfo;
++ (NVReminder *)addReminderFromDictionary:(NSDictionary *)reminderInfo withContext:(NSManagedObjectContext*)context;
 
 @end

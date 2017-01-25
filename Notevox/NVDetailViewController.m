@@ -16,9 +16,10 @@
 
 - (void)configureView {
     // Update the user interface for the detail item.
-    
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissViewController)];
     self.navigationItem.rightBarButtonItem = doneButton;
+    
+    self.taskDescription.text = self.reminder.reminderTitle;
 }
 
 

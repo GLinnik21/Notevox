@@ -11,9 +11,7 @@
 
 @implementation NVReminder (Add)
 
-+ (NVReminder *)addReminderFromDictionary:(NSDictionary *)reminderInfo {
-    NVAppDelegate *appDelegate = (NVAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [[appDelegate persistentContainer] viewContext];
++ (NVReminder *)addReminderFromDictionary:(NSDictionary *)reminderInfo withContext:(NSManagedObjectContext*)context{
     
     NVReminder *reminder = [NSEntityDescription insertNewObjectForEntityForName:@"Reminder" inManagedObjectContext:context];
     

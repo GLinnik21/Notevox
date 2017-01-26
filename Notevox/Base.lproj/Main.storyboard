@@ -78,6 +78,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T7t-vi-Oud">
                                             <rect key="frame" x="290" y="10" width="33" height="33"/>
                                             <state key="normal" image="playButton"/>
+                                            <state key="highlighted" image="pauseButton"/>
                                             <connections>
                                                 <action selector="playReminder:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="tQp-sE-RQc"/>
                                             </connections>
@@ -157,6 +158,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <action selector="descriptionChanged:" destination="5LO-F5-hy1" eventType="editingChanged" id="E6G-St-17u"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -185,6 +189,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zD9-e3-opp">
                                                     <rect key="frame" x="310" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="switchChanged:" destination="5LO-F5-hy1" eventType="touchUpInside" id="r65-nL-h3Z"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -195,25 +202,25 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="N7C-mt-gF2" detailTextLabel="DU7-A3-UAD" style="IBUITableViewCellStyleValue1" id="lGT-2a-sAI">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="N7C-mt-gF2" detailTextLabel="xEj-V3-nK1" style="IBUITableViewCellStyleValue1" id="lGT-2a-sAI">
                                         <rect key="frame" x="0.0" y="159" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lGT-2a-sAI" id="dfZ-dN-ajy">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N7C-mt-gF2">
-                                                    <rect key="frame" x="15" y="11" width="34" height="21"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Remind" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N7C-mt-gF2">
+                                                    <rect key="frame" x="15" y="11" width="58" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DU7-A3-UAD">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xEj-V3-nK1">
                                                     <rect key="frame" x="316" y="11" width="44" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" red="1" green="0.4135699498" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -231,6 +238,9 @@
                                                     <date key="date" timeIntervalSinceReferenceDate="506597275.66720998">
                                                         <!--2017-01-20 09:27:55 +0000-->
                                                     </date>
+                                                    <connections>
+                                                        <action selector="dateChanged:" destination="5LO-F5-hy1" eventType="valueChanged" id="Sy9-Ae-diX"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                             <constraints>
@@ -251,6 +261,10 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Parameters" id="ELL-z6-tIv"/>
                     <connections>
+                        <outlet property="datePickerCell" destination="hz7-GJ-S6x" id="4SP-MU-fhX"/>
+                        <outlet property="dateToRemindSwitch" destination="zD9-e3-opp" id="cQD-XP-myI"/>
+                        <outlet property="labelsCell" destination="lGT-2a-sAI" id="nJF-4v-ceA"/>
+                        <outlet property="remindDateLabel" destination="xEj-V3-nK1" id="Cwa-4M-gi3"/>
                         <outlet property="remindDatePicker" destination="p56-p2-C3f" id="ybM-89-287"/>
                         <outlet property="taskDescription" destination="SYs-5D-QDR" id="1XK-oC-R1T"/>
                     </connections>
@@ -261,6 +275,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="pauseButton" width="33" height="33"/>
         <image name="playButton" width="33" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>

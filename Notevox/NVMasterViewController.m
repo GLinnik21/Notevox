@@ -46,6 +46,13 @@
     return [textField resignFirstResponder];
 }
 
+- (NSString *)formateDateStringfromDate:(NSDate *)date {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.locale = [NSLocale currentLocale];
+    dateFormatter.dateFormat = @"dd.MM.yy, HH:mm";
+    return [dateFormatter stringFromDate:date];
+}
+
 - (void)insertNewObject:(id)sender {
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     
@@ -108,7 +115,7 @@
     NVReminder *reminder = (NVReminder*)[[self fetchedResultsController] objectAtIndexPath:indexPath];
     
     cell.taskTextView.text = reminder.reminderTitle;
-    cell.dateLabel.text = reminder.dateToRemind.description;
+    cell.dateLabel.text = [self formateDateStringfromDate:reminder.dateToRemind];
     cell.timeLabel.text = @"0:00";
     
     [cell.taskTextView setDelegate:self];

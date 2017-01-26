@@ -20,9 +20,55 @@
     self.navigationItem.rightBarButtonItem = doneButton;
     
     [self.taskDescription setText:self.reminder.reminderTitle];
-    [self.remindDatePicker setDate:self.reminder.dateToRemind];
+    
+    if (self.reminder.dateToRemind) {
+        [self.remindDatePicker setDate:self.reminder.dateToRemind];
+        [self.remindDateLabel setText:[self formateDateStringfromDate:self.reminder.dateToRemind]];
+        [self.dateToRemindSwitch setOn:YES];
+    } else {
+        [self.dateToRemindSwitch setOn:NO];
+        [self hideDateCells];
+    }
 }
 
+- (IBAction)dateChanged:(id)sender {
+    [self.remindDateLabel setText:[self formateDateStringfromDate:self.remindDatePicker.date]];
+}
+
+- (IBAction)descriptionChanged:(id)sender {
+    if ([self.taskDescription.text isEqual: @""]) {
+        [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    } else {
+        [self.navigationItem.rightBarButtonItem setEnabled:YES];
+    }
+}
+
+- (IBAction)switchChanged:(id)sender {
+    if (!self.dateToRemindSwitch.isOn) {
+        [self hideDateCells];
+        self.reminder.dateToRemind = nil;
+    } else {
+        [self showDateCells];
+    }
+}
+
+- (void)hideDateCells {
+    [self.labelsCell setHidden:YES];
+    [self.datePickerCell setHidden:YES];
+}
+
+- (void)showDateCells {
+    [self.labelsCell setHidden:NO];
+    [self.datePickerCell setHidden:NO];
+    [self.remindDateLabel setText:[self formateDateStringfromDate:self.remindDatePicker.date]];
+}
+
+- (NSString *)formateDateStringfromDate:(NSDate *)date {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.locale = [NSLocale currentLocale];
+    dateFormatter.dateFormat = @"EEE, dd MMM yyyy HH:mm";
+    return [dateFormatter stringFromDate:date];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,7 +79,9 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    self.reminder.dateToRemind = self.remindDatePicker.date;
+    if (self.dateToRemindSwitch.isOn) {
+        self.reminder.dateToRemind = self.remindDatePicker.date;
+    }
     self.reminder.reminderTitle = self.taskDescription.text;
 }
 

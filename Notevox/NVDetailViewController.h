@@ -12,7 +12,6 @@
 
 @interface NVDetailViewController : UITableViewController <UITextFieldDelegate>
 
-@property (strong, nonatomic) NSDate *detailItem;
 @property (weak, nonatomic) IBOutlet UITextField *taskDescription;
 @property (weak, nonatomic) IBOutlet UIDatePicker *remindDatePicker;
 @property (weak) NVReminder *reminder;

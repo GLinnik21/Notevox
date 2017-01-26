@@ -19,7 +19,8 @@
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissViewController)];
     self.navigationItem.rightBarButtonItem = doneButton;
     
-    self.taskDescription.text = self.reminder.reminderTitle;
+    [self.taskDescription setText:self.reminder.reminderTitle];
+    [self.remindDatePicker setDate:self.reminder.dateToRemind];
 }
 
 
@@ -31,6 +32,10 @@
     [self configureView];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    self.reminder.dateToRemind = self.remindDatePicker.date;
+    self.reminder.reminderTitle = self.taskDescription.text;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -45,16 +50,6 @@
     return [textField resignFirstResponder];
 }
 
-#pragma mark - Managing the detail item
-
-- (void)setDetailItem:(NSDate *)newDetailItem {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
-        
-        // Update the view.
-        [self configureView];
-    }
-}
 
 
 @end

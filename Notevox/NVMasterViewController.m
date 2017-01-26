@@ -31,26 +31,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     self.clearsSelectionOnViewWillAppear = self.splitViewController.isCollapsed;
-    /*
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *documentsDirectory = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
-    
-    NSString *documentName = @"DataModel.sqlite";
-    NSURL *url = [documentsDirectory URLByAppendingPathComponent:documentName];
-    self.document = [[UIManagedDocument alloc] initWithFileURL:url];
-    
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[url path]]) {
-        [self.document openWithCompletionHandler:^(BOOL success) {
-            if (success) [self initializeFetchedResultsController];
-            if (!success) NSLog(@"Couldn't open document at %@", url);}
-         ];
-    } else {
-        [self.document saveToURL:url forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
-            if (success) [self initializeFetchedResultsController];
-            if (!success) NSLog(@"Couldn't open document at %@", url);}
-         ];
-    }
-    */
+
     [self initializeFetchedResultsController];
     [super viewWillAppear:animated];
 }
@@ -75,6 +56,14 @@
     newReminder.dateToRemind = [NSDate date];
     newReminder.audioFileURL = @"/dev/null";
     count++;
+    
+    NSError *error = nil;
+    if (![context save:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+        abort();
+    }
 }
 
 
@@ -102,18 +91,20 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         NVReminder *reminder = [self.fetchedResultsController objectAtIndexPath:indexPath];
         NVDetailViewController *controller = (NVDetailViewController *)[[segue destinationViewController] topViewController];
         [controller setReminder:reminder];
     }
 }
-
-
+/*
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    self.accessoryIndexPath = indexPath;
+}
+*/
 #pragma mark - Table View
 
-- (void)configureCell:(NVCustomTableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath
-{
+- (void)configureCell:(NVCustomTableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath {
     NVReminder *reminder = (NVReminder*)[[self fetchedResultsController] objectAtIndexPath:indexPath];
     
     cell.taskTextView.text = reminder.reminderTitle;
@@ -164,12 +155,10 @@
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [[self tableView] beginUpdates];
 }
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
-{
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
     switch(type) {
         case NSFetchedResultsChangeInsert:
             [[self tableView] insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
@@ -182,8 +171,7 @@
             break;
     }
 }
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
-{
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     switch(type) {
         case NSFetchedResultsChangeInsert:
             [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -200,8 +188,7 @@
             break;
     }
 }
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [[self tableView] endUpdates];
 }
 

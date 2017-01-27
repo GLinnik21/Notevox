@@ -33,6 +33,7 @@
     self.clearsSelectionOnViewWillAppear = self.splitViewController.isCollapsed;
 
     [self initializeFetchedResultsController];
+    [self.tableView reloadData];
     [super viewWillAppear:animated];
 }
 

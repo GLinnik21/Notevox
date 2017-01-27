@@ -26,6 +26,11 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (NVDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadTableView)
+                                                 name:@"reloadData"
+                                               object:nil];
 }
 
 
@@ -33,7 +38,7 @@
     self.clearsSelectionOnViewWillAppear = self.splitViewController.isCollapsed;
 
     [self initializeFetchedResultsController];
-    [self.tableView reloadData];
+    [self reloadTableView];
     [super viewWillAppear:animated];
 }
 
@@ -61,6 +66,24 @@
 
 }
 
+- (void)rescheduleAllLocalNotifications{
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    NSArray *fetchedData = [_fetchedResultsController fetchedObjects];
+    
+    for (int i = 0; i < fetchedData.count; i++) {
+        NVReminder *tempReminder = [fetchedData objectAtIndex:i];
+        //Schedule reminders only with date and only valid date
+        if (tempReminder.dateToRemind && [tempReminder.dateToRemind compare:[NSDate date]] == NSOrderedDescending) {
+            UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+            localNotification.fireDate = tempReminder.dateToRemind;
+            localNotification.alertBody = tempReminder.reminderTitle;
+            localNotification.timeZone = [NSTimeZone localTimeZone];
+            localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+            [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+        }
+    }
+}
+
 - (NSString *)formateDateStringfromDate:(NSDate *)date {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.locale = [NSLocale currentLocale];
@@ -75,10 +98,12 @@
     NVReminder *newReminder = [NSEntityDescription insertNewObjectForEntityForName:@"Reminder" inManagedObjectContext:context];
     
     static int count = 0;
-    newReminder.reminderTitle = [NSString stringWithFormat:@"%i cell", count];
-    newReminder.dateToRemind = [NSDate date];
+    static int time = 0;
+    newReminder.reminderTitle = [NSString stringWithFormat:@"Reminder %i", count];
+    newReminder.dateToRemind = [NSDate dateWithTimeIntervalSinceNow:60 + time];
     newReminder.audioFileURL = @"/dev/null";
     count++;
+    time += 60;
     
     NSError *error = nil;
     if (![context save:&error]) {
@@ -126,6 +151,10 @@
 }
 */
 #pragma mark - Table View
+
+- (void)reloadTableView {
+    [self.tableView reloadData];
+}
 
 - (void)configureCell:(NVCustomTableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath {
     NVReminder *reminder = (NVReminder*)[[self fetchedResultsController] objectAtIndexPath:indexPath];
@@ -186,7 +215,9 @@
 #pragma mark - NSFetchedResultsControllerDelegate
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [[self tableView] beginUpdates];
+    [self rescheduleAllLocalNotifications];
 }
+
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
     switch(type) {
         case NSFetchedResultsChangeInsert:
@@ -200,6 +231,7 @@
             break;
     }
 }
+
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     switch(type) {
         case NSFetchedResultsChangeInsert:
@@ -217,6 +249,7 @@
             break;
     }
 }
+
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [[self tableView] endUpdates];
 }

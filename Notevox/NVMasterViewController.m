@@ -43,12 +43,27 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self textFieldDidEndEditing:textField];
     return [textField resignFirstResponder];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    NVCustomTableViewCell *sellectedCell = (NVCustomTableViewCell *)textField.superview.superview;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sellectedCell];
+    NVReminder *reminder = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    if (textField.text.length > 0) {
+        reminder.reminderTitle = textField.text;
+    } else {
+        [textField setText:reminder.reminderTitle];
+    }
+
 }
 
 - (NSString *)formateDateStringfromDate:(NSDate *)date {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.locale = [NSLocale currentLocale];
+    dateFormatter.timeZone = [NSTimeZone systemTimeZone];
     dateFormatter.dateFormat = @"dd.MM.yy, HH:mm";
     return [dateFormatter stringFromDate:date];
 }
@@ -118,13 +133,19 @@
     cell.dateLabel.text = [self formateDateStringfromDate:reminder.dateToRemind];
     cell.timeLabel.text = @"0:00";
     
+    if ([reminder.dateToRemind compare:[NSDate date]] == NSOrderedAscending) {
+        cell.dateLabel.textColor = [UIColor redColor];
+    } else {
+        cell.dateLabel.textColor = [UIColor blackColor];;
+    }
+
+    
     [cell.taskTextView setDelegate:self];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [[[self fetchedResultsController] sections] count];
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     id< NSFetchedResultsSectionInfo> sectionInfo = [[self fetchedResultsController] sections][section];

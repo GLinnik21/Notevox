@@ -23,6 +23,7 @@
     
     if (self.reminder.dateToRemind) {
         [self.remindDatePicker setDate:self.reminder.dateToRemind];
+        [self.remindDatePicker setTimeZone:[NSTimeZone systemTimeZone]];
         [self.remindDateLabel setText:[self formateDateStringfromDate:self.reminder.dateToRemind]];
         [self.dateToRemindSwitch setOn:YES];
     } else {
@@ -66,6 +67,7 @@
 - (NSString *)formateDateStringfromDate:(NSDate *)date {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.locale = [NSLocale currentLocale];
+    dateFormatter.timeZone = [NSTimeZone systemTimeZone];
     dateFormatter.dateFormat = @"EEE, dd MMM yyyy HH:mm";
     return [dateFormatter stringFromDate:date];
 }

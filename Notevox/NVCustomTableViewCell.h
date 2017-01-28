@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *taskTextView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *creationLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 - (IBAction)playReminder:(id)sender;

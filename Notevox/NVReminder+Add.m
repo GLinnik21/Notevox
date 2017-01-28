@@ -16,6 +16,7 @@
     NVReminder *reminder = [NSEntityDescription insertNewObjectForEntityForName:@"Reminder" inManagedObjectContext:context];
     
     reminder.audioFileURL = [reminderInfo valueForKey:@"audioFileURL"];
+    reminder.creationDate = [reminderInfo valueForKey:@"creationDate"];
     reminder.dateToRemind = [reminderInfo valueForKey:@"dateToRemind"];
     reminder.reminderTitle = [reminderInfo valueForKey:@"reminderTitle"];
     

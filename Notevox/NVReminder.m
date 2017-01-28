@@ -12,6 +12,7 @@
 
 @dynamic audioFileURL;
 @dynamic dateToRemind;
+@dynamic creationDate;
 @dynamic reminderTitle;
 
 @end

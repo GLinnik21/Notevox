@@ -13,6 +13,11 @@
 
 @interface NVMasterViewController ()
 
+
+
+//for the results to be shown with two table delegates
+@property (nonatomic, strong) NVMasterViewController *searchResultsController;
+
 @end
 
 @implementation NVMasterViewController
@@ -31,8 +36,13 @@
                                              selector:@selector(reloadTableView)
                                                  name:@"reloadData"
                                                object:nil];
+    
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.dimsBackgroundDuringPresentation = false;
+    self.definesPresentationContext = true;
+    self.tableView.tableHeaderView = self.searchController.searchBar;
 }
-
 
 - (void)viewWillAppear:(BOOL)animated {
     self.clearsSelectionOnViewWillAppear = self.splitViewController.isCollapsed;
@@ -101,6 +111,7 @@
     static int time = 0;
     newReminder.reminderTitle = [NSString stringWithFormat:@"Reminder %i", count];
     newReminder.dateToRemind = [NSDate dateWithTimeIntervalSinceNow:60 + time];
+    newReminder.creationDate = [NSDate date];
     newReminder.audioFileURL = @"/dev/null";
     count++;
     time += 60;
@@ -124,6 +135,12 @@
     
     NVAppDelegate *appDelegate = (NVAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *moc = [[appDelegate dataController] managedObjectContext]; //Retrieve the main queue NSManagedObjectContext
+    
+    //For UISearhController
+    if (self.searchController.searchBar.text.length != 0) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"reminderTitle contains[c] %@", self.searchController.searchBar.text];
+        request.predicate = predicate;
+    }
     
     [self setFetchedResultsController:[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:moc sectionNameKeyPath:nil cacheName:nil]];
     [[self fetchedResultsController] setDelegate:self];
@@ -159,14 +176,20 @@
 - (void)configureCell:(NVCustomTableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath {
     NVReminder *reminder = (NVReminder*)[[self fetchedResultsController] objectAtIndexPath:indexPath];
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.locale = [NSLocale currentLocale];
+    dateFormatter.timeZone = [NSTimeZone systemTimeZone];
+    dateFormatter.dateFormat = @"dd.MM.yy";
+    
     cell.taskTextView.text = reminder.reminderTitle;
     cell.dateLabel.text = [self formateDateStringfromDate:reminder.dateToRemind];
+    cell.creationLabel.text = [dateFormatter stringFromDate:reminder.creationDate];
     cell.timeLabel.text = @"0:00";
     
     if ([reminder.dateToRemind compare:[NSDate date]] == NSOrderedAscending) {
         cell.dateLabel.textColor = [UIColor redColor];
     } else {
-        cell.dateLabel.textColor = [UIColor blackColor];;
+        cell.dateLabel.textColor = [UIColor greenColor];;
     }
 
     
@@ -253,5 +276,17 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [[self tableView] endUpdates];
 }
+
+#pragma mark - UISearchController
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    [self initializeFetchedResultsController];
+    [self reloadTableView];
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [self reloadTableView];
+}
+
 
 @end

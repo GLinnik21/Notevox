@@ -12,12 +12,14 @@
 
 @class NVDetailViewController;
 
-@interface NVMasterViewController : UITableViewController <UITextFieldDelegate, NSFetchedResultsControllerDelegate>
+@interface NVMasterViewController : UITableViewController <UITextFieldDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
 
 @property (strong, nonatomic) NVDetailViewController *detailViewController;
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
+@property (nonatomic, strong) UISearchController *searchController;
 
 @end
 

@@ -63,7 +63,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textField>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUG-vD-11B">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUG-vD-11B" userLabel="Creation Date Label">
                                             <rect key="frame" x="17" y="32" width="33" height="15"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -83,23 +83,38 @@
                                                 <action selector="playReminder:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="tQp-sE-RQc"/>
                                             </connections>
                                         </button>
+                                        <progressView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YwY-Fk-IjY">
+                                            <rect key="frame" x="17" y="16" width="261" height="2"/>
+                                        </progressView>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="del-M9-qPH" userLabel="Remind Date Label">
+                                            <rect key="frame" x="58" y="32" width="33" height="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="T7t-vi-Oud" firstAttribute="leading" secondItem="D02-C1-QDX" secondAttribute="trailing" constant="8" id="08u-m4-POk"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="YwY-Fk-IjY" secondAttribute="trailing" constant="42" id="2o3-xP-krI"/>
                                         <constraint firstItem="D02-C1-QDX" firstAttribute="leading" secondItem="37f-cq-3Eg" secondAttribute="leading" constant="17" id="3XE-YY-3Pa"/>
                                         <constraint firstItem="D02-C1-QDX" firstAttribute="top" secondItem="37f-cq-3Eg" secondAttribute="top" constant="7" id="4UL-Uc-6Km"/>
                                         <constraint firstItem="nUG-vD-11B" firstAttribute="top" secondItem="37f-cq-3Eg" secondAttribute="top" constant="32" id="9Ex-5i-s06"/>
                                         <constraint firstItem="T7t-vi-Oud" firstAttribute="centerY" secondItem="37f-cq-3Eg" secondAttribute="centerY" id="BEh-ND-uyZ"/>
-                                        <constraint firstAttribute="bottom" secondItem="vjh-at-sUw" secondAttribute="bottom" constant="5" id="Ckt-b0-gOB"/>
+                                        <constraint firstItem="del-M9-qPH" firstAttribute="centerY" secondItem="nUG-vD-11B" secondAttribute="centerY" id="U6V-pq-WDv"/>
+                                        <constraint firstItem="del-M9-qPH" firstAttribute="leading" secondItem="nUG-vD-11B" secondAttribute="trailing" constant="8" id="cY8-fk-Gqs"/>
+                                        <constraint firstItem="YwY-Fk-IjY" firstAttribute="leading" secondItem="37f-cq-3Eg" secondAttribute="leadingMargin" constant="9" id="chQ-y5-mlf"/>
                                         <constraint firstItem="T7t-vi-Oud" firstAttribute="leading" secondItem="vjh-at-sUw" secondAttribute="trailing" constant="12" id="hQv-bU-vnt"/>
                                         <constraint firstItem="nUG-vD-11B" firstAttribute="leading" secondItem="37f-cq-3Eg" secondAttribute="leading" constant="17" id="kDw-au-qCY"/>
+                                        <constraint firstItem="YwY-Fk-IjY" firstAttribute="centerY" secondItem="D02-C1-QDX" secondAttribute="centerY" id="lha-L3-mlm"/>
                                         <constraint firstAttribute="trailing" secondItem="T7t-vi-Oud" secondAttribute="trailing" constant="5" id="p3p-lB-nlj"/>
+                                        <constraint firstItem="vjh-at-sUw" firstAttribute="centerY" secondItem="del-M9-qPH" secondAttribute="centerY" id="wv6-OM-g0I"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="1" green="0.41356994984225248" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <outlet property="dateLabel" destination="nUG-vD-11B" id="eKE-ar-sEl"/>
+                                    <outlet property="creationLabel" destination="nUG-vD-11B" id="XmU-0s-WWs"/>
+                                    <outlet property="dateLabel" destination="del-M9-qPH" id="Lof-ag-UaC"/>
                                     <outlet property="playButton" destination="T7t-vi-Oud" id="Whl-jm-Zcp"/>
                                     <outlet property="taskTextView" destination="D02-C1-QDX" id="qsk-tt-kMB"/>
                                     <outlet property="timeLabel" destination="vjh-at-sUw" id="O2j-sR-KWQ"/>

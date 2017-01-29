@@ -9,14 +9,15 @@
 #import "NVMasterViewController.h"
 #import "NVDetailViewController.h"
 #import "NVCustomTableViewCell.h"
-#include "NVAppDelegate.h"
+#import "NVAppDelegate.h"
 
-@interface NVMasterViewController ()
+//#define LIBRARY_SOUND_FOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Sounds"]
 
-
-
-//for the results to be shown with two table delegates
-@property (nonatomic, strong) NVMasterViewController *searchResultsController;
+@interface NVMasterViewController () {
+    AVAudioRecorder *recorder;
+    AVAudioPlayer *player;
+    NSMutableDictionary *recordSetting;
+}
 
 @end
 
@@ -28,8 +29,6 @@
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (NVDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -82,12 +81,17 @@
     
     for (int i = 0; i < fetchedData.count; i++) {
         NVReminder *tempReminder = [fetchedData objectAtIndex:i];
-        //Schedule reminders only with date and only valid date
+        //Schedule reminders with only valid date
         if (tempReminder.dateToRemind && [tempReminder.dateToRemind compare:[NSDate date]] == NSOrderedDescending) {
             UILocalNotification *localNotification = [[UILocalNotification alloc] init];
             localNotification.fireDate = tempReminder.dateToRemind;
             localNotification.alertBody = tempReminder.reminderTitle;
-            localNotification.timeZone = [NSTimeZone localTimeZone];
+            localNotification.timeZone = [NSTimeZone defaultTimeZone];
+            if (tempReminder.isCustomSound) {
+                localNotification.soundName = tempReminder.audioFileURL;
+            } else {
+                localNotification.soundName = UILocalNotificationDefaultSoundName;
+            }
             localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
             [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
         }
@@ -102,19 +106,100 @@
     return [dateFormatter stringFromDate:date];
 }
 
+- (IBAction)startRecording:(id)sender {
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    NSError *err = nil;
+    [audioSession setCategory :AVAudioSessionCategoryPlayAndRecord error:&err];
+    if(err){
+        NSLog(@"audioSession: %@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
+        return;
+    }
+    [audioSession setActive:YES error:&err];
+    err = nil;
+    if(err){
+        NSLog(@"audioSession: %@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
+        return;
+    }
+    
+    recordSetting = [[NSMutableDictionary alloc] init];
+    
+    [recordSetting setValue :[NSNumber numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];
+    [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
+    [recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
+    
+    [recordSetting setValue :[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
+    [recordSetting setValue :[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsBigEndianKey];
+    [recordSetting setValue :[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsFloatKey];
+    
+    
+    NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get Library folder
+    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:@"/Sounds"];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:dataPath])
+        [[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+    
+    // Create a new dated file
+    NSString *recorderFilePath = [NSString stringWithFormat:@"%@/%@.caf", dataPath, [NSDate date].description];
+    
+    NSURL *url = [NSURL fileURLWithPath:recorderFilePath];
+    err = nil;
+    recorder = [[ AVAudioRecorder alloc] initWithURL:url settings:recordSetting error:&err];
+    if(!recorder){
+        NSLog(@"recorder: %@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
+        UIAlertView *alert =
+        [[UIAlertView alloc] initWithTitle: @"Warning"
+                                   message: [err localizedDescription]
+                                  delegate: nil
+                         cancelButtonTitle:@"OK"
+                         otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    //prepare to record
+    [recorder setDelegate:self];
+    [recorder prepareToRecord];
+    recorder.meteringEnabled = YES;
+    
+    /*
+    BOOL audioHWAvailable = audioSession.inputIsAvailable;
+    if (! audioHWAvailable) {
+        UIAlertView *cantRecordAlert =
+        [[UIAlertView alloc] initWithTitle: @"Warning"
+                                   message: @"Audio input hardware not available"
+                                  delegate: nil
+                         cancelButtonTitle:@"OK"
+                         otherButtonTitles:nil];
+        [cantRecordAlert show];
+        return;
+    }
+    */
+    // start recording
+    [recorder recordForDuration:(NSTimeInterval) 30];
+}
+
+- (IBAction)stopRecording:(id)sender {
+    [recorder stop];
+    
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setActive:NO error:nil];
+}
+
+
+
 - (void)insertNewObject:(id)sender {
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     
     NVReminder *newReminder = [NSEntityDescription insertNewObjectForEntityForName:@"Reminder" inManagedObjectContext:context];
     
     static int count = 0;
-    static int time = 0;
     newReminder.reminderTitle = [NSString stringWithFormat:@"Reminder %i", count];
-    newReminder.dateToRemind = [NSDate dateWithTimeIntervalSinceNow:60 + time];
+    newReminder.dateToRemind = nil;
     newReminder.creationDate = [NSDate date];
-    newReminder.audioFileURL = @"/dev/null";
+    newReminder.audioFileURL = sender;
     count++;
-    time += 60;
     
     NSError *error = nil;
     if (![context save:&error]) {
@@ -152,6 +237,13 @@
     }
 }
 
+#pragma mark - AVAudioRecorderDelegate
+
+- (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag{
+    NSLog(@"Stoped recording, %i", flag);
+    [self insertNewObject: avrecorder.url.lastPathComponent];
+}
+
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -162,11 +254,8 @@
         [controller setReminder:reminder];
     }
 }
-/*
--(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    self.accessoryIndexPath = indexPath;
-}
-*/
+
+
 #pragma mark - Table View
 
 - (void)reloadTableView {
@@ -178,7 +267,7 @@
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.locale = [NSLocale currentLocale];
-    dateFormatter.timeZone = [NSTimeZone systemTimeZone];
+    dateFormatter.timeZone = [NSTimeZone defaultTimeZone];
     dateFormatter.dateFormat = @"dd.MM.yy";
     
     cell.taskTextView.text = reminder.reminderTitle;
@@ -223,6 +312,14 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+        
+        NSError *err = nil;
+        NSString *fileToDeletePath = [[self.fetchedResultsController objectAtIndexPath:indexPath] audioFileURL];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        [fileManager removeItemAtPath:fileToDeletePath error:&err];
+        if(err)
+            NSLog(@"File Manager: %@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
+        
         [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
         
         NSError *error = nil;
@@ -283,10 +380,5 @@
     [self initializeFetchedResultsController];
     [self reloadTableView];
 }
-
--(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    [self reloadTableView];
-}
-
 
 @end

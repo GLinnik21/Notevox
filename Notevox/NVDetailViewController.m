@@ -20,6 +20,7 @@
     self.navigationItem.rightBarButtonItem = doneButton;
     
     [self.taskDescription setText:self.reminder.reminderTitle];
+    [self.remindWithVoiceSwitch setOn:self.reminder.isCustomSound ? YES : NO];
     
     if (self.reminder.dateToRemind) {
         [self.remindDatePicker setDate:self.reminder.dateToRemind];
@@ -44,12 +45,20 @@
     }
 }
 
-- (IBAction)switchChanged:(id)sender {
+- (IBAction)dateSwitchChanged:(id)sender {
     if (!self.dateToRemindSwitch.isOn) {
         [self hideDateCells];
         self.reminder.dateToRemind = nil;
     } else {
         [self showDateCells];
+    }
+}
+
+- (IBAction)voiceSwitchChanged:(id)sender {
+    if (self.remindWithVoiceSwitch.isOn) {
+        self.reminder.isCustomSound = YES;
+    } else {
+        self.reminder.isCustomSound = NO;
     }
 }
 
@@ -82,7 +91,10 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     if (self.dateToRemindSwitch.isOn) {
-        self.reminder.dateToRemind = self.remindDatePicker.date;
+        NSDateComponents *comps = [self.remindDatePicker.calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute)
+                                                            fromDate:self.remindDatePicker.date];
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        self.reminder.dateToRemind = [calendar dateFromComponents:comps];
     }
     self.reminder.reminderTitle = self.taskDescription.text;
 }

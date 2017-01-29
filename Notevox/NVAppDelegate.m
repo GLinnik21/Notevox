@@ -69,6 +69,8 @@
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     
     // Set icon badge number to zero
+    // Request to reload table view data
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
     application.applicationIconBadgeNumber = 0;
 }
 

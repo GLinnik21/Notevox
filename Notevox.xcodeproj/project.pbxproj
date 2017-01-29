@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED4956C11E3D2F41001B09D8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED4956C01E3D2F41001B09D8 /* AVFoundation.framework */; };
 		ED9E3B491E3954DC0032087F /* NVDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E3B481E3954DC0032087F /* NVDataController.m */; };
 		EDDCAE951E30F773000FE262 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAE941E30F773000FE262 /* main.m */; };
 		EDDCAE981E30F773000FE262 /* NVAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAE971E30F773000FE262 /* NVAppDelegate.m */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ED4956C01E3D2F41001B09D8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		ED9E3B471E3954DC0032087F /* NVDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVDataController.h; sourceTree = "<group>"; };
 		ED9E3B481E3954DC0032087F /* NVDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVDataController.m; sourceTree = "<group>"; };
 		EDDCAE901E30F773000FE262 /* Notevox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notevox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,17 +52,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED4956C11E3D2F41001B09D8 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED4956BF1E3D2F40001B09D8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED4956C01E3D2F41001B09D8 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EDDCAE871E30F773000FE262 = {
 			isa = PBXGroup;
 			children = (
 				EDDCAE921E30F773000FE262 /* Notevox */,
 				EDDCAE911E30F773000FE262 /* Products */,
+				ED4956BF1E3D2F40001B09D8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

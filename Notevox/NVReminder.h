@@ -11,6 +11,7 @@
 
 @interface NVReminder : NSManagedObject
 
+@property (nonatomic, assign) BOOL isCustomSound;
 @property (nonatomic, retain) NSString *audioFileURL;
 @property (nonatomic, retain) NSDate *dateToRemind;
 @property (nonatomic, retain) NSDate *creationDate;

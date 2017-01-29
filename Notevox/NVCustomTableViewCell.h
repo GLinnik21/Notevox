@@ -18,5 +18,6 @@
 - (IBAction)playReminder:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UIProgressView *playingProgress;
 
 @end

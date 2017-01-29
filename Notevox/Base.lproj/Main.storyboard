@@ -78,7 +78,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T7t-vi-Oud">
                                             <rect key="frame" x="290" y="10" width="33" height="33"/>
                                             <state key="normal" image="playButton"/>
-                                            <state key="highlighted" image="pauseButton"/>
+                                            <state key="focused" title="Focused"/>
                                             <connections>
                                                 <action selector="playReminder:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="tQp-sE-RQc"/>
                                             </connections>
@@ -116,6 +116,7 @@
                                     <outlet property="creationLabel" destination="nUG-vD-11B" id="XmU-0s-WWs"/>
                                     <outlet property="dateLabel" destination="del-M9-qPH" id="Lof-ag-UaC"/>
                                     <outlet property="playButton" destination="T7t-vi-Oud" id="Whl-jm-Zcp"/>
+                                    <outlet property="playingProgress" destination="YwY-Fk-IjY" id="CG8-FU-rU8"/>
                                     <outlet property="taskTextView" destination="D02-C1-QDX" id="qsk-tt-kMB"/>
                                     <outlet property="timeLabel" destination="vjh-at-sUw" id="O2j-sR-KWQ"/>
                                     <segue destination="vC3-pB-5Vb" kind="presentation" identifier="showDetail" trigger="accessoryAction" id="cn6-3Q-srI"/>
@@ -129,12 +130,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Reminders" id="Zdf-7t-Un8">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="xK3-n2-duu">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="UVS-qo-GDD">
-                                <rect key="frame" x="276" y="7" width="83" height="30"/>
+                        <barButtonItem key="rightBarButtonItem" id="xK3-n2-duu">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UVS-qo-GDD">
+                                <rect key="frame" x="326" y="5" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Record"/>
+                                <state key="normal" image="pauseButton"/>
                                 <connections>
+                                    <action selector="cancelRecording:" destination="7bK-jq-Zjz" eventType="touchUpOutside" id="Kcl-k5-mqd"/>
                                     <action selector="startRecording:" destination="7bK-jq-Zjz" eventType="touchDown" id="HFe-uE-YrZ"/>
                                     <action selector="stopRecording:" destination="7bK-jq-Zjz" eventType="touchUpInside" id="42i-vP-36I"/>
                                 </connections>

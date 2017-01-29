@@ -16,7 +16,7 @@
 @interface NVMasterViewController () {
     AVAudioRecorder *recorder;
     AVAudioPlayer *player;
-    NSMutableDictionary *recordSetting;
+    NVCustomTableViewCell *previouslyPlayedCell;
 }
 
 @end
@@ -106,7 +106,61 @@
     return [dateFormatter stringFromDate:date];
 }
 
+- (void)configurePreviousCell {
+    [previouslyPlayedCell.playButton setImage:[UIImage imageNamed:@"playButton"] forState:UIControlStateNormal];
+    previouslyPlayedCell.taskTextView.hidden = NO;
+    previouslyPlayedCell.playingProgress.hidden = YES;
+
+}
+
+- (void)updateTime:(NSTimer *)timer {
+    NVCustomTableViewCell *tempCell = timer.userInfo;
+    [tempCell.playingProgress setProgress:(player.currentTime/player.duration)];
+}
+
+-(void)playButtonClicked:(UIButton*)sender {
+    NVCustomTableViewCell *tempCell = (NVCustomTableViewCell *)sender.superview.superview;
+    if (player.isPlaying && [previouslyPlayedCell.playButton isEqual:sender]) {
+        //Pause the same cell
+        [sender setImage:[UIImage imageNamed:@"playButton"] forState:UIControlStateNormal];
+        [player pause];
+    } else if(!player.isPlaying && [previouslyPlayedCell.playButton isEqual:sender]) {
+        //Play new cell, while previuos on pause or playing
+        [sender setImage:[UIImage imageNamed:@"pauseButton"] forState:UIControlStateNormal];
+        previouslyPlayedCell.taskTextView.hidden = YES;
+        previouslyPlayedCell.playingProgress.hidden = NO;
+        [player play];
+    } else {
+        //Play new cell, while nothing is playing
+        tempCell.taskTextView.hidden = YES;
+        tempCell.playingProgress.hidden = NO;
+        [NSTimer scheduledTimerWithTimeInterval:1.0/60.0 target:self selector:@selector(updateTime:) userInfo:tempCell repeats:YES];
+        
+        [previouslyPlayedCell.playButton setImage:[UIImage imageNamed:@"playButton"] forState:UIControlStateNormal];
+        previouslyPlayedCell.taskTextView.hidden = NO;
+        previouslyPlayedCell.playingProgress.hidden = YES;
+        previouslyPlayedCell = tempCell;
+        
+        NVReminder *reminder = (NVReminder*)[[self fetchedResultsController] objectAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
+        
+        NSString *fileURLString = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        fileURLString = [fileURLString stringByAppendingPathComponent:[NSString stringWithFormat:@"Sounds/%@", reminder.audioFileURL]];
+        NSURL *fileURL = [NSURL fileURLWithPath:fileURLString];
+        
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
+        
+        player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
+        [player setDelegate:self];
+        [player play];
+        
+        [sender setImage:[UIImage imageNamed:@"pauseButton"] forState:UIControlStateNormal];
+    }
+}
+
 - (IBAction)startRecording:(id)sender {
+    [player stop];
+    [self configurePreviousCell];
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     NSError *err = nil;
     [audioSession setCategory :AVAudioSessionCategoryPlayAndRecord error:&err];
@@ -121,7 +175,7 @@
         return;
     }
     
-    recordSetting = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *recordSetting = [[NSMutableDictionary alloc] init];
     
     [recordSetting setValue :[NSNumber numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];
     [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
@@ -177,6 +231,7 @@
     }
     */
     // start recording
+    self.navigationController.navigationBar.topItem.title = @"Recording...";
     [recorder recordForDuration:(NSTimeInterval) 30];
 }
 
@@ -185,8 +240,16 @@
     
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     [audioSession setActive:NO error:nil];
+    
+    [self insertNewObject: recorder.url.lastPathComponent];
 }
 
+- (IBAction)cancelRecording:(id)sender {
+    [recorder stop];
+    [recorder deleteRecording];
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setActive:NO error:nil];
+}
 
 
 - (void)insertNewObject:(id)sender {
@@ -241,7 +304,13 @@
 
 - (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag{
     NSLog(@"Stoped recording, %i", flag);
-    [self insertNewObject: avrecorder.url.lastPathComponent];
+    self.navigationController.navigationBar.topItem.title = @"Reminders";
+}
+
+#pragma mark - AVAudioPlayerDelegate
+
+- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
+    [self configurePreviousCell];
 }
 
 #pragma mark - Segues
@@ -270,15 +339,25 @@
     dateFormatter.timeZone = [NSTimeZone defaultTimeZone];
     dateFormatter.dateFormat = @"dd.MM.yy";
     
+    NSString *fileURLString = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    fileURLString = [fileURLString stringByAppendingPathComponent:[NSString stringWithFormat:@"Sounds/%@", reminder.audioFileURL]];
+    NSURL *fileURL = [NSURL fileURLWithPath:fileURLString];
+
+    AVURLAsset *audioAsset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
+    CMTime audioDuration = audioAsset.duration;
+    float audioDurationSeconds = CMTimeGetSeconds(audioDuration);
+    
     cell.taskTextView.text = reminder.reminderTitle;
     cell.dateLabel.text = [self formateDateStringfromDate:reminder.dateToRemind];
     cell.creationLabel.text = [dateFormatter stringFromDate:reminder.creationDate];
-    cell.timeLabel.text = @"0:00";
+    cell.timeLabel.text = [NSString stringWithFormat:@"0:0%f", audioDurationSeconds];
+    cell.playButton.tag = indexPath.row;
+    [cell.playButton addTarget:self action:@selector(playButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     if ([reminder.dateToRemind compare:[NSDate date]] == NSOrderedAscending) {
         cell.dateLabel.textColor = [UIColor redColor];
     } else {
-        cell.dateLabel.textColor = [UIColor greenColor];;
+        cell.dateLabel.textColor = [UIColor blueColor];
     }
 
     
@@ -314,9 +393,10 @@
         NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
         
         NSError *err = nil;
-        NSString *fileToDeletePath = [[self.fetchedResultsController objectAtIndexPath:indexPath] audioFileURL];
         NSFileManager *fileManager = [NSFileManager defaultManager];
-        [fileManager removeItemAtPath:fileToDeletePath error:&err];
+        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        documentsPath = [documentsPath stringByAppendingPathComponent:[NSString stringWithFormat:@"Sounds/%@", [[self.fetchedResultsController objectAtIndexPath:indexPath] audioFileURL]]];
+        [fileManager removeItemAtPath:documentsPath error:&err];
         if(err)
             NSLog(@"File Manager: %@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
         

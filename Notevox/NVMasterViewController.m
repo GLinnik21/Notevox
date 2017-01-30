@@ -273,9 +273,9 @@
 - (void)initializeFetchedResultsController {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Reminder"];
     
-    NSSortDescriptor *lastNameSort = [NSSortDescriptor sortDescriptorWithKey:@"dateToRemind" ascending:YES];
+    NSSortDescriptor *creationDateSort = [NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO];
     
-    [request setSortDescriptors:@[lastNameSort]];
+    [request setSortDescriptors:@[creationDateSort]];
     
     NVAppDelegate *appDelegate = (NVAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *moc = [[appDelegate dataController] managedObjectContext]; //Retrieve the main queue NSManagedObjectContext

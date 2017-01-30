@@ -165,7 +165,7 @@
             </objects>
             <point key="canvasLocation" x="-39" y="128"/>
         </scene>
-        <!--Parameters-->
+        <!--Details-->
         <scene sceneID="xmZ-CQ-Y71">
             <objects>
                 <tableViewController id="5LO-F5-hy1" customClass="NVDetailViewController" sceneMemberID="viewController">
@@ -267,8 +267,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Remind" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N7C-mt-gF2">
-                                                    <rect key="frame" x="15" y="11" width="58" height="21"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Alarm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N7C-mt-gF2">
+                                                    <rect key="frame" x="15" y="11" width="45" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -317,7 +317,7 @@
                             <outlet property="delegate" destination="5LO-F5-hy1" id="xem-Ru-diE"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Parameters" id="ELL-z6-tIv"/>
+                    <navigationItem key="navigationItem" title="Details" id="ELL-z6-tIv"/>
                     <connections>
                         <outlet property="datePickerCell" destination="hz7-GJ-S6x" id="4SP-MU-fhX"/>
                         <outlet property="dateToRemindSwitch" destination="zD9-e3-opp" id="cQD-XP-myI"/>

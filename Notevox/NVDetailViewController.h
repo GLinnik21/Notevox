@@ -21,6 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *labelsCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *datePickerCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *remindWithVoiceCell;
 
 
 @end

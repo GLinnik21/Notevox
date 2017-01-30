@@ -65,11 +65,13 @@
 - (void)hideDateCells {
     [self.labelsCell setHidden:YES];
     [self.datePickerCell setHidden:YES];
+    [self.remindWithVoiceCell setHidden:YES];
 }
 
 - (void)showDateCells {
     [self.labelsCell setHidden:NO];
     [self.datePickerCell setHidden:NO];
+    [self.remindWithVoiceCell setHidden:NO];
     [self.remindDateLabel setText:[self formateDateStringfromDate:self.remindDatePicker.date]];
 }
 

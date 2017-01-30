@@ -78,7 +78,7 @@
 - (void)rescheduleAllLocalNotifications{
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     NSArray *fetchedData = [_fetchedResultsController fetchedObjects];
-    
+    int badgeNumber = 1;
     for (int i = 0; i < fetchedData.count; i++) {
         NVReminder *tempReminder = [fetchedData objectAtIndex:i];
         //Schedule reminders with only valid date
@@ -92,7 +92,8 @@
             } else {
                 localNotification.soundName = UILocalNotificationDefaultSoundName;
             }
-            localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+            localNotification.applicationIconBadgeNumber = UIApplication.sharedApplication. applicationIconBadgeNumber + badgeNumber++;
+            NSLog(@"%ld badges", (long)[[UIApplication sharedApplication] applicationIconBadgeNumber]);
             [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
         }
     }
@@ -226,20 +227,7 @@
     [recorder setDelegate:self];
     [recorder prepareToRecord];
     recorder.meteringEnabled = YES;
-    
-    /*
-    BOOL audioHWAvailable = audioSession.inputIsAvailable;
-    if (! audioHWAvailable) {
-        UIAlertView *cantRecordAlert =
-        [[UIAlertView alloc] initWithTitle: @"Warning"
-                                   message: @"Audio input hardware not available"
-                                  delegate: nil
-                         cancelButtonTitle:@"OK"
-                         otherButtonTitles:nil];
-        [cantRecordAlert show];
-        return;
-    }
-    */
+ 
     // start recording
     self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"recording", @"");
     [recorder recordForDuration:(NSTimeInterval) 30];

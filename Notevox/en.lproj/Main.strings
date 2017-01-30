@@ -1,0 +1,45 @@
+
+/* Class = "UITableViewController"; title = "Master"; ObjectID = "7bK-jq-Zjz"; */
+"7bK-jq-Zjz.title" = "Master";
+
+/* Class = "UITextField"; text = "Task description"; ObjectID = "D02-C1-QDX"; */
+"D02-C1-QDX.text" = "Task description";
+
+/* Class = "UINavigationItem"; title = "Parameters"; ObjectID = "ELL-z6-tIv"; */
+"ELL-z6-tIv.title" = "Parameters";
+
+/* Class = "UILabel"; text = "Remind"; ObjectID = "N7C-mt-gF2"; */
+"N7C-mt-gF2.text" = "Remind";
+
+/* Class = "UILabel"; text = "Remind with the recording"; ObjectID = "Qzf-Gw-h4w"; */
+"Qzf-Gw-h4w.text" = "Remind with the recording";
+
+/* Class = "UINavigationController"; title = "Master"; ObjectID = "RMx-3f-FxP"; */
+"RMx-3f-FxP.title" = "Master";
+
+/* Class = "UITextField"; placeholder = "Task description goes here"; ObjectID = "SYs-5D-QDR"; */
+"SYs-5D-QDR.placeholder" = "Task description goes here";
+
+/* Class = "UITextField"; text = "Task description"; ObjectID = "SYs-5D-QDR"; */
+"SYs-5D-QDR.text" = "Task description";
+
+/* Class = "UIButton"; focusedTitle = "Focused"; ObjectID = "T7t-vi-Oud"; */
+"T7t-vi-Oud.focusedTitle" = "Focused";
+
+/* Class = "UINavigationItem"; title = "Reminders"; ObjectID = "Zdf-7t-Un8"; */
+"Zdf-7t-Un8.title" = "Reminders";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "del-M9-qPH"; */
+"del-M9-qPH.text" = "Detail";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "nUG-vD-11B"; */
+"nUG-vD-11B.text" = "Detail";
+
+/* Class = "UILabel"; text = "Remind on a day"; ObjectID = "upH-w4-GfZ"; */
+"upH-w4-GfZ.text" = "Remind on a day";
+
+/* Class = "UILabel"; text = "Time"; ObjectID = "vjh-at-sUw"; */
+"vjh-at-sUw.text" = "Time";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "xEj-V3-nK1"; */
+"xEj-V3-nK1.text" = "Detail";

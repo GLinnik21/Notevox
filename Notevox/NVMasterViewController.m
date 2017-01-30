@@ -113,9 +113,9 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.locale = [NSLocale currentLocale];
     dateFormatter.timeZone = [NSTimeZone defaultTimeZone];
-    dateFormatter.dateFormat = @"00:mm";
-    [tempCell.playingProgress setProgress:(player.currentTime/player.duration)];
-    tempCell.timeLabel.text = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:seconds * 60]];
+    dateFormatter.dateFormat = @"mm:ss";
+    tempCell.playingProgress.progress = player.currentTime/player.duration;
+    tempCell.timeLabel.text = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:seconds]];
     if (!player.isPlaying && !previouslyPlayedCell) {
         [timer invalidate];
     }
@@ -241,7 +241,7 @@
     }
     */
     // start recording
-    self.navigationController.navigationBar.topItem.title = @"Recording...";
+    self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"recording", @"");
     [recorder recordForDuration:(NSTimeInterval) 30];
 }
 
@@ -266,13 +266,11 @@
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     
     NVReminder *newReminder = [NSEntityDescription insertNewObjectForEntityForName:@"Reminder" inManagedObjectContext:context];
-    
-    static int count = 0;
-    newReminder.reminderTitle = [NSString stringWithFormat:@"Reminder %i", count];
+
+    newReminder.reminderTitle = [NSString stringWithFormat:NSLocalizedString(@"untitled", @"")];
     newReminder.dateToRemind = nil;
     newReminder.creationDate = [NSDate date];
     newReminder.audioFileURL = sender;
-    count++;
     
     NSError *error = nil;
     if (![context save:&error]) {
@@ -314,7 +312,7 @@
 
 - (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag{
     NSLog(@"Stoped recording, %i", flag);
-    self.navigationController.navigationBar.topItem.title = @"Reminders";
+    self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"reminders", @"");
 }
 
 #pragma mark - AVAudioPlayerDelegate
@@ -361,8 +359,8 @@
     cell.taskTextView.text = reminder.reminderTitle;
     cell.dateLabel.text = [self formateDateStringfromDate:reminder.dateToRemind];
     cell.creationLabel.text = [dateFormatter stringFromDate:reminder.creationDate];
-    dateFormatter.dateFormat = @"00:mm";
-    cell.timeLabel.text = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:audioDurationSeconds * 60]];
+    dateFormatter.dateFormat = @"mm:ss";
+    cell.timeLabel.text = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:audioDurationSeconds]];
     cell.playButton.tag = indexPath.row;
     [cell.playButton addTarget:self action:@selector(playButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [cell.playButton setImage:[UIImage imageNamed:@"playButton"] forState:UIControlStateNormal];
@@ -416,6 +414,8 @@
             NSLog(@"File Manager: %@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
         
         [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+        previouslyPlayedCell = nil;
+        [player stop];
         
         NSError *error = nil;
         if (![context save:&error]) {

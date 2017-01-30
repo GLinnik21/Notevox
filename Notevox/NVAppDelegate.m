@@ -10,7 +10,9 @@
 #import "NVDetailViewController.h"
 #import "NVMasterViewController.h"
 
-@interface NVAppDelegate () <UISplitViewControllerDelegate>
+@interface NVAppDelegate () <UISplitViewControllerDelegate> {
+    AVAudioPlayer *player;
+}
 
 @end
 
@@ -35,13 +37,24 @@
     return YES;
 }
 
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
-{
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    
+    NSString *fileURLString = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    fileURLString = [fileURLString stringByAppendingPathComponent:[NSString stringWithFormat:@"Sounds/%@", notification.soundName]];
+    NSURL *fileURL = [NSURL fileURLWithPath:fileURLString];
+    
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
+    
+    player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
+    [player play];
+    
     UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reminder"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"reminder", @"")
                                                         message:notification.alertBody
-                                                       delegate:self cancelButtonTitle:@"OK"
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
     }

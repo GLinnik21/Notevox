@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		ED4956C11E3D2F41001B09D8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED4956C01E3D2F41001B09D8 /* AVFoundation.framework */; };
 		ED9E3B491E3954DC0032087F /* NVDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E3B481E3954DC0032087F /* NVDataController.m */; };
+		EDAFCD9E1E3F66420011A290 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EDAFCDA01E3F66420011A290 /* Localizable.strings */; };
 		EDDCAE951E30F773000FE262 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAE941E30F773000FE262 /* main.m */; };
 		EDDCAE981E30F773000FE262 /* NVAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAE971E30F773000FE262 /* NVAppDelegate.m */; };
 		EDDCAE9B1E30F773000FE262 /* NVMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAE9A1E30F773000FE262 /* NVMasterViewController.m */; };
@@ -26,6 +27,10 @@
 		ED4956C01E3D2F41001B09D8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		ED9E3B471E3954DC0032087F /* NVDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVDataController.h; sourceTree = "<group>"; };
 		ED9E3B481E3954DC0032087F /* NVDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVDataController.m; sourceTree = "<group>"; };
+		EDAFCD961E3F62780011A290 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		EDAFCD9B1E3F64870011A290 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		EDAFCD9F1E3F66420011A290 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EDAFCDA11E3F66470011A290 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EDDCAE901E30F773000FE262 /* Notevox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notevox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDCAE941E30F773000FE262 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EDDCAE961E30F773000FE262 /* NVAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NVAppDelegate.h; sourceTree = "<group>"; };
@@ -105,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				EDDCAE941E30F773000FE262 /* main.m */,
+				EDAFCDA01E3F66420011A290 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -188,6 +194,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = EDDCAE871E30F773000FE262;
 			productRefGroup = EDDCAE911E30F773000FE262 /* Products */;
@@ -205,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDDCAEA61E30F773000FE262 /* LaunchScreen.storyboard in Resources */,
+				EDAFCD9E1E3F66420011A290 /* Localizable.strings in Resources */,
 				EDDCAEA31E30F773000FE262 /* Assets.xcassets in Resources */,
 				EDDCAEA11E30F773000FE262 /* Main.storyboard in Resources */,
 			);
@@ -232,10 +240,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		EDAFCDA01E3F66420011A290 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EDAFCD9F1E3F66420011A290 /* en */,
+				EDAFCDA11E3F66470011A290 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		EDDCAE9F1E30F773000FE262 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				EDDCAEA01E30F773000FE262 /* Base */,
+				EDAFCD961E3F62780011A290 /* en */,
+				EDAFCD9B1E3F64870011A290 /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -255,6 +274,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -302,6 +322,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

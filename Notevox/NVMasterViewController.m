@@ -106,39 +106,42 @@
     return [dateFormatter stringFromDate:date];
 }
 
-- (void)configurePreviousCell {
-    [previouslyPlayedCell.playButton setImage:[UIImage imageNamed:@"playButton"] forState:UIControlStateNormal];
-    previouslyPlayedCell.taskTextView.hidden = NO;
-    previouslyPlayedCell.playingProgress.hidden = YES;
-
-}
 
 - (void)updateTime:(NSTimer *)timer {
     NVCustomTableViewCell *tempCell = timer.userInfo;
     [tempCell.playingProgress setProgress:(player.currentTime/player.duration)];
+    tempCell.timeLabel.text = [NSString stringWithFormat:@"%f", (player.currentTime/player.duration)];
+    if (!player.isPlaying && !previouslyPlayedCell) {
+        [timer invalidate];
+    }
 }
 
 -(void)playButtonClicked:(UIButton*)sender {
+    static NSTimer *timer = nil;
     NVCustomTableViewCell *tempCell = (NVCustomTableViewCell *)sender.superview.superview;
     if (player.isPlaying && [previouslyPlayedCell.playButton isEqual:sender]) {
         //Pause the same cell
         [sender setImage:[UIImage imageNamed:@"playButton"] forState:UIControlStateNormal];
         [player pause];
-    } else if(!player.isPlaying && [previouslyPlayedCell.playButton isEqual:sender]) {
-        //Play new cell, while previuos on pause or playing
+    } else if (!player.isPlaying && [previouslyPlayedCell.playButton isEqual:sender]) {
+        //Play the same cell
         [sender setImage:[UIImage imageNamed:@"pauseButton"] forState:UIControlStateNormal];
-        previouslyPlayedCell.taskTextView.hidden = YES;
-        previouslyPlayedCell.playingProgress.hidden = NO;
-        [player play];
-    } else {
-        //Play new cell, while nothing is playing
         tempCell.taskTextView.hidden = YES;
         tempCell.playingProgress.hidden = NO;
-        [NSTimer scheduledTimerWithTimeInterval:1.0/60.0 target:self selector:@selector(updateTime:) userInfo:tempCell repeats:YES];
+        [player play];
+    } else {
+        //Play new cell
+        [player stop];
+        [timer invalidate];
+        timer = nil;
         
-        [previouslyPlayedCell.playButton setImage:[UIImage imageNamed:@"playButton"] forState:UIControlStateNormal];
-        previouslyPlayedCell.taskTextView.hidden = NO;
-        previouslyPlayedCell.playingProgress.hidden = YES;
+        tempCell.taskTextView.hidden = YES;
+        tempCell.playingProgress.hidden = NO;
+        timer = [NSTimer scheduledTimerWithTimeInterval:1.0/60.0 target:self selector:@selector(updateTime:) userInfo:tempCell repeats:YES];
+        
+        if (previouslyPlayedCell) {
+            [self.tableView reloadRowsAtIndexPaths:@[[self.tableView indexPathForCell:previouslyPlayedCell]] withRowAnimation:UITableViewRowAnimationNone];
+        }
         previouslyPlayedCell = tempCell;
         
         NVReminder *reminder = (NVReminder*)[[self fetchedResultsController] objectAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
@@ -160,7 +163,7 @@
 
 - (IBAction)startRecording:(id)sender {
     [player stop];
-    [self configurePreviousCell];
+    [self.tableView reloadRowsAtIndexPaths:@[[self.tableView indexPathForCell:previouslyPlayedCell]] withRowAnimation:UITableViewRowAnimationNone];
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     NSError *err = nil;
     [audioSession setCategory :AVAudioSessionCategoryPlayAndRecord error:&err];
@@ -310,7 +313,8 @@
 #pragma mark - AVAudioPlayerDelegate
 
 - (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
-    [self configurePreviousCell];
+    [self.tableView reloadRowsAtIndexPaths:@[[self.tableView indexPathForCell:previouslyPlayedCell]] withRowAnimation:UITableViewRowAnimationNone];
+    previouslyPlayedCell = nil;
 }
 
 #pragma mark - Segues
@@ -353,6 +357,9 @@
     cell.timeLabel.text = [NSString stringWithFormat:@"0:0%f", audioDurationSeconds];
     cell.playButton.tag = indexPath.row;
     [cell.playButton addTarget:self action:@selector(playButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.playButton setImage:[UIImage imageNamed:@"playButton"] forState:UIControlStateNormal];
+    cell.taskTextView.hidden = NO;
+    cell.playingProgress.hidden = YES;
     
     if ([reminder.dateToRemind compare:[NSDate date]] == NSOrderedAscending) {
         cell.dateLabel.textColor = [UIColor redColor];
@@ -451,6 +458,7 @@
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     [[self tableView] endUpdates];
 }
 

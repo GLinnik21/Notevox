@@ -83,7 +83,7 @@
                                                 <action selector="playReminder:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="tQp-sE-RQc"/>
                                             </connections>
                                         </button>
-                                        <progressView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YwY-Fk-IjY">
+                                        <progressView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YwY-Fk-IjY">
                                             <rect key="frame" x="17" y="16" width="261" height="2"/>
                                         </progressView>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="del-M9-qPH" userLabel="Remind Date Label">

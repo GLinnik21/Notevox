@@ -13,6 +13,7 @@
 
 @property (nonatomic, assign) BOOL isCustomSound;
 @property (nonatomic, retain) NSString *audioFileURL;
+@property (nonatomic) NSInteger *repeatCalendar;
 @property (nonatomic, retain) NSDate *dateToRemind;
 @property (nonatomic, retain) NSDate *creationDate;
 @property (nonatomic, retain) NSString *reminderTitle;

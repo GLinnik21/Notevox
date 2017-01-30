@@ -78,7 +78,7 @@
 - (void)rescheduleAllLocalNotifications{
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     NSArray *fetchedData = [_fetchedResultsController fetchedObjects];
-    int badgeNumber = 1;
+    NSInteger badgeNumber = 1;
     for (int i = 0; i < fetchedData.count; i++) {
         NVReminder *tempReminder = [fetchedData objectAtIndex:i];
         //Schedule reminders with only valid date
@@ -110,7 +110,7 @@
 
 - (void)updateTime:(NSTimer *)timer {
     NVCustomTableViewCell *tempCell = timer.userInfo;
-    int seconds = player.currentTime;
+    NSInteger seconds = player.currentTime;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.locale = [NSLocale currentLocale];
     dateFormatter.timeZone = [NSTimeZone defaultTimeZone];
@@ -342,7 +342,7 @@
 
     AVURLAsset *audioAsset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
     CMTime audioDuration = audioAsset.duration;
-    int audioDurationSeconds = CMTimeGetSeconds(audioDuration);
+    NSInteger audioDurationSeconds = CMTimeGetSeconds(audioDuration);
     
     cell.taskTextView.text = reminder.reminderTitle;
     cell.dateLabel.text = [self formateDateStringfromDate:reminder.dateToRemind];

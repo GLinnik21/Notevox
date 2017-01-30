@@ -6,8 +6,9 @@
         <attribute name="dateToRemind" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isCustomSound" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="reminderTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="repeatCalendar" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Reminder" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Reminder" positionX="-63" positionY="-18" width="128" height="135"/>
     </elements>
 </model>

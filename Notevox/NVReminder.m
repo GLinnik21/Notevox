@@ -15,5 +15,6 @@
 @dynamic dateToRemind;
 @dynamic creationDate;
 @dynamic reminderTitle;
+@dynamic repeatCalendar;
 
 @end

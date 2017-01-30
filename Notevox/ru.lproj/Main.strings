@@ -18,7 +18,7 @@
 "RMx-3f-FxP.title" = "Master";
 
 /* Class = "UITextField"; placeholder = "Task description goes here"; ObjectID = "SYs-5D-QDR"; */
-"SYs-5D-QDR.placeholder" = "Task description goes here";
+"SYs-5D-QDR.placeholder" = "Название напоминания";
 
 /* Class = "UITextField"; text = "Название"; ObjectID = "SYs-5D-QDR"; */
 "SYs-5D-QDR.text" = "Название";

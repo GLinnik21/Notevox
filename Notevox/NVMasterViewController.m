@@ -109,8 +109,13 @@
 
 - (void)updateTime:(NSTimer *)timer {
     NVCustomTableViewCell *tempCell = timer.userInfo;
+    int seconds = player.currentTime;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.locale = [NSLocale currentLocale];
+    dateFormatter.timeZone = [NSTimeZone defaultTimeZone];
+    dateFormatter.dateFormat = @"00:mm";
     [tempCell.playingProgress setProgress:(player.currentTime/player.duration)];
-    tempCell.timeLabel.text = [NSString stringWithFormat:@"%f", (player.currentTime/player.duration)];
+    tempCell.timeLabel.text = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:seconds * 60]];
     if (!player.isPlaying && !previouslyPlayedCell) {
         [timer invalidate];
     }
@@ -162,8 +167,10 @@
 }
 
 - (IBAction)startRecording:(id)sender {
-    [player stop];
-    [self.tableView reloadRowsAtIndexPaths:@[[self.tableView indexPathForCell:previouslyPlayedCell]] withRowAnimation:UITableViewRowAnimationNone];
+    if (player.isPlaying) {
+        [player stop];
+        [self.tableView reloadRowsAtIndexPaths:@[[self.tableView indexPathForCell:previouslyPlayedCell]] withRowAnimation:UITableViewRowAnimationNone];
+    }
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     NSError *err = nil;
     [audioSession setCategory :AVAudioSessionCategoryPlayAndRecord error:&err];
@@ -349,12 +356,13 @@
 
     AVURLAsset *audioAsset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
     CMTime audioDuration = audioAsset.duration;
-    float audioDurationSeconds = CMTimeGetSeconds(audioDuration);
+    int audioDurationSeconds = CMTimeGetSeconds(audioDuration);
     
     cell.taskTextView.text = reminder.reminderTitle;
     cell.dateLabel.text = [self formateDateStringfromDate:reminder.dateToRemind];
     cell.creationLabel.text = [dateFormatter stringFromDate:reminder.creationDate];
-    cell.timeLabel.text = [NSString stringWithFormat:@"0:0%f", audioDurationSeconds];
+    dateFormatter.dateFormat = @"00:mm";
+    cell.timeLabel.text = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:audioDurationSeconds * 60]];
     cell.playButton.tag = indexPath.row;
     [cell.playButton addTarget:self action:@selector(playButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [cell.playButton setImage:[UIImage imageNamed:@"playButton"] forState:UIControlStateNormal];

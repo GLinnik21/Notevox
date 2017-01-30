@@ -75,7 +75,7 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T7t-vi-Oud">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T7t-vi-Oud">
                                             <rect key="frame" x="290" y="10" width="33" height="33"/>
                                             <state key="normal" image="playButton"/>
                                             <state key="focused" title="Focused"/>
@@ -131,10 +131,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Reminders" id="Zdf-7t-Un8">
                         <barButtonItem key="rightBarButtonItem" id="xK3-n2-duu">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UVS-qo-GDD">
-                                <rect key="frame" x="326" y="5" width="33" height="33"/>
+                            <inset key="imageInsets" minX="0.0" minY="0.0" maxX="-2" maxY="0.0"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="UVS-qo-GDD">
+                                <rect key="frame" x="345" y="10" width="14" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="pauseButton"/>
+                                <state key="normal" image="micButton"/>
                                 <connections>
                                     <action selector="cancelRecording:" destination="7bK-jq-Zjz" eventType="touchUpOutside" id="Kcl-k5-mqd"/>
                                     <action selector="startRecording:" destination="7bK-jq-Zjz" eventType="touchDown" id="HFe-uE-YrZ"/>
@@ -207,7 +208,7 @@
                                         <rect key="frame" x="0.0" y="115" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s1n-o6-VNr" id="fKw-39-eeM">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remind with the recording" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qzf-Gw-h4w">
@@ -333,7 +334,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="pauseButton" width="33" height="33"/>
+        <image name="micButton" width="14" height="23"/>
         <image name="playButton" width="33" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>

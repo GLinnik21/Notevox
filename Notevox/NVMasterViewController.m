@@ -437,8 +437,6 @@
             NSLog(@"File Manager: %@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
         
         [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
-        previouslyPlayedCell = nil;
-        [player stop];
         
         NSError *error = nil;
         if (![context save:&error]) {
@@ -489,6 +487,8 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    previouslyPlayedCell = nil;
+    [player stop];
     [self rescheduleAllLocalNotifications];
     [[self tableView] endUpdates];
 }

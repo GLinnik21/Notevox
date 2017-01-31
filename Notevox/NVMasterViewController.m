@@ -334,7 +334,18 @@
         [controller setReminder:reminder];
     }
 }
+#pragma mark - MGSwipeTableCellDelegate
 
+-(BOOL) swipeTableCell:(nonnull MGSwipeTableCell*) cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NVReminder *reminder = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    if (reminder.isImportant) {
+        reminder.isImportant = NO;
+    } else {
+        reminder.isImportant = YES;
+    }
+    return YES;
+}
 
 #pragma mark - Table View
 
@@ -359,6 +370,8 @@
     NSInteger audioDurationSeconds = CMTimeGetSeconds(audioDuration);
     
     cell.taskTextView.text = reminder.reminderTitle;
+    cell.taskTextView.textColor = reminder.isImportant ? [UIColor orangeColor] : [UIColor blackColor];
+    
     cell.dateLabel.text = [self formateDateStringfromDate:reminder.dateToRemind];
     cell.creationLabel.text = [dateFormatter stringFromDate:reminder.creationDate];
     dateFormatter.dateFormat = @"mm:ss";
@@ -392,7 +405,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NVCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReminderCell" forIndexPath:indexPath];
     
-    // Set up the cell
+    //configure left buttons
+    MGSwipeButton *importantButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"importantButton"] backgroundColor:[UIColor orangeColor]];
+    [importantButton iconTintColor:[UIColor whiteColor]];
+    cell.leftButtons = @[importantButton];
+    cell.leftSwipeSettings.transition = MGSwipeStateSwippingLeftToRight;
+    cell.delegate = self;
+    
+    // Set up the cell content
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }

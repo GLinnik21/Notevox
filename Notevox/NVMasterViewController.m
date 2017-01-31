@@ -86,9 +86,11 @@
 - (void)rescheduleAllLocalNotifications{
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     NSArray *fetchedData = [_fetchedResultsController fetchedObjects];
+    NSSortDescriptor *dateToRemindSort = [NSSortDescriptor sortDescriptorWithKey:@"dateToRemind" ascending:YES];
+    NSArray *sortedData = [fetchedData sortedArrayUsingDescriptors:@[dateToRemindSort]];
     NSInteger badgeNumber = 1;
-    for (int i = 0; i < fetchedData.count; i++) {
-        NVReminder *tempReminder = [fetchedData objectAtIndex:i];
+    for (int i = 0; i < sortedData.count; i++) {
+        NVReminder *tempReminder = [sortedData objectAtIndex:i];
         //Schedule reminders with only valid date
         if (tempReminder.dateToRemind && [tempReminder.dateToRemind compare:[NSDate date]] == NSOrderedDescending) {
             UILocalNotification *localNotification = [[UILocalNotification alloc] init];
@@ -101,7 +103,6 @@
                 localNotification.soundName = UILocalNotificationDefaultSoundName;
             }
             localNotification.applicationIconBadgeNumber = UIApplication.sharedApplication. applicationIconBadgeNumber + badgeNumber++;
-            NSLog(@"%ld badges", (long)[[UIApplication sharedApplication] applicationIconBadgeNumber]);
             [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
         }
     }
@@ -297,10 +298,10 @@
     }
     
     [self setFetchedResultsController:[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:moc sectionNameKeyPath:nil cacheName:nil]];
-    [[self fetchedResultsController] setDelegate:self];
+    self.fetchedResultsController.delegate = self;
     
     NSError *error = nil;
-    if (![[self fetchedResultsController] performFetch:&error]) {
+    if (![self.fetchedResultsController performFetch:&error]) {
         NSLog(@"Failed to initialize FetchedResultsController: %@\n%@", [error localizedDescription], [error userInfo]);
         abort();
     }

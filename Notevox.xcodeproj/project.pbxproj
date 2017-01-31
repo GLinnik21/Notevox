@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C2D98C9059389F76A1341C5 /* libPods-Notevox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEC86E95D8E485201DD8FDF /* libPods-Notevox.a */; };
 		ED4956C11E3D2F41001B09D8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED4956C01E3D2F41001B09D8 /* AVFoundation.framework */; };
 		ED9E3B491E3954DC0032087F /* NVDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E3B481E3954DC0032087F /* NVDataController.m */; };
 		EDAFCD9E1E3F66420011A290 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EDAFCDA01E3F66420011A290 /* Localizable.strings */; };
@@ -24,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B19C7AEB611E4698785C1C5 /* Pods-Notevox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notevox.release.xcconfig"; path = "Pods/Target Support Files/Pods-Notevox/Pods-Notevox.release.xcconfig"; sourceTree = "<group>"; };
+		2CEC86E95D8E485201DD8FDF /* libPods-Notevox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Notevox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CFC6DD1A31B71271AEF172C /* Pods-Notevox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notevox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Notevox/Pods-Notevox.debug.xcconfig"; sourceTree = "<group>"; };
 		ED4956C01E3D2F41001B09D8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		ED9E3B471E3954DC0032087F /* NVDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVDataController.h; sourceTree = "<group>"; };
 		ED9E3B481E3954DC0032087F /* NVDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVDataController.m; sourceTree = "<group>"; };
@@ -58,16 +62,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED4956C11E3D2F41001B09D8 /* AVFoundation.framework in Frameworks */,
+				4C2D98C9059389F76A1341C5 /* libPods-Notevox.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		300A27D16D568C411A6C760B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6CFC6DD1A31B71271AEF172C /* Pods-Notevox.debug.xcconfig */,
+				0B19C7AEB611E4698785C1C5 /* Pods-Notevox.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		ED4956BF1E3D2F40001B09D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED4956C01E3D2F41001B09D8 /* AVFoundation.framework */,
+				2CEC86E95D8E485201DD8FDF /* libPods-Notevox.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -78,6 +93,7 @@
 				EDDCAE921E30F773000FE262 /* Notevox */,
 				EDDCAE911E30F773000FE262 /* Products */,
 				ED4956BF1E3D2F40001B09D8 /* Frameworks */,
+				300A27D16D568C411A6C760B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -156,9 +172,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EDDCAEAA1E30F773000FE262 /* Build configuration list for PBXNativeTarget "Notevox" */;
 			buildPhases = (
+				3CE7799BC1F931F0F1147D0D /* [CP] Check Pods Manifest.lock */,
 				EDDCAE8C1E30F773000FE262 /* Sources */,
 				EDDCAE8D1E30F773000FE262 /* Frameworks */,
 				EDDCAE8E1E30F773000FE262 /* Resources */,
+				95390A3BBC2DCCFC3D60C147 /* [CP] Embed Pods Frameworks */,
+				D3FE7F4D867359E6B5E4D6AC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -219,6 +238,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3CE7799BC1F931F0F1147D0D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		95390A3BBC2DCCFC3D60C147 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Notevox/Pods-Notevox-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D3FE7F4D867359E6B5E4D6AC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Notevox/Pods-Notevox-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EDDCAE8C1E30F773000FE262 /* Sources */ = {
@@ -362,6 +429,7 @@
 		};
 		EDDCAEAB1E30F773000FE262 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6CFC6DD1A31B71271AEF172C /* Pods-Notevox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -379,6 +447,7 @@
 		};
 		EDDCAEAC1E30F773000FE262 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B19C7AEB611E4698785C1C5 /* Pods-Notevox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

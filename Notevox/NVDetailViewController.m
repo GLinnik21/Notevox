@@ -45,22 +45,24 @@
     }
 }
 
-- (IBAction)dateSwitchChanged:(id)sender {
-    if (!self.dateToRemindSwitch.isOn) {
-        [self hideDateCells];
-        self.reminder.dateToRemind = nil;
+- (IBAction)switchChanged:(id)sender {
+    if (sender == self.dateToRemindSwitch) {
+        if (!self.dateToRemindSwitch.isOn) {
+            [self hideDateCells];
+            self.reminder.dateToRemind = nil;
+        } else {
+            [self showDateCells];
+        }
+
     } else {
-        [self showDateCells];
+        if (self.remindWithVoiceSwitch.isOn) {
+            self.reminder.isCustomSound = YES;
+        } else {
+            self.reminder.isCustomSound = NO;
+        }
     }
 }
 
-- (IBAction)voiceSwitchChanged:(id)sender {
-    if (self.remindWithVoiceSwitch.isOn) {
-        self.reminder.isCustomSound = YES;
-    } else {
-        self.reminder.isCustomSound = NO;
-    }
-}
 
 - (void)hideDateCells {
     [self.labelsCell setHidden:YES];

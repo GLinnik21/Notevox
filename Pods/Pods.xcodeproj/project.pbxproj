@@ -1,0 +1,512 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0DEDF39448DE84481254281F23B571E3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		1E22CEDDA193202CB829FB019E54722B /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E0C536338B8A0482BA3B7D3D43E74 /* SWLongPressGestureRecognizer.m */; };
+		30499F3343D2AE6D51F25A687914A394 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DAFEBC42C43D6E01A649CC0C135A83 /* SWUtilityButtonView.m */; };
+		33D16A00088CF5003CCCEE4AD96F7A63 /* Pods-Notevox-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 147C65C7E9962B6E41D45D9BCEC6E509 /* Pods-Notevox-dummy.m */; };
+		4ACE3871CFA67A8A9B97E191A5B09F0A /* SWTableViewCell-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F45DDF8AA71299C511160FF6D1AF7F /* SWTableViewCell-dummy.m */; };
+		87E6F05036A99455B5671CA5298CA8C5 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC444C36365AE1CAFA385D879DCD196 /* SWTableViewCell.m */; };
+		91B5159F550C5A057B0F53650BE98545 /* SWTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4004AD560CAEE5F30E25FAF8F40CEC99 /* SWTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9BBBE611B2A813BA673ED200F43C631D /* SWUtilityButtonView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B394B361B751CEFD895BD0D4EB41B3A /* SWUtilityButtonView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A34C28D1F316FF2518F79FDC7E5E24C6 /* SWUtilityButtonTapGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 50DDD137E72812F840B69A0BFB8468C2 /* SWUtilityButtonTapGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C130C79C9410312E31834FCDE8666F2A /* NSMutableArray+SWUtilityButtons.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C44C32AF6F23E45CF2375CDC8C1F08 /* NSMutableArray+SWUtilityButtons.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D90C0CB4CFDE12728B6886DD8AAE0465 /* SWCellScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A3C86FE92C53623FBF0B71111303E7 /* SWCellScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DE1AC8C050E7085E5F68A0CEBBF9C2B1 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = E4CDF94181AF733F3D89ACC2646F127C /* NSMutableArray+SWUtilityButtons.m */; };
+		E439661D5B30B9AF7968122448A5A6B5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		EB89E8BA015888C3540531FD7127CA9A /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = DE43F14217DC3957124418763F1E2303 /* SWUtilityButtonTapGestureRecognizer.m */; };
+		F3E3B41894F82D564B560A02010D0EBE /* SWLongPressGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = F69700723796AC56ED899E2B84397373 /* SWLongPressGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FEC97196637AD300BA5A9F5FBF4EC8AC /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FC0F6070C287B388F931494A00A3442 /* SWCellScrollView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7D8FABD9CC2E855DD35BCB87DC9FA398 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 54A823D6C3271AAA30C4BBD494902705;
+			remoteInfo = SWTableViewCell;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0BE86500CBBE915DF57773B29B25A977 /* Pods-Notevox-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Notevox-frameworks.sh"; sourceTree = "<group>"; };
+		11C13D92B03BF66CAE39A39D6A604D16 /* Pods-Notevox-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Notevox-acknowledgements.markdown"; sourceTree = "<group>"; };
+		147C65C7E9962B6E41D45D9BCEC6E509 /* Pods-Notevox-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Notevox-dummy.m"; sourceTree = "<group>"; };
+		2C19048658450A41077A5E9C15E6BF36 /* libSWTableViewCell.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libSWTableViewCell.a; path = libSWTableViewCell.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C76114810BAA127BB08D151B7FF49EF /* Pods-Notevox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Notevox.debug.xcconfig"; sourceTree = "<group>"; };
+		4004AD560CAEE5F30E25FAF8F40CEC99 /* SWTableViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SWTableViewCell.h; path = SWTableViewCell/PodFiles/SWTableViewCell.h; sourceTree = "<group>"; };
+		41544FCFCA7C5E1EC165648782EC92F9 /* Pods-Notevox-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Notevox-resources.sh"; sourceTree = "<group>"; };
+		47A3C86FE92C53623FBF0B71111303E7 /* SWCellScrollView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SWCellScrollView.h; path = SWTableViewCell/PodFiles/SWCellScrollView.h; sourceTree = "<group>"; };
+		50DDD137E72812F840B69A0BFB8468C2 /* SWUtilityButtonTapGestureRecognizer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SWUtilityButtonTapGestureRecognizer.h; path = SWTableViewCell/PodFiles/SWUtilityButtonTapGestureRecognizer.h; sourceTree = "<group>"; };
+		56C44C32AF6F23E45CF2375CDC8C1F08 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+SWUtilityButtons.h"; path = "SWTableViewCell/PodFiles/NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
+		6CDC5661E8CCBC5BF0B10539C26DF803 /* SWTableViewCell.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SWTableViewCell.xcconfig; sourceTree = "<group>"; };
+		76F45DDF8AA71299C511160FF6D1AF7F /* SWTableViewCell-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SWTableViewCell-dummy.m"; sourceTree = "<group>"; };
+		7A8EDA49AEE87FB635059E3E56B39016 /* Pods-Notevox-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Notevox-acknowledgements.plist"; sourceTree = "<group>"; };
+		7B394B361B751CEFD895BD0D4EB41B3A /* SWUtilityButtonView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SWUtilityButtonView.h; path = SWTableViewCell/PodFiles/SWUtilityButtonView.h; sourceTree = "<group>"; };
+		7BC444C36365AE1CAFA385D879DCD196 /* SWTableViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SWTableViewCell.m; path = SWTableViewCell/PodFiles/SWTableViewCell.m; sourceTree = "<group>"; };
+		83E103BB392F4B5E6866353E5097A76B /* SWTableViewCell-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SWTableViewCell-prefix.pch"; sourceTree = "<group>"; };
+		903D4ADD6C94F82ECBE990B09C48818B /* libPods-Notevox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Notevox.a"; path = "libPods-Notevox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9FC0F6070C287B388F931494A00A3442 /* SWCellScrollView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SWCellScrollView.m; path = SWTableViewCell/PodFiles/SWCellScrollView.m; sourceTree = "<group>"; };
+		B1DAFEBC42C43D6E01A649CC0C135A83 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SWUtilityButtonView.m; path = SWTableViewCell/PodFiles/SWUtilityButtonView.m; sourceTree = "<group>"; };
+		B70E0C536338B8A0482BA3B7D3D43E74 /* SWLongPressGestureRecognizer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SWLongPressGestureRecognizer.m; path = SWTableViewCell/PodFiles/SWLongPressGestureRecognizer.m; sourceTree = "<group>"; };
+		BCC041CD3FE3FA1937CA8A93E23811ED /* Pods-Notevox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Notevox.release.xcconfig"; sourceTree = "<group>"; };
+		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		DE43F14217DC3957124418763F1E2303 /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SWUtilityButtonTapGestureRecognizer.m; path = SWTableViewCell/PodFiles/SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
+		E4CDF94181AF733F3D89ACC2646F127C /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+SWUtilityButtons.m"; path = "SWTableViewCell/PodFiles/NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
+		F69700723796AC56ED899E2B84397373 /* SWLongPressGestureRecognizer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SWLongPressGestureRecognizer.h; path = SWTableViewCell/PodFiles/SWLongPressGestureRecognizer.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		01D3C8C3F8EA7855FBFA936B549C66C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E439661D5B30B9AF7968122448A5A6B5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E048817F90D2D8B68C6EA45ADCF51080 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DEDF39448DE84481254281F23B571E3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		23E07552EBDF89C3C97554B76466A1A4 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				6CDC5661E8CCBC5BF0B10539C26DF803 /* SWTableViewCell.xcconfig */,
+				76F45DDF8AA71299C511160FF6D1AF7F /* SWTableViewCell-dummy.m */,
+				83E103BB392F4B5E6866353E5097A76B /* SWTableViewCell-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SWTableViewCell";
+			sourceTree = "<group>";
+		};
+		7523D91959F5B2C6AC17DDAC2AA63CFD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E5AB4BB2207F114CDCBC6DBB31D24346 /* SWTableViewCell */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				7523D91959F5B2C6AC17DDAC2AA63CFD /* Pods */,
+				B319893857EBAAEF88987062BBD2DA19 /* Products */,
+				E459D6D44AFA1D80B21547BD0548210D /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		B319893857EBAAEF88987062BBD2DA19 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				903D4ADD6C94F82ECBE990B09C48818B /* libPods-Notevox.a */,
+				2C19048658450A41077A5E9C15E6BF36 /* libSWTableViewCell.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E459D6D44AFA1D80B21547BD0548210D /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				F6BE4095F85AAF81495868CFC4110810 /* Pods-Notevox */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		E5AB4BB2207F114CDCBC6DBB31D24346 /* SWTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				56C44C32AF6F23E45CF2375CDC8C1F08 /* NSMutableArray+SWUtilityButtons.h */,
+				E4CDF94181AF733F3D89ACC2646F127C /* NSMutableArray+SWUtilityButtons.m */,
+				47A3C86FE92C53623FBF0B71111303E7 /* SWCellScrollView.h */,
+				9FC0F6070C287B388F931494A00A3442 /* SWCellScrollView.m */,
+				F69700723796AC56ED899E2B84397373 /* SWLongPressGestureRecognizer.h */,
+				B70E0C536338B8A0482BA3B7D3D43E74 /* SWLongPressGestureRecognizer.m */,
+				4004AD560CAEE5F30E25FAF8F40CEC99 /* SWTableViewCell.h */,
+				7BC444C36365AE1CAFA385D879DCD196 /* SWTableViewCell.m */,
+				50DDD137E72812F840B69A0BFB8468C2 /* SWUtilityButtonTapGestureRecognizer.h */,
+				DE43F14217DC3957124418763F1E2303 /* SWUtilityButtonTapGestureRecognizer.m */,
+				7B394B361B751CEFD895BD0D4EB41B3A /* SWUtilityButtonView.h */,
+				B1DAFEBC42C43D6E01A649CC0C135A83 /* SWUtilityButtonView.m */,
+				23E07552EBDF89C3C97554B76466A1A4 /* Support Files */,
+			);
+			name = SWTableViewCell;
+			path = SWTableViewCell;
+			sourceTree = "<group>";
+		};
+		F6BE4095F85AAF81495868CFC4110810 /* Pods-Notevox */ = {
+			isa = PBXGroup;
+			children = (
+				11C13D92B03BF66CAE39A39D6A604D16 /* Pods-Notevox-acknowledgements.markdown */,
+				7A8EDA49AEE87FB635059E3E56B39016 /* Pods-Notevox-acknowledgements.plist */,
+				147C65C7E9962B6E41D45D9BCEC6E509 /* Pods-Notevox-dummy.m */,
+				0BE86500CBBE915DF57773B29B25A977 /* Pods-Notevox-frameworks.sh */,
+				41544FCFCA7C5E1EC165648782EC92F9 /* Pods-Notevox-resources.sh */,
+				2C76114810BAA127BB08D151B7FF49EF /* Pods-Notevox.debug.xcconfig */,
+				BCC041CD3FE3FA1937CA8A93E23811ED /* Pods-Notevox.release.xcconfig */,
+			);
+			name = "Pods-Notevox";
+			path = "Target Support Files/Pods-Notevox";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		BBC247B13855CF8747FD98118E21EDD7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C130C79C9410312E31834FCDE8666F2A /* NSMutableArray+SWUtilityButtons.h in Headers */,
+				D90C0CB4CFDE12728B6886DD8AAE0465 /* SWCellScrollView.h in Headers */,
+				F3E3B41894F82D564B560A02010D0EBE /* SWLongPressGestureRecognizer.h in Headers */,
+				91B5159F550C5A057B0F53650BE98545 /* SWTableViewCell.h in Headers */,
+				A34C28D1F316FF2518F79FDC7E5E24C6 /* SWUtilityButtonTapGestureRecognizer.h in Headers */,
+				9BBBE611B2A813BA673ED200F43C631D /* SWUtilityButtonView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		54A823D6C3271AAA30C4BBD494902705 /* SWTableViewCell */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EAC1EE50B529B300AA7FAF52FDA04180 /* Build configuration list for PBXNativeTarget "SWTableViewCell" */;
+			buildPhases = (
+				2042A24F7F4749B474A90158561FD469 /* Sources */,
+				01D3C8C3F8EA7855FBFA936B549C66C7 /* Frameworks */,
+				BBC247B13855CF8747FD98118E21EDD7 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SWTableViewCell;
+			productName = SWTableViewCell;
+			productReference = 2C19048658450A41077A5E9C15E6BF36 /* libSWTableViewCell.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		68F5D115ED3CFC571BE74BF5966C687F /* Pods-Notevox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D309F7D92C6C9D7668FF8BE798FA8CDF /* Build configuration list for PBXNativeTarget "Pods-Notevox" */;
+			buildPhases = (
+				B113AC5D010F755F5A546761576893C9 /* Sources */,
+				E048817F90D2D8B68C6EA45ADCF51080 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FB0867310D9B0FC15948596D01DAFBDB /* PBXTargetDependency */,
+			);
+			name = "Pods-Notevox";
+			productName = "Pods-Notevox";
+			productReference = 903D4ADD6C94F82ECBE990B09C48818B /* libPods-Notevox.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = B319893857EBAAEF88987062BBD2DA19 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				68F5D115ED3CFC571BE74BF5966C687F /* Pods-Notevox */,
+				54A823D6C3271AAA30C4BBD494902705 /* SWTableViewCell */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2042A24F7F4749B474A90158561FD469 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE1AC8C050E7085E5F68A0CEBBF9C2B1 /* NSMutableArray+SWUtilityButtons.m in Sources */,
+				FEC97196637AD300BA5A9F5FBF4EC8AC /* SWCellScrollView.m in Sources */,
+				1E22CEDDA193202CB829FB019E54722B /* SWLongPressGestureRecognizer.m in Sources */,
+				4ACE3871CFA67A8A9B97E191A5B09F0A /* SWTableViewCell-dummy.m in Sources */,
+				87E6F05036A99455B5671CA5298CA8C5 /* SWTableViewCell.m in Sources */,
+				EB89E8BA015888C3540531FD7127CA9A /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
+				30499F3343D2AE6D51F25A687914A394 /* SWUtilityButtonView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B113AC5D010F755F5A546761576893C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33D16A00088CF5003CCCEE4AD96F7A63 /* Pods-Notevox-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FB0867310D9B0FC15948596D01DAFBDB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SWTableViewCell;
+			target = 54A823D6C3271AAA30C4BBD494902705 /* SWTableViewCell */;
+			targetProxy = 7D8FABD9CC2E855DD35BCB87DC9FA398 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		015A368F878AC3E2CEAE21DDE8026304 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		44CDBB6D11DE06DB64D6268622BDC47E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4624E5E4304E05E4174A5ED923FF35FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6CDC5661E8CCBC5BF0B10539C26DF803 /* SWTableViewCell.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SWTableViewCell/SWTableViewCell-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		AB0B6C1568E007BBE5BA5A3A0C62B10C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C76114810BAA127BB08D151B7FF49EF /* Pods-Notevox.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		E012847178055943AE77C079A845BBE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6CDC5661E8CCBC5BF0B10539C26DF803 /* SWTableViewCell.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SWTableViewCell/SWTableViewCell-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		ECB95C68764CF389EE22962A84487AFF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BCC041CD3FE3FA1937CA8A93E23811ED /* Pods-Notevox.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				015A368F878AC3E2CEAE21DDE8026304 /* Debug */,
+				44CDBB6D11DE06DB64D6268622BDC47E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D309F7D92C6C9D7668FF8BE798FA8CDF /* Build configuration list for PBXNativeTarget "Pods-Notevox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB0B6C1568E007BBE5BA5A3A0C62B10C /* Debug */,
+				ECB95C68764CF389EE22962A84487AFF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EAC1EE50B529B300AA7FAF52FDA04180 /* Build configuration list for PBXNativeTarget "SWTableViewCell" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4624E5E4304E05E4174A5ED923FF35FC /* Debug */,
+				E012847178055943AE77C079A845BBE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

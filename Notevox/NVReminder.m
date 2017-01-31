@@ -11,6 +11,7 @@
 @implementation NVReminder
 
 @dynamic isCustomSound;
+@dynamic isImportant;
 @dynamic audioFileURL;
 @dynamic dateToRemind;
 @dynamic creationDate;

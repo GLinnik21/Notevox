@@ -220,7 +220,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zD9-e3-opp">
                                                     <rect key="frame" x="310" y="6" width="51" height="31"/>
                                                     <connections>
-                                                        <action selector="dateSwitchChanged:" destination="5LO-F5-hy1" eventType="touchUpInside" id="lYq-Ab-Wj8"/>
+                                                        <action selector="switchChanged:" destination="5LO-F5-hy1" eventType="touchUpInside" id="pH6-Cs-zdQ"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -248,7 +248,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LUv-KT-Nna">
                                                     <rect key="frame" x="310" y="6" width="51" height="31"/>
                                                     <connections>
-                                                        <action selector="voiceSwitchChanged:" destination="5LO-F5-hy1" eventType="touchUpInside" id="ogD-ys-J7E"/>
+                                                        <action selector="switchChanged:" destination="5LO-F5-hy1" eventType="touchUpInside" id="XzB-wG-FWy"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>

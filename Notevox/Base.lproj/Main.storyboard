@@ -79,9 +79,6 @@
                                             <rect key="frame" x="290" y="10" width="33" height="33"/>
                                             <state key="normal" image="playButton"/>
                                             <state key="focused" title="Focused"/>
-                                            <connections>
-                                                <action selector="playReminder:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="tQp-sE-RQc"/>
-                                            </connections>
                                         </button>
                                         <progressView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YwY-Fk-IjY">
                                             <rect key="frame" x="17" y="16" width="261" height="2"/>

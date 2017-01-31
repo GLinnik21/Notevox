@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '68F5D115ED3CFC571BE74BF5966C687F'
+               BlueprintIdentifier = 'C5925D72F8A44D1ABA3BA18981E28891'
                BlueprintName = 'Pods-Notevox'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libPods-Notevox.a'>

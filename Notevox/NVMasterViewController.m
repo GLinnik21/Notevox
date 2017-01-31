@@ -57,13 +57,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NVCustomTableViewCell *)getCustomCellViewObject:(id)sender {
+    NVCustomTableViewCell *tempCell = (NVCustomTableViewCell *)sender;
+    while (![tempCell isKindOfClass:[NVCustomTableViewCell class]]) {
+        tempCell = (NVCustomTableViewCell *)tempCell.superview;
+    }
+    return tempCell;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self textFieldDidEndEditing:textField];
     return [textField resignFirstResponder];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    NVCustomTableViewCell *sellectedCell = (NVCustomTableViewCell *)textField.superview.superview;
+    NVCustomTableViewCell *sellectedCell = [self getCustomCellViewObject:textField];
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sellectedCell];
     NVReminder *reminder = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
@@ -124,7 +132,9 @@
 
 -(void)playButtonClicked:(UIButton*)sender {
     static NSTimer *timer = nil;
-    NVCustomTableViewCell *tempCell = (NVCustomTableViewCell *)sender.superview.superview;
+    
+    NVCustomTableViewCell *tempCell = [self getCustomCellViewObject:sender];
+    
     if (player.isPlaying && [previouslyPlayedCell.playButton isEqual:sender]) {
         //Pause the same cell
         [sender setImage:[UIImage imageNamed:@"playButton"] forState:UIControlStateNormal];
@@ -312,6 +322,10 @@
 
 #pragma mark - Segues
 
+//- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+//    [self performSegueWithIdentifier: @"EditUser" sender: [tableView cellForRowAtIndexPath: indexPath]];
+//}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
@@ -376,7 +390,8 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NVCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReminderCell"];
+    NVCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReminderCell" forIndexPath:indexPath];
+    
     // Set up the cell
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
@@ -418,7 +433,6 @@
 #pragma mark - NSFetchedResultsControllerDelegate
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [[self tableView] beginUpdates];
-    [self rescheduleAllLocalNotifications];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
@@ -455,6 +469,7 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self rescheduleAllLocalNotifications];
     [[self tableView] endUpdates];
 }
 

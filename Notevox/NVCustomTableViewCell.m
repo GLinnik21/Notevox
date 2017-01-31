@@ -21,6 +21,4 @@
     // Configure the view for the selected state
 }
 
-- (IBAction)playReminder:(id)sender {
-}
 @end

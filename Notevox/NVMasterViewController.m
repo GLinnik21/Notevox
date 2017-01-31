@@ -410,6 +410,7 @@
     [importantButton iconTintColor:[UIColor whiteColor]];
     cell.leftButtons = @[importantButton];
     cell.leftSwipeSettings.transition = MGSwipeStateSwippingLeftToRight;
+    cell.leftExpansion.buttonIndex = 0;
     cell.delegate = self;
     
     // Set up the cell content

@@ -32,7 +32,14 @@
     
     // Set icon badge number to zero
     application.applicationIconBadgeNumber = 0;
-    
+    [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted){
+        if (!granted) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"micPrivacyTitle", @"")
+                                                        message:NSLocalizedString(@"micPrivacyDesc", @"")
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+            [alert show];}}];
     [self setDataController:[[NVDataController alloc] init]];
     return YES;
 }

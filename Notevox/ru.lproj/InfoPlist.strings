@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Notevox
+
+  Created by Глеб Линник on 01.02.17.
+  Copyright © 2017 ARobot. All rights reserved.
+*/
+
+"NSMicrophoneUsageDescription" = "Для записи голоса";

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4C2D98C9059389F76A1341C5 /* libPods-Notevox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEC86E95D8E485201DD8FDF /* libPods-Notevox.a */; };
+		ED2A9C541E414C9F00CB451A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED2A9C561E414C9F00CB451A /* InfoPlist.strings */; };
 		ED4956C11E3D2F41001B09D8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED4956C01E3D2F41001B09D8 /* AVFoundation.framework */; };
 		ED9E3B491E3954DC0032087F /* NVDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E3B481E3954DC0032087F /* NVDataController.m */; };
 		EDAFCD9E1E3F66420011A290 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EDAFCDA01E3F66420011A290 /* Localizable.strings */; };
@@ -28,6 +29,8 @@
 		0B19C7AEB611E4698785C1C5 /* Pods-Notevox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notevox.release.xcconfig"; path = "Pods/Target Support Files/Pods-Notevox/Pods-Notevox.release.xcconfig"; sourceTree = "<group>"; };
 		2CEC86E95D8E485201DD8FDF /* libPods-Notevox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Notevox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CFC6DD1A31B71271AEF172C /* Pods-Notevox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notevox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Notevox/Pods-Notevox.debug.xcconfig"; sourceTree = "<group>"; };
+		ED2A9C551E414C9F00CB451A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		ED2A9C571E414CD500CB451A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ED4956C01E3D2F41001B09D8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		ED9E3B471E3954DC0032087F /* NVDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVDataController.h; sourceTree = "<group>"; };
 		ED9E3B481E3954DC0032087F /* NVDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVDataController.m; sourceTree = "<group>"; };
@@ -115,6 +118,7 @@
 				EDDCAEA21E30F773000FE262 /* Assets.xcassets */,
 				EDDCAEA41E30F773000FE262 /* LaunchScreen.storyboard */,
 				EDDCAEA71E30F773000FE262 /* Info.plist */,
+				ED2A9C561E414C9F00CB451A /* InfoPlist.strings */,
 				EDDCAE931E30F773000FE262 /* Supporting Files */,
 				EDDCAEDD1E32AAF4000FE262 /* Views */,
 				EDDCAEDE1E32AB06000FE262 /* Model */,
@@ -239,6 +243,7 @@
 				EDAFCD9E1E3F66420011A290 /* Localizable.strings in Resources */,
 				EDDCAEA31E30F773000FE262 /* Assets.xcassets in Resources */,
 				EDDCAEA11E30F773000FE262 /* Main.storyboard in Resources */,
+				ED2A9C541E414C9F00CB451A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +317,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		ED2A9C561E414C9F00CB451A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED2A9C551E414C9F00CB451A /* ru */,
+				ED2A9C571E414CD500CB451A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		EDAFCDA01E3F66420011A290 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

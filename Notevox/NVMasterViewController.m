@@ -41,6 +41,7 @@
     self.searchController.dimsBackgroundDuringPresentation = false;
     self.definesPresentationContext = true;
     self.tableView.tableHeaderView = self.searchController.searchBar;
+    [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted){if (!granted) self.navigationItem.rightBarButtonItem.enabled = NO;}];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

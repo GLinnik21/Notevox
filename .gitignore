@@ -3,6 +3,7 @@ build/*
 *.pbxuser
 *.mode1v3
 *.xcdebugger
+*.xcbkptlist
 
 # old skool
 .svn

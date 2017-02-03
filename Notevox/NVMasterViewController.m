@@ -496,9 +496,10 @@
     [[self tableView] endUpdates];
 }
 
-#pragma mark - UISearchController
+#pragma mark - UISearchControllerDelegate
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    [player stop];
     [self initializeFetchedResultsController];
     [self reloadTableView];
 }

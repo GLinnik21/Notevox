@@ -250,8 +250,15 @@
     
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     [audioSession setActive:NO error:nil];
+    AVURLAsset *audioAsset = [AVURLAsset URLAssetWithURL:recorder.url options:nil];
+    CMTime audioDuration = audioAsset.duration;
+    Float64 audioDurationSeconds = CMTimeGetSeconds(audioDuration);
     
-    [self insertNewObject: recorder.url.lastPathComponent];
+    if (audioDurationSeconds > 0.5) {
+        [self insertNewObject: recorder.url.lastPathComponent];
+    } else {
+        [recorder deleteRecording];
+    }
 }
 
 - (IBAction)cancelRecording:(id)sender {

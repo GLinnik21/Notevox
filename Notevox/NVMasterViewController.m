@@ -10,8 +10,7 @@
 #import "NVDetailViewController.h"
 #import "NVCustomTableViewCell.h"
 #import "NVAppDelegate.h"
-
-//#define LIBRARY_SOUND_FOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Sounds"]
+#import "UIView+Shake.h"
 
 @interface NVMasterViewController () {
     AVAudioRecorder *recorder;
@@ -257,6 +256,9 @@
     if (audioDurationSeconds > 0.5) {
         [self insertNewObject: recorder.url.lastPathComponent];
     } else {
+        [self.navigationController.navigationBar.subviews enumerateObjectsUsingBlock:^(UIView* obj, NSUInteger idx, BOOL *stop) {
+            [obj shake:7 withDelta:4.0 speed:0.1];
+        }];
         [recorder deleteRecording];
     }
 }

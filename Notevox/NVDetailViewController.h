@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NVReminder.h"
+#import "NVReminder+Add.h"
 #import <CoreData/CoreData.h>
 
 @interface NVDetailViewController : UITableViewController <UITextFieldDelegate>

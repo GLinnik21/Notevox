@@ -292,7 +292,7 @@
 
 
 - (void)initializeFetchedResultsController {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Reminder"];
+    NSFetchRequest *request = [NVReminder fetchRequest];
     
     NSSortDescriptor *creationDateSort = [NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO];
     

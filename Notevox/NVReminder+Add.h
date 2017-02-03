@@ -6,7 +6,7 @@
 //  Copyright © 2017 ARobot. All rights reserved.
 //
 
-#import "NVReminder.h"
+#import "NVReminder+CoreDataClass.h"
 
 @interface NVReminder (Add)
 

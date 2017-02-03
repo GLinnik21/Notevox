@@ -21,7 +21,7 @@
     reminder.creationDate = [reminderInfo valueForKey:@"creationDate"];
     reminder.dateToRemind = [reminderInfo valueForKey:@"dateToRemind"];
     reminder.reminderTitle = [reminderInfo valueForKey:@"reminderTitle"];
-    *(reminder.repeatCalendar) = (NSInteger)[reminderInfo valueForKey:@"repeatCalendar"];
+    reminder.repeatCalendar = (int32_t)[reminderInfo valueForKey:@"repeatCalendar"];
     
     return reminder;
 }

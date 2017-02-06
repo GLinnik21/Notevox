@@ -102,7 +102,7 @@
             } else {
                 localNotification.soundName = UILocalNotificationDefaultSoundName;
             }
-            localNotification.applicationIconBadgeNumber = UIApplication.sharedApplication. applicationIconBadgeNumber + badgeNumber++;
+            localNotification.applicationIconBadgeNumber = UIApplication.sharedApplication.applicationIconBadgeNumber + badgeNumber++;
             [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
         }
     }
@@ -182,6 +182,7 @@
     if (player.isPlaying) {
         [player stop];
         [self.tableView reloadRowsAtIndexPaths:@[[self.tableView indexPathForCell:previouslyPlayedCell]] withRowAnimation:UITableViewRowAnimationNone];
+        previouslyPlayedCell = nil;
     }
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     NSError *err = nil;

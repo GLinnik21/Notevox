@@ -101,6 +101,7 @@
         self.reminder.dateToRemind = [calendar dateFromComponents:comps];
     }
     self.reminder.reminderTitle = self.taskDescription.text;
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

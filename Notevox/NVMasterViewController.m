@@ -45,7 +45,6 @@
                                              selector:@selector(reloadTableView)
                                                  name:@"reloadData"
                                                object:nil];
-    
     [self initializeFetchedResultsController];
     [self reloadTableView];
     [super viewWillAppear:animated];

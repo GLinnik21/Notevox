@@ -76,7 +76,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T7t-vi-Oud">
-                                            <rect key="frame" x="290" y="10" width="33" height="33"/>
+                                            <rect key="frame" x="290" y="0.0" width="33" height="52"/>
                                             <state key="normal" image="playButton"/>
                                             <state key="focused" title="Focused"/>
                                         </button>
@@ -95,9 +95,11 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="YwY-Fk-IjY" secondAttribute="trailing" constant="42" id="2o3-xP-krI"/>
                                         <constraint firstItem="D02-C1-QDX" firstAttribute="leading" secondItem="37f-cq-3Eg" secondAttribute="leading" constant="17" id="3XE-YY-3Pa"/>
                                         <constraint firstItem="D02-C1-QDX" firstAttribute="top" secondItem="37f-cq-3Eg" secondAttribute="top" constant="7" id="4UL-Uc-6Km"/>
+                                        <constraint firstAttribute="bottom" secondItem="T7t-vi-Oud" secondAttribute="bottom" id="691-qc-LWZ"/>
                                         <constraint firstItem="nUG-vD-11B" firstAttribute="top" secondItem="37f-cq-3Eg" secondAttribute="top" constant="32" id="9Ex-5i-s06"/>
                                         <constraint firstItem="T7t-vi-Oud" firstAttribute="centerY" secondItem="37f-cq-3Eg" secondAttribute="centerY" id="BEh-ND-uyZ"/>
                                         <constraint firstItem="del-M9-qPH" firstAttribute="centerY" secondItem="nUG-vD-11B" secondAttribute="centerY" id="U6V-pq-WDv"/>
+                                        <constraint firstItem="T7t-vi-Oud" firstAttribute="top" secondItem="37f-cq-3Eg" secondAttribute="top" id="a8Y-R8-f6q"/>
                                         <constraint firstItem="del-M9-qPH" firstAttribute="leading" secondItem="nUG-vD-11B" secondAttribute="trailing" constant="8" id="cY8-fk-Gqs"/>
                                         <constraint firstItem="YwY-Fk-IjY" firstAttribute="leading" secondItem="37f-cq-3Eg" secondAttribute="leadingMargin" constant="9" id="chQ-y5-mlf"/>
                                         <constraint firstItem="T7t-vi-Oud" firstAttribute="leading" secondItem="vjh-at-sUw" secondAttribute="trailing" constant="12" id="hQv-bU-vnt"/>
@@ -217,7 +219,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zD9-e3-opp">
                                                     <rect key="frame" x="310" y="6" width="51" height="31"/>
                                                     <connections>
-                                                        <action selector="switchChanged:" destination="5LO-F5-hy1" eventType="touchUpInside" id="pH6-Cs-zdQ"/>
+                                                        <action selector="switchChanged:" destination="5LO-F5-hy1" eventType="primaryActionTriggered" id="54r-bA-Cae"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -245,7 +247,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LUv-KT-Nna">
                                                     <rect key="frame" x="310" y="6" width="51" height="31"/>
                                                     <connections>
-                                                        <action selector="switchChanged:" destination="5LO-F5-hy1" eventType="touchUpInside" id="XzB-wG-FWy"/>
+                                                        <action selector="switchChanged:" destination="5LO-F5-hy1" eventType="primaryActionTriggered" id="WCC-Xo-5qg"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>

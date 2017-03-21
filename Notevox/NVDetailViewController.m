@@ -16,7 +16,8 @@
 
 - (void)configureView {
     // Update the user interface for the detail item.
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissViewController)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:
+                                   UIBarButtonSystemItemDone target:self action:@selector(dismissViewController)];
     self.navigationItem.rightBarButtonItem = doneButton;
     
     [self.taskDescription setText:self.reminder.reminderTitle];
@@ -95,7 +96,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     if (self.dateToRemindSwitch.isOn) {
-        NSDateComponents *comps = [self.remindDatePicker.calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute)
+        NSDateComponents *comps = [self.remindDatePicker.calendar components:
+                                   (NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute)
                                                             fromDate:self.remindDatePicker.date];
         NSCalendar *calendar = [NSCalendar currentCalendar];
         self.reminder.dateToRemind = [calendar dateFromComponents:comps];

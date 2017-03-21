@@ -10,6 +10,17 @@
 
 @interface NVDetailViewController ()
 
+@property (weak, nonatomic) IBOutlet UISwitch *dateToRemindSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *remindWithVoiceSwitch;
+
+@property (weak, nonatomic) IBOutlet UITextField *taskDescription;
+@property (weak, nonatomic) IBOutlet UILabel *remindDateLabel;
+@property (weak, nonatomic) IBOutlet UIDatePicker *remindDatePicker;
+
+@property (weak, nonatomic) IBOutlet UITableViewCell *labelsCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *datePickerCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *remindWithVoiceCell;
+
 @end
 
 @implementation NVDetailViewController
@@ -104,11 +115,6 @@
     }
     self.reminder.reminderTitle = self.taskDescription.text;
     [super viewWillAppear:animated];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)dismissViewController {

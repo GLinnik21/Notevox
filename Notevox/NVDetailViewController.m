@@ -99,9 +99,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [[self taskDescription] setDelegate:self];
-    
     [self configureView];
 }
 

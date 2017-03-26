@@ -27,8 +27,6 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-    self.detailViewController = (NVDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
@@ -39,8 +37,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.clearsSelectionOnViewWillAppear = self.splitViewController.isCollapsed;
-
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadTableView)
                                                  name:@"reloadData"
@@ -404,9 +400,6 @@
     } else {
         cell.dateLabel.textColor = [UIColor blueColor];
     }
-
-    
-    [cell.taskTextView setDelegate:self];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

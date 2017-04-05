@@ -101,18 +101,6 @@
     [self saveContext];
 }
 
-
-#pragma mark - Split view
-
-- (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
-    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[NVDetailViewController class]] && ([(NVDetailViewController *)[(UINavigationController *)secondaryViewController topViewController] reminder] == nil)) {
-        // Return YES to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
 #pragma mark - Core Data Saving support
 
 - (void)saveContext {

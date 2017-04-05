@@ -57,6 +57,7 @@
 		EDDCAEDB1E323AC1000FE262 /* Notevox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notevox.xcdatamodel; sourceTree = "<group>"; };
 		EDDCAEE71E32D44C000FE262 /* NVReminder+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NVReminder+Add.h"; sourceTree = "<group>"; };
 		EDDCAEE81E32D44C000FE262 /* NVReminder+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NVReminder+Add.m"; sourceTree = "<group>"; };
+		EDDF61C71E957945006D3195 /* Notevox 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Notevox 2.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -516,9 +517,10 @@
 		EDDCAEDA1E323AC1000FE262 /* Notevox.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				EDDF61C71E957945006D3195 /* Notevox 2.xcdatamodel */,
 				EDDCAEDB1E323AC1000FE262 /* Notevox.xcdatamodel */,
 			);
-			currentVersion = EDDCAEDB1E323AC1000FE262 /* Notevox.xcdatamodel */;
+			currentVersion = EDDF61C71E957945006D3195 /* Notevox 2.xcdatamodel */;
 			path = Notevox.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

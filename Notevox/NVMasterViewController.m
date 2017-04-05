@@ -67,8 +67,8 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self textFieldDidEndEditing:textField];
-    return [textField resignFirstResponder];
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
@@ -83,7 +83,7 @@
     }
 
 }
-
+//TODO: split nontification scheduling and player into different instances
 - (void)rescheduleAllLocalNotifications{
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     NSArray *fetchedData = [_fetchedResultsController fetchedObjects];

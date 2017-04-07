@@ -2,8 +2,8 @@
 //  NVNVMasterViewController.m
 //  Notevox
 //
-//  Created by Глеб Линник on 19.01.17.
-//  Copyright © 2017 ARobot. All rights reserved.
+//  Created by Linnik Gleb on 19.01.17.
+//  Copyright © 2017 A&K. All rights reserved.
 //
 
 #import "NVMasterViewController.h"

@@ -2,8 +2,8 @@
 //  NVDataController.m
 //  Notevox
 //
-//  Created by Глеб Линник on 26.01.17.
-//  Copyright © 2017 ARobot. All rights reserved.
+//  Created by Linnik Gleb on 26.01.17.
+//  Copyright © 2017 A&K. All rights reserved.
 //
 
 #import "NVDataController.h"

@@ -36,7 +36,7 @@
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
             [alert show];}}];
-    [self setDataController:[[NVDataController alloc] init]];
+    [[NVCoreDataManager sharedInstance] initializeCoreData];
     return YES;
 }
 
@@ -104,7 +104,7 @@
 #pragma mark - Core Data Saving support
 
 - (void)saveContext {
-    NSManagedObjectContext *context = self.dataController.managedObjectContext;
+    NSManagedObjectContext *context = [NVCoreDataManager sharedInstance].managedObjectContext;
     NSError *error = nil;
     if ([context hasChanges] && ![context save:&error]) {
         // Replace this implementation with code to handle the error appropriately.

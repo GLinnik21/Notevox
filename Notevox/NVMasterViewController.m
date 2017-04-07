@@ -300,8 +300,7 @@
     
     [request setSortDescriptors:@[creationDateSort]];
     
-    NVAppDelegate *appDelegate = (NVAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *moc = [[appDelegate dataController] managedObjectContext]; //Retrieve the main queue NSManagedObjectContext
+    NSManagedObjectContext *moc = [NVCoreDataManager sharedInstance].managedObjectContext; //Retrieve the main queue NSManagedObjectContext
     
     //For UISearhController
     if (self.searchController.searchBar.text.length != 0) {

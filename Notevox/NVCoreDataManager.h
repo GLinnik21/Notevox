@@ -1,5 +1,5 @@
 //
-//  NVDataController.h
+//  NVCoreDataManager.h
 //  Notevox
 //
 //  Created by Linnik Gleb on 26.01.17.
@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@interface NVDataController : NSObject
+@interface NVCoreDataManager : NSObject
 
 @property (strong) NSManagedObjectContext *managedObjectContext;
 
 - (void)initializeCoreData;
++ (instancetype)sharedInstance;
 
 @end

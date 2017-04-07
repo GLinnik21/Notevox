@@ -1,14 +1,14 @@
 //
-//  NVDataController.m
+//  NVCoreDataManager.m
 //  Notevox
 //
 //  Created by Linnik Gleb on 26.01.17.
 //  Copyright © 2017 A&K. All rights reserved.
 //
 
-#import "NVDataController.h"
+#import "NVCoreDataManager.h"
 
-@implementation NVDataController
+@implementation NVCoreDataManager
 
 - (id)init
 {
@@ -18,6 +18,22 @@
     [self initializeCoreData];
     
     return self;
+}
+
++ (instancetype)sharedInstance{
+    // structure used to test whether the block has completed or not
+    static dispatch_once_t token = 0;
+    
+    // initialize sharedObject as nil (first call only)
+    __strong static NVCoreDataManager *sharedObject = nil;
+    
+    // executes a block object once and only once for the lifetime of an application
+    dispatch_once(&token, ^{
+        sharedObject = [[self alloc] init];
+    });
+    
+    // returns the same object each time
+    return sharedObject;
 }
 
 - (void)initializeCoreData

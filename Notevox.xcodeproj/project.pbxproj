@@ -11,7 +11,7 @@
 		ED2A9C541E414C9F00CB451A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED2A9C561E414C9F00CB451A /* InfoPlist.strings */; };
 		ED2A9C5A1E44852800CB451A /* UIView+Shake.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2A9C591E44852800CB451A /* UIView+Shake.m */; };
 		ED4956C11E3D2F41001B09D8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED4956C01E3D2F41001B09D8 /* AVFoundation.framework */; };
-		ED9E3B491E3954DC0032087F /* NVDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E3B481E3954DC0032087F /* NVDataController.m */; };
+		ED9E3B491E3954DC0032087F /* NVCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E3B481E3954DC0032087F /* NVCoreDataManager.m */; };
 		EDAFCD9E1E3F66420011A290 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EDAFCDA01E3F66420011A290 /* Localizable.strings */; };
 		EDDCAE951E30F773000FE262 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAE941E30F773000FE262 /* main.m */; };
 		EDDCAE981E30F773000FE262 /* NVAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAE971E30F773000FE262 /* NVAppDelegate.m */; };
@@ -23,6 +23,7 @@
 		EDDCAEB01E31048F000FE262 /* NVCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAEAF1E31048F000FE262 /* NVCustomTableViewCell.m */; };
 		EDDCAEDC1E323AC1000FE262 /* Notevox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAEDA1E323AC1000FE262 /* Notevox.xcdatamodeld */; };
 		EDDCAEE91E32D44C000FE262 /* NVReminder+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAEE81E32D44C000FE262 /* NVReminder+Add.m */; };
+		EDDE662B1E983D0400B0C35E /* NVReminderNote.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDE662A1E983D0400B0C35E /* NVReminderNote.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,8 +35,8 @@
 		ED2A9C581E44852800CB451A /* UIView+Shake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shake.h"; sourceTree = "<group>"; };
 		ED2A9C591E44852800CB451A /* UIView+Shake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shake.m"; sourceTree = "<group>"; };
 		ED4956C01E3D2F41001B09D8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		ED9E3B471E3954DC0032087F /* NVDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVDataController.h; sourceTree = "<group>"; };
-		ED9E3B481E3954DC0032087F /* NVDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVDataController.m; sourceTree = "<group>"; };
+		ED9E3B471E3954DC0032087F /* NVCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVCoreDataManager.h; sourceTree = "<group>"; };
+		ED9E3B481E3954DC0032087F /* NVCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVCoreDataManager.m; sourceTree = "<group>"; };
 		EDAFCD961E3F62780011A290 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		EDAFCD9B1E3F64870011A290 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		EDAFCD9F1E3F66420011A290 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -57,6 +58,8 @@
 		EDDCAEDB1E323AC1000FE262 /* Notevox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notevox.xcdatamodel; sourceTree = "<group>"; };
 		EDDCAEE71E32D44C000FE262 /* NVReminder+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NVReminder+Add.h"; sourceTree = "<group>"; };
 		EDDCAEE81E32D44C000FE262 /* NVReminder+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NVReminder+Add.m"; sourceTree = "<group>"; };
+		EDDE66291E983D0400B0C35E /* NVReminderNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVReminderNote.h; sourceTree = "<group>"; };
+		EDDE662A1E983D0400B0C35E /* NVReminderNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVReminderNote.m; sourceTree = "<group>"; };
 		EDDF61C71E957945006D3195 /* Notevox 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Notevox 2.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,8 +175,10 @@
 				EDDCAEDA1E323AC1000FE262 /* Notevox.xcdatamodeld */,
 				EDDCAEE71E32D44C000FE262 /* NVReminder+Add.h */,
 				EDDCAEE81E32D44C000FE262 /* NVReminder+Add.m */,
-				ED9E3B471E3954DC0032087F /* NVDataController.h */,
-				ED9E3B481E3954DC0032087F /* NVDataController.m */,
+				ED9E3B471E3954DC0032087F /* NVCoreDataManager.h */,
+				ED9E3B481E3954DC0032087F /* NVCoreDataManager.m */,
+				EDDE66291E983D0400B0C35E /* NVReminderNote.h */,
+				EDDE662A1E983D0400B0C35E /* NVReminderNote.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -209,7 +214,7 @@
 			attributes = {
 				CLASSPREFIX = NV;
 				LastUpgradeCheck = 0820;
-				ORGANIZATIONNAME = ARobot;
+				ORGANIZATIONNAME = "A&K";
 				TargetAttributes = {
 					EDDCAE8F1E30F773000FE262 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -311,11 +316,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED9E3B491E3954DC0032087F /* NVDataController.m in Sources */,
+				ED9E3B491E3954DC0032087F /* NVCoreDataManager.m in Sources */,
 				EDDCAE981E30F773000FE262 /* NVAppDelegate.m in Sources */,
 				EDDCAEE91E32D44C000FE262 /* NVReminder+Add.m in Sources */,
 				ED2A9C5A1E44852800CB451A /* UIView+Shake.m in Sources */,
 				EDDCAEDC1E323AC1000FE262 /* Notevox.xcdatamodeld in Sources */,
+				EDDE662B1E983D0400B0C35E /* NVReminderNote.m in Sources */,
 				EDDCAE9B1E30F773000FE262 /* NVMasterViewController.m in Sources */,
 				EDDCAE951E30F773000FE262 /* main.m in Sources */,
 				EDDCAEB01E31048F000FE262 /* NVCustomTableViewCell.m in Sources */,

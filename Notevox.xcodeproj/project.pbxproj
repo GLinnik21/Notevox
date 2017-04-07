@@ -33,6 +33,7 @@
 		ED2A9C571E414CD500CB451A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ED2A9C581E44852800CB451A /* UIView+Shake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shake.h"; sourceTree = "<group>"; };
 		ED2A9C591E44852800CB451A /* UIView+Shake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shake.m"; sourceTree = "<group>"; };
+		ED3FE53A1E97F31A00FBD154 /* Notevox 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Notevox 2.xcdatamodel"; sourceTree = "<group>"; };
 		ED4956C01E3D2F41001B09D8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		ED9E3B471E3954DC0032087F /* NVDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVDataController.h; sourceTree = "<group>"; };
 		ED9E3B481E3954DC0032087F /* NVDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVDataController.m; sourceTree = "<group>"; };
@@ -516,9 +517,10 @@
 		EDDCAEDA1E323AC1000FE262 /* Notevox.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				ED3FE53A1E97F31A00FBD154 /* Notevox 2.xcdatamodel */,
 				EDDCAEDB1E323AC1000FE262 /* Notevox.xcdatamodel */,
 			);
-			currentVersion = EDDCAEDB1E323AC1000FE262 /* Notevox.xcdatamodel */;
+			currentVersion = ED3FE53A1E97F31A00FBD154 /* Notevox 2.xcdatamodel */;
 			path = Notevox.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

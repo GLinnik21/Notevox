@@ -15,6 +15,7 @@
     
     NVReminder *reminder = [NSEntityDescription insertNewObjectForEntityForName:@"Reminder" inManagedObjectContext:context];
     
+    reminder.identificator = (int16_t)[reminderInfo valueForKey:@"identificator"];
     reminder.isCustomSound = [reminderInfo valueForKey:@"isCustomSound"];
     reminder.isImportant = [reminderInfo valueForKey:@"isImportant"];
     reminder.audioFileURL = [reminderInfo valueForKey:@"audioFileURL"];

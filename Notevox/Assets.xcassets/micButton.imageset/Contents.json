@@ -2,7 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "mic.pdf"
+      "filename" : "mic.pdf",
+      "resizing" : {
+        "mode" : "3-part-vertical",
+        "center" : {
+          "mode" : "tile",
+          "height" : 1
+        },
+        "cap-insets" : {
+          "top" : 4,
+          "bottom" : 8
+        }
+      }
     }
   ],
   "info" : {

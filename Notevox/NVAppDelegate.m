@@ -36,7 +36,6 @@
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
             [alert show];}}];
-    [[NVCoreDataManager sharedInstance] initializeCoreData];
     return YES;
 }
 

@@ -11,7 +11,7 @@
 
 @implementation NVReminder (Add)
 
-+ (NVReminder *)addReminderFromDictionary:(NSDictionary *)reminderInfo withContext:(NSManagedObjectContext*)context{
++ (NVReminder *)addReminderFromDictionary:(NSDictionary *)reminderInfo withContext:(NSManagedObjectContext*)context {
     
     NVReminder *reminder = [NSEntityDescription insertNewObjectForEntityForName:@"Reminder" inManagedObjectContext:context];
     
@@ -25,6 +25,16 @@
     reminder.repeatCalendar = (int32_t)[reminderInfo valueForKey:@"repeatCalendar"];
     
     return reminder;
+}
+
+- (void)prepareForDeletion {
+    NSError *err = nil;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    documentsPath = [documentsPath stringByAppendingPathComponent:[NSString stringWithFormat:@"Sounds/%@", self.audioFileURL]];
+    [fileManager removeItemAtPath:documentsPath error:&err];
+    if(err)
+        NSLog(@"File Manager: %@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
 }
 
 @end

@@ -274,7 +274,7 @@
 
 
 - (void)insertNewObject:(id)sender {
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    NSManagedObjectContext *context = [[NVCoreDataManager sharedInstance] managedObjectContext];
     
     NVReminder *newReminder = [NSEntityDescription insertNewObjectForEntityForName:@"Reminder" inManagedObjectContext:context];
 
@@ -300,7 +300,7 @@
     
     [request setSortDescriptors:@[creationDateSort]];
     
-    NSManagedObjectContext *moc = [NVCoreDataManager sharedInstance].managedObjectContext; //Retrieve the main queue NSManagedObjectContext
+    NSManagedObjectContext *moc = [[NVCoreDataManager sharedInstance] managedObjectContext]; //Retrieve the main queue NSManagedObjectContext
     
     //For UISearhController
     if (self.searchController.searchBar.text.length != 0) {
@@ -436,15 +436,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-        
-        NSError *err = nil;
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        documentsPath = [documentsPath stringByAppendingPathComponent:[NSString stringWithFormat:@"Sounds/%@", [[self.fetchedResultsController objectAtIndexPath:indexPath] audioFileURL]]];
-        [fileManager removeItemAtPath:documentsPath error:&err];
-        if(err)
-            NSLog(@"File Manager: %@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
+        NSManagedObjectContext *context = [[NVCoreDataManager sharedInstance] managedObjectContext];
         
         [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
         

@@ -11,5 +11,6 @@
 @interface NVReminder (Add)
 
 + (NVReminder *)addReminderFromDictionary:(NSDictionary *)reminderInfo withContext:(NSManagedObjectContext*)context;
+- (void)prepareForDeletion;
 
 @end

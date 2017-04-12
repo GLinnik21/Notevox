@@ -12,7 +12,9 @@
 @interface NVCoreDataManager : NSObject
 
 @property (strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSArray *managedObjects;
 
 + (instancetype)sharedInstance;
+- (void)saveState;
 
 @end

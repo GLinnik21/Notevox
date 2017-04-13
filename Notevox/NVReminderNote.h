@@ -20,5 +20,6 @@
 @property (nonatomic) int32_t repeatCalendar;
 
 - (instancetype _Nonnull)initWithDictionary:(NSDictionary *_Nonnull)dictionary;
+- (NSDictionary *_Nullable)dictionary;
 
 @end

@@ -17,5 +17,7 @@
 + (instancetype)sharedInstance;
 - (void)saveState;
 - (NSArray *)getAllReminders;
+- (void)deleteReminderWithUUID:(NSUUID *)uuid;
+- (void)addNewReminderWithDinctionary:(NSDictionary *)dictionary;
 
 @end

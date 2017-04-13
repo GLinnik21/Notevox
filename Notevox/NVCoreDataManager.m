@@ -122,6 +122,27 @@
     return reminderNoteObjects;
 }
 
+- (void)deleteReminderWithUUID:(NSUUID *)uuid {
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Reminder"];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"uniqueID == %@", uuid.UUIDString]];
+    NSError *error = nil;
+    NSArray *reminderToDelete = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (!reminderToDelete) {
+        NSLog(@"Error fetching Reminder objects: %@\n%@", [error localizedDescription], [error userInfo]);
+        abort();
+    } else if (reminderToDelete.count == 1) {
+        [self.managedObjectContext deleteObject:reminderToDelete[0]];
+    } else {
+        NSLog(@"2 or more reminders were found with the same UUID. How could it be?!\n");
+        abort();
+    }
+}
+
+- (void)addNewReminderWithDinctionary:(NSDictionary *)dictionary {
+    [NVReminder addReminderFromDictionary:dictionary withContext:self.managedObjectContext];
+    [self saveState];
+}
+
 ////For UIManagedDocument and iCloud
 //- (void)documentIsReady {
 //    if (self.document.documentState == UIDocumentStateNormal) {

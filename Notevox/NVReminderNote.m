@@ -25,4 +25,19 @@
     return self;
 }
 
+- (NSDictionary *)dictionary {
+    NSDictionary *tempDictionary = @{
+                                     @"uniqueID" : self.uniqueID,
+                                     @"isCustomSound" : [NSNumber numberWithBool:self.isCustomSound],
+                                     @"isImportant" : [NSNumber numberWithBool:self.isImportant],
+                                     @"audioFileURL" : self.audioFileURL,
+                                     @"creationDate" : self.creationDate,
+                                     @"dateToRemind" : self.dateToRemind,
+                                     @"reminderTitle" : self.reminderTitle,
+                                     @"repeatCalendar" : [NSNumber numberWithInt:self.repeatCalendar],
+                                     };
+    return tempDictionary;
+}
+
+
 @end

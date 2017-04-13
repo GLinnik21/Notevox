@@ -11,7 +11,7 @@
 #import "NVReminder+Add.h"
 
 @interface NVCoreDataManager ()
-@property (nonatomic, strong) UIManagedDocument *document;
+//@property (nonatomic, strong) UIManagedDocument *document;
 @end
 
 @implementation NVCoreDataManager
@@ -103,17 +103,22 @@
     }
 }
 
-- (NSArray *)getAllReminders {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Reminder"];
-    NSSortDescriptor *creationDateSort = [NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO];
-    [request setSortDescriptors:@[creationDateSort]];
-    
+- (NSArray<NVReminder *> *)getRemindersWithPredicate:(NSPredicate *)predicate andSortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors{
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Reminder"];
+    [fetchRequest setPredicate:predicate];
+    [fetchRequest setSortDescriptors:sortDescriptors];
     NSError *error = nil;
-    NSArray *managedObjects = [self.managedObjectContext executeFetchRequest:request error:&error];
-    if (!managedObjects) {
+    NSArray *reminderArray = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (!reminderArray) {
         NSLog(@"Error fetching Reminder objects: %@\n%@", [error localizedDescription], [error userInfo]);
         abort();
     }
+    return reminderArray;
+}
+
+- (NSArray<NVReminderNote *> *)getAllReminders {
+    NSArray *managedObjects = [self getRemindersWithPredicate:nil
+                                           andSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]]];
     NSMutableArray *reminderNoteObjects = [[NSMutableArray alloc] init];
     for (NVReminder *reminder in managedObjects) {
         NVReminderNote *tempReminderNote = [[NVReminderNote alloc] initWithDictionary:reminder.dictionary];
@@ -122,20 +127,27 @@
     return reminderNoteObjects;
 }
 
-- (void)deleteReminderWithUUID:(NSUUID *)uuid {
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Reminder"];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"uniqueID == %@", uuid.UUIDString]];
-    NSError *error = nil;
-    NSArray *reminderToDelete = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    if (!reminderToDelete) {
-        NSLog(@"Error fetching Reminder objects: %@\n%@", [error localizedDescription], [error userInfo]);
-        abort();
-    } else if (reminderToDelete.count == 1) {
-        [self.managedObjectContext deleteObject:reminderToDelete[0]];
+
+- (NVReminder *)getManagedObjectReminderWithUUID:(NSUUID *)uuid {
+    NSArray *reminderArray = [self getRemindersWithPredicate:[NSPredicate predicateWithFormat:@"uniqueID == %@", uuid.UUIDString] andSortDescriptors:nil];
+    NVReminder *reminder = nil;
+    if (reminderArray.count == 1) {
+        reminder = reminderArray.firstObject;
     } else {
         NSLog(@"2 or more reminders were found with the same UUID. How could it be?!\n");
         abort();
     }
+    return reminder;
+}
+
+- (NVReminderNote *)getReminderWithUUID:(NSUUID *)uuid {
+    NVReminderNote *reminder = [[NVReminderNote alloc] initWithDictionary:[self getManagedObjectReminderWithUUID:uuid].dictionary];
+    return reminder;
+}
+
+- (void)deleteReminderWithUUID:(NSUUID *)uuid {
+    [self.managedObjectContext deleteObject:[self getManagedObjectReminderWithUUID:uuid]];
+    [self saveState];
 }
 
 - (void)addNewReminderWithDinctionary:(NSDictionary *)dictionary {

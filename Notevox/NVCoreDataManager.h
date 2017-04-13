@@ -15,9 +15,12 @@
 @property (strong) NSManagedObjectContext *managedObjectContext;
 
 + (instancetype)sharedInstance;
-- (void)saveState;
-- (NSArray *)getAllReminders;
+
+- (NSArray<NVReminderNote *> *)getAllReminders;
+- (NVReminderNote *)getReminderWithUUID:(NSUUID *)uuid;
+
 - (void)deleteReminderWithUUID:(NSUUID *)uuid;
 - (void)addNewReminderWithDinctionary:(NSDictionary *)dictionary;
 
+- (void)saveState;
 @end

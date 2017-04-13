@@ -27,13 +27,13 @@
 
 - (NSDictionary *)dictionary {
     NSDictionary *tempDictionary = @{
-                                     @"uniqueID" : self.uniqueID,
+                                     @"uniqueID" : self.uniqueID ?: [NSNull null],
                                      @"isCustomSound" : [NSNumber numberWithBool:self.isCustomSound],
                                      @"isImportant" : [NSNumber numberWithBool:self.isImportant],
                                      @"audioFileURL" : self.audioFileURL,
                                      @"creationDate" : self.creationDate,
-                                     @"dateToRemind" : self.dateToRemind,
-                                     @"reminderTitle" : self.reminderTitle,
+                                     @"dateToRemind" : self.dateToRemind ?: [NSNull null],
+                                     @"reminderTitle" : self.reminderTitle ?: [NSNull null],
                                      @"repeatCalendar" : [NSNumber numberWithInt:self.repeatCalendar],
                                      };
     return tempDictionary;

@@ -21,5 +21,6 @@
 
 - (instancetype _Nonnull)initWithDictionary:(NSDictionary *_Nonnull)dictionary;
 - (NSDictionary *_Nullable)dictionary;
+- (void)configureReminderWithDictionary:(NSDictionary *_Nonnull)reminderInfo;
 
 @end

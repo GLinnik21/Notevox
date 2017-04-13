@@ -39,5 +39,15 @@
     return tempDictionary;
 }
 
+- (void)configureReminderWithDictionary:(NSDictionary *)reminderInfo {
+    self.uniqueID = [reminderInfo valueForKey:@"uniqueID"];
+    self.isCustomSound = [[reminderInfo valueForKey:@"isCustomSound"] boolValue];
+    self.isImportant = [[reminderInfo valueForKey:@"isImportant"] boolValue];
+    self.audioFileURL = [reminderInfo valueForKey:@"audioFileURL"];
+    self.creationDate = [reminderInfo valueForKey:@"creationDate"];
+    self.dateToRemind = [reminderInfo valueForKey:@"dateToRemind"];
+    self.reminderTitle = [reminderInfo valueForKey:@"reminderTitle"];
+    self.repeatCalendar = [[reminderInfo valueForKey:@"repeatCalendar"] intValue];
+}
 
 @end

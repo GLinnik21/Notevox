@@ -18,6 +18,7 @@
 
 - (NSArray<NVReminderNote *> *)getAllReminders;
 - (NVReminderNote *)getReminderWithUUID:(NSUUID *)uuid;
+- (void)setReminderWithReminderNote:(NVReminderNote *)reminderNote;
 
 - (void)deleteReminderWithUUID:(NSUUID *)uuid;
 - (void)addNewReminderWithDinctionary:(NSDictionary *)dictionary;

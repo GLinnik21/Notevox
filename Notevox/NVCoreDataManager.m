@@ -7,37 +7,72 @@
 //
 
 #import "NVCoreDataManager.h"
+#import <UIKit/UIKit.h>
+#import "NVReminder+Add.h"
+
+@interface NVCoreDataManager ()
+@property (nonatomic, strong) UIManagedDocument *document;
+@end
 
 @implementation NVCoreDataManager
 
-- (id)init
-{
+- (id)init {
     self = [super init];
-    if (!self) return nil;
-    
-    [self initializeCoreData];
-    
+    if (self) {
+        [self initializeCoreData];
+////UIManagedDocument for iCloud fot later use. For now will just use standart CoreData Stack implementation 
+//        NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
+//        url = [url URLByAppendingPathComponent:@"DocumentMetadata.plist"];
+//        self.document = [[UIManagedDocument alloc] initWithFileURL:url];
+//        
+//        if ([[NSFileManager defaultManager] fileExistsAtPath:[url path]]) {
+//            [self.document openWithCompletionHandler:^(BOOL success) {
+//                if (success) {
+//                    [self documentIsReady];
+//                } else {
+//                    NSLog(@"Couldn't open file at %@", url);
+//                }
+//            }];
+//        } else {
+//            [self.document saveToURL:self.document.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
+//                if (success) {
+//                    [self documentIsReady];
+//                } else {
+//                    NSLog(@"Couldn't open create at %@", url);
+//                }
+//            }];
+//        }
+//        
+//        // Set our document up for automatic migrations
+//        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                 [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+//                                 [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+//        self.document.persistentStoreOptions = options;
+//        
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:@selector(objectsDidChange:)
+//                                                     name:NSManagedObjectContextObjectsDidChangeNotification
+//                                                   object:self.document.managedObjectContext];
+//        
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:@selector(contextDidSave:)
+//                                                     name:NSManagedObjectContextDidSaveNotification
+//                                                   object:self.document.managedObjectContext];
+    }
     return self;
 }
 
-+ (instancetype)sharedInstance{
-    // structure used to test whether the block has completed or not
++ (instancetype)sharedInstance {
     static dispatch_once_t token = 0;
-    
-    // initialize sharedObject as nil (first call only)
     __strong static NVCoreDataManager *sharedObject = nil;
-    
     // executes a block object once and only once for the lifetime of an application
     dispatch_once(&token, ^{
         sharedObject = [[self alloc] init];
     });
-    
-    // returns the same object each time
     return sharedObject;
 }
 
-- (void)initializeCoreData
-{
+- (void)initializeCoreData {
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Notevox" withExtension:@"momd"];
     NSManagedObjectModel *mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     NSAssert(mom != nil, @"Error initializing Managed Object Model");
@@ -57,5 +92,55 @@
         NSAssert(store != nil, @"Error initializing PSC: %@\n%@", [error localizedDescription], [error userInfo]);
     });
 }
+
+- (void)saveState {
+    NSError *error = nil;
+    if (![self.managedObjectContext save:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+        abort();
+    }
+}
+
+- (NSArray *)getAllReminders {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Reminder"];
+    NSSortDescriptor *creationDateSort = [NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO];
+    [request setSortDescriptors:@[creationDateSort]];
+    
+    NSError *error = nil;
+    NSArray *managedObjects = [self.managedObjectContext executeFetchRequest:request error:&error];
+    if (!managedObjects) {
+        NSLog(@"Error fetching Reminder objects: %@\n%@", [error localizedDescription], [error userInfo]);
+        abort();
+    }
+    NSMutableArray *reminderNoteObjects = [[NSMutableArray alloc] init];
+    for (NVReminder *reminder in managedObjects) {
+        NVReminderNote *tempReminderNote = [[NVReminderNote alloc] initWithDictionary:reminder.dictionary];
+        [reminderNoteObjects addObject:tempReminderNote];
+    }
+    return reminderNoteObjects;
+}
+
+////For UIManagedDocument and iCloud
+//- (void)documentIsReady {
+//    if (self.document.documentState == UIDocumentStateNormal) {
+//        self.managedObjectContext = self.document.managedObjectContext;
+//    }
+//}
+//
+//- (void)objectsDidChange:(NSNotification *)notification
+//{
+//#ifdef DEBUG
+//    NSLog(@"NSManagedObjects did change.");
+//#endif
+//}
+//
+//- (void)contextDidSave:(NSNotification *)notification
+//{
+//#ifdef DEBUG
+//    NSLog(@"NSManagedContext did save.");
+//#endif
+//}
 
 @end

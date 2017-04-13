@@ -15,16 +15,30 @@
     
     NVReminder *reminder = [NSEntityDescription insertNewObjectForEntityForName:@"Reminder" inManagedObjectContext:context];
     
-    reminder.identificator = (int16_t)[reminderInfo valueForKey:@"identificator"];
-    reminder.isCustomSound = [reminderInfo valueForKey:@"isCustomSound"];
-    reminder.isImportant = [reminderInfo valueForKey:@"isImportant"];
+    reminder.uniqueID = [reminderInfo valueForKey:@"uniqueID"];
+    reminder.isCustomSound = [[reminderInfo valueForKey:@"isCustomSound"] boolValue];
+    reminder.isImportant = [[reminderInfo valueForKey:@"isImportant"] boolValue];
     reminder.audioFileURL = [reminderInfo valueForKey:@"audioFileURL"];
     reminder.creationDate = [reminderInfo valueForKey:@"creationDate"];
     reminder.dateToRemind = [reminderInfo valueForKey:@"dateToRemind"];
     reminder.reminderTitle = [reminderInfo valueForKey:@"reminderTitle"];
-    reminder.repeatCalendar = (int32_t)[reminderInfo valueForKey:@"repeatCalendar"];
+    reminder.repeatCalendar = [[reminderInfo valueForKey:@"repeatCalendar"] intValue];
     
     return reminder;
+}
+
+- (NSDictionary *)dictionary {
+    NSDictionary *tempDictionary = @{
+                                     @"uniqueID" : self.uniqueID,
+                                     @"isCustomSound" : [NSNumber numberWithBool:self.isCustomSound],
+                                     @"isImportant" : [NSNumber numberWithBool:self.isImportant],
+                                     @"audioFileURL" : self.audioFileURL,
+                                     @"creationDate" : self.creationDate,
+                                     @"dateToRemind" : self.dateToRemind,
+                                     @"reminderTitle" : self.reminderTitle,
+                                     @"repeatCalendar" : [NSNumber numberWithInt:self.repeatCalendar],
+                                     };
+    return tempDictionary;
 }
 
 - (void)prepareForDeletion {

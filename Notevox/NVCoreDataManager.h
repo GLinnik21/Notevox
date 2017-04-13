@@ -8,13 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "NVReminderNote.h"
 
 @interface NVCoreDataManager : NSObject
 
 @property (strong) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong) NSArray *managedObjects;
 
 + (instancetype)sharedInstance;
 - (void)saveState;
+- (NSArray *)getAllReminders;
 
 @end

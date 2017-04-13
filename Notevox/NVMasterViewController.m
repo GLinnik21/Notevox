@@ -277,7 +277,8 @@
     NSManagedObjectContext *context = [[NVCoreDataManager sharedInstance] managedObjectContext];
     
     NVReminder *newReminder = [NSEntityDescription insertNewObjectForEntityForName:@"Reminder" inManagedObjectContext:context];
-
+    
+    newReminder.uniqueID = [[[NSUUID alloc] init] UUIDString];
     newReminder.reminderTitle = [NSString stringWithFormat:NSLocalizedString(@"untitled", @"")];
     newReminder.dateToRemind = nil;
     newReminder.creationDate = [NSDate date];

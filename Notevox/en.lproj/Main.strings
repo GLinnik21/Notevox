@@ -9,7 +9,7 @@
 "ELL-z6-tIv.title" = "Parameters";
 
 /* Class = "UILabel"; text = "Remind"; ObjectID = "N7C-mt-gF2"; */
-"N7C-mt-gF2.text" = "Remind";
+"N7C-mt-gF2.text" = "Alarm";
 
 /* Class = "UILabel"; text = "Remind with the recording"; ObjectID = "Qzf-Gw-h4w"; */
 "Qzf-Gw-h4w.text" = "Remind with the recording";

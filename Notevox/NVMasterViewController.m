@@ -11,11 +11,12 @@
 #import "NVCustomTableViewCell.h"
 #import "NVAppDelegate.h"
 #import "UIView+Shake.h"
+#import "NSDate+DateTools.h"
 
 @interface NVMasterViewController () {
-    AVAudioRecorder *recorder;
-    AVAudioPlayer *player;
-    NVCustomTableViewCell *previouslyPlayedCell;
+    AVAudioRecorder *_recorder;
+    AVAudioPlayer *_player;
+    NVCustomTableViewCell *_previouslyPlayedCell;
 }
 
 @end
@@ -110,24 +111,33 @@
 }
 
 - (NSString *)formateDateStringfromDate:(NSDate *)date {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.locale = [NSLocale currentLocale];
-    dateFormatter.timeZone = [NSTimeZone systemTimeZone];
-    dateFormatter.dateFormat = @"dd.MM.yy, HH:mm";
-    return [dateFormatter stringFromDate:date];
+    NSString *dateFormatString = nil;
+    if (date) {
+        if (date.isToday) {
+            dateFormatString = NSLocalizedString(@"today", @"");
+        } else if (date.isTomorrow) {
+            dateFormatString = NSLocalizedString(@"tomorrow", @"");
+        } else if (date.isYesterday) {
+            dateFormatString = NSLocalizedString(@"yesterday", @"");;
+        } else {
+            dateFormatString = [NSDateFormatter localizedStringFromDate:date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle];
+        }
+        dateFormatString = [dateFormatString stringByAppendingString:[NSString stringWithFormat:@", %@", [NSDateFormatter localizedStringFromDate:date dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]]];
+    }
+    return dateFormatString;
 }
 
 
 - (void)updateTime:(NSTimer *)timer {
     NVCustomTableViewCell *tempCell = timer.userInfo;
-    NSInteger seconds = player.currentTime;
+    NSInteger seconds = _player.currentTime;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.locale = [NSLocale currentLocale];
     dateFormatter.timeZone = [NSTimeZone defaultTimeZone];
     dateFormatter.dateFormat = @"mm:ss";
-    tempCell.playingProgress.progress = player.currentTime/player.duration;
+    tempCell.playingProgress.progress = _player.currentTime/_player.duration;
     tempCell.timeLabel.text = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:seconds]];
-    if (!player.isPlaying && !previouslyPlayedCell) {
+    if (!_player.isPlaying && !_previouslyPlayedCell) {
         [timer invalidate];
     }
 }
@@ -137,19 +147,19 @@
     
     NVCustomTableViewCell *tempCell = [self getCustomCellViewObject:sender];
     
-    if (player.isPlaying && [previouslyPlayedCell.playButton isEqual:sender]) {
+    if (_player.isPlaying && [_previouslyPlayedCell.playButton isEqual:sender]) {
         //Pause the same cell
         [sender setImage:[UIImage imageNamed:@"playButton"] forState:UIControlStateNormal];
-        [player pause];
-    } else if (!player.isPlaying && [previouslyPlayedCell.playButton isEqual:sender]) {
+        [_player pause];
+    } else if (!_player.isPlaying && [_previouslyPlayedCell.playButton isEqual:sender]) {
         //Play the same cell
         [sender setImage:[UIImage imageNamed:@"pauseButton"] forState:UIControlStateNormal];
         tempCell.taskTextView.hidden = YES;
         tempCell.playingProgress.hidden = NO;
-        [player play];
+        [_player play];
     } else {
         //Play new cell
-        [player stop];
+        [_player stop];
         [timer invalidate];
         timer = nil;
         
@@ -157,10 +167,10 @@
         tempCell.playingProgress.hidden = NO;
         timer = [NSTimer scheduledTimerWithTimeInterval:1.0/60.0 target:self selector:@selector(updateTime:) userInfo:tempCell repeats:YES];
         
-        if (previouslyPlayedCell) {
-            [self.tableView reloadRowsAtIndexPaths:@[[self.tableView indexPathForCell:previouslyPlayedCell]] withRowAnimation:UITableViewRowAnimationNone];
+        if (_previouslyPlayedCell) {
+            [self.tableView reloadRowsAtIndexPaths:@[[self.tableView indexPathForCell:_previouslyPlayedCell]] withRowAnimation:UITableViewRowAnimationNone];
         }
-        previouslyPlayedCell = tempCell;
+        _previouslyPlayedCell = tempCell;
         
         NVReminder *reminder = (NVReminder*)[[self fetchedResultsController] objectAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
         
@@ -171,19 +181,19 @@
         AVAudioSession *audioSession = [AVAudioSession sharedInstance];
         [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
         
-        player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
-        [player setDelegate:self];
-        [player play];
+        _player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
+        [_player setDelegate:self];
+        [_player play];
         
         [sender setImage:[UIImage imageNamed:@"pauseButton"] forState:UIControlStateNormal];
     }
 }
 
 - (IBAction)startRecording:(id)sender {
-    if (player.isPlaying) {
-        [player stop];
-        [self.tableView reloadRowsAtIndexPaths:@[[self.tableView indexPathForCell:previouslyPlayedCell]] withRowAnimation:UITableViewRowAnimationNone];
-        previouslyPlayedCell = nil;
+    if (_player.isPlaying) {
+        [_player stop];
+        [self.tableView reloadRowsAtIndexPaths:@[[self.tableView indexPathForCell:_previouslyPlayedCell]] withRowAnimation:UITableViewRowAnimationNone];
+        _previouslyPlayedCell = nil;
     }
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     NSError *err = nil;
@@ -223,8 +233,8 @@
     
     NSURL *url = [NSURL fileURLWithPath:recorderFilePath];
     err = nil;
-    recorder = [[ AVAudioRecorder alloc] initWithURL:url settings:recordSetting error:&err];
-    if(!recorder){
+    _recorder = [[ AVAudioRecorder alloc] initWithURL:url settings:recordSetting error:&err];
+    if(!_recorder){
         NSLog(@"recorder: %@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
         UIAlertView *alert =
         [[UIAlertView alloc] initWithTitle: @"Warning"
@@ -237,37 +247,37 @@
     }
     
     //prepare to record
-    [recorder setDelegate:self];
-    [recorder prepareToRecord];
-    recorder.meteringEnabled = YES;
+    [_recorder setDelegate:self];
+    [_recorder prepareToRecord];
+    _recorder.meteringEnabled = YES;
  
     // start recording
     self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"recording", @"");
-    [recorder recordForDuration:(NSTimeInterval) 30];
+    [_recorder recordForDuration:(NSTimeInterval) 30];
 }
 
 - (IBAction)stopRecording:(id)sender {
-    [recorder stop];
+    [_recorder stop];
     
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     [audioSession setActive:NO error:nil];
-    AVURLAsset *audioAsset = [AVURLAsset URLAssetWithURL:recorder.url options:nil];
+    AVURLAsset *audioAsset = [AVURLAsset URLAssetWithURL:_recorder.url options:nil];
     CMTime audioDuration = audioAsset.duration;
     Float64 audioDurationSeconds = CMTimeGetSeconds(audioDuration);
     
     if (audioDurationSeconds > 0.5) {
-        [self insertNewObject: recorder.url.lastPathComponent];
+        [self insertNewObject: _recorder.url.lastPathComponent];
     } else {
         [self.navigationController.navigationBar.subviews enumerateObjectsUsingBlock:^(UIView* obj, NSUInteger idx, BOOL *stop) {
             [obj shake:7 withDelta:4.0 speed:0.1];
         }];
-        [recorder deleteRecording];
+        [_recorder deleteRecording];
     }
 }
 
 - (IBAction)cancelRecording:(id)sender {
-    [recorder stop];
-    [recorder deleteRecording];
+    [_recorder stop];
+    [_recorder deleteRecording];
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     [audioSession setActive:NO error:nil];
 }
@@ -323,8 +333,8 @@
 #pragma mark - AVAudioPlayerDelegate
 
 - (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
-    [self.tableView reloadRowsAtIndexPaths:@[[self.tableView indexPathForCell:previouslyPlayedCell]] withRowAnimation:UITableViewRowAnimationNone];
-    previouslyPlayedCell = nil;
+    [self.tableView reloadRowsAtIndexPaths:@[[self.tableView indexPathForCell:_previouslyPlayedCell]] withRowAnimation:UITableViewRowAnimationNone];
+    _previouslyPlayedCell = nil;
 }
 
 #pragma mark - Segues
@@ -366,7 +376,6 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.locale = [NSLocale currentLocale];
     dateFormatter.timeZone = [NSTimeZone defaultTimeZone];
-    dateFormatter.dateFormat = @"dd.MM.yy";
     
     NSString *fileURLString = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     fileURLString = [fileURLString stringByAppendingPathComponent:[NSString stringWithFormat:@"Sounds/%@", reminder.audioFileURL]];
@@ -380,7 +389,7 @@
     cell.taskTextView.textColor = reminder.isImportant ? [UIColor orangeColor] : [UIColor blackColor];
     
     cell.dateLabel.text = [self formateDateStringfromDate:reminder.dateToRemind];
-    cell.creationLabel.text = [dateFormatter stringFromDate:reminder.creationDate];
+    cell.creationLabel.text = reminder.creationDate.timeAgoSinceNow;
     dateFormatter.dateFormat = @"mm:ss";
     cell.timeLabel.text = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:audioDurationSeconds]];
     cell.playButton.tag = indexPath.row;
@@ -389,11 +398,10 @@
     cell.taskTextView.hidden = NO;
     cell.playingProgress.hidden = YES;
     
-    if ([reminder.dateToRemind compare:[NSDate date]] == NSOrderedAscending) {
+    if ([reminder.dateToRemind isEarlierThanOrEqualTo:[NSDate date]])
         cell.dateLabel.textColor = [UIColor redColor];
-    } else {
-        cell.dateLabel.textColor = [UIColor blueColor];
-    }
+    else
+        cell.dateLabel.textColor = [UIColor darkGrayColor];;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -478,8 +486,8 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-    previouslyPlayedCell = nil;
-    [player stop];
+    _previouslyPlayedCell = nil;
+    [_player stop];
     [self rescheduleAllLocalNotifications];
     [[self tableView] endUpdates];
 }
@@ -487,7 +495,7 @@
 #pragma mark - UISearchControllerDelegate
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    [player stop];
+    [_player stop];
     [self initializeFetchedResultsController];
     [self reloadTableView];
 }

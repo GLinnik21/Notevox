@@ -11,5 +11,9 @@
 "recording" = "Recording...";
 "untitled" = "Untitled";
 
+"today" = "Today";
+"tomorrow" = "Tomorrow";
+"yesterday" = "Yesterday";
+
 "micPrivacyTitle" = "No access to the mic";
 "micPrivacyDesc" = "You've denied access to the mic in the privacy settings. Voice recording feature will be unavalible.";

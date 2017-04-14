@@ -9,7 +9,7 @@
 "ELL-z6-tIv.title" = "Параметры";
 
 /* Class = "UILabel"; text = "Напомин."; ObjectID = "N7C-mt-gF2"; */
-"N7C-mt-gF2.text" = "Напомин.";
+"N7C-mt-gF2.text" = "Уведомление";
 
 /* Class = "UILabel"; text = "Использовать запись"; ObjectID = "Qzf-Gw-h4w"; */
 "Qzf-Gw-h4w.text" = "Использовать запись";

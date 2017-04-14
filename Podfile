@@ -5,4 +5,5 @@ target 'Notevox' do
   # use_frameworks!
 
   pod 'MGSwipeTableCell'
+  pod 'DateTools'
 end

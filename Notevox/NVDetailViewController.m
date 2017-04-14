@@ -7,6 +7,7 @@
 //
 
 #import "NVDetailViewController.h"
+#import "NSDate+DateTools.h"
 
 @interface NVDetailViewController ()
 
@@ -37,7 +38,7 @@
     if (self.reminder.dateToRemind) {
         [self.remindDatePicker setDate:self.reminder.dateToRemind];
         [self.remindDatePicker setTimeZone:[NSTimeZone systemTimeZone]];
-        [self.remindDateLabel setText:[self formateDateStringfromDate:self.reminder.dateToRemind]];
+        [self.remindDateLabel setText:[NSDateFormatter localizedStringFromDate:self.reminder.dateToRemind dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterShortStyle]];
         [self.dateToRemindSwitch setOn:YES];
     } else {
         [self.dateToRemindSwitch setOn:NO];
@@ -46,7 +47,7 @@
 }
 
 - (IBAction)dateChanged:(id)sender {
-    [self.remindDateLabel setText:[self formateDateStringfromDate:self.remindDatePicker.date]];
+    [self.remindDateLabel setText:[NSDateFormatter localizedStringFromDate:self.remindDatePicker.date dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterShortStyle]];
 }
 
 - (IBAction)descriptionChanged:(id)sender {
@@ -86,15 +87,7 @@
     [self.labelsCell setHidden:NO];
     [self.datePickerCell setHidden:NO];
     [self.remindWithVoiceCell setHidden:NO];
-    [self.remindDateLabel setText:[self formateDateStringfromDate:self.remindDatePicker.date]];
-}
-
-- (NSString *)formateDateStringfromDate:(NSDate *)date {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.locale = [NSLocale currentLocale];
-    dateFormatter.timeZone = [NSTimeZone systemTimeZone];
-    dateFormatter.dateFormat = @"EEE, dd MMM yyyy HH:mm";
-    return [dateFormatter stringFromDate:date];
+    [self.remindDateLabel setText:[NSDateFormatter localizedStringFromDate:self.remindDatePicker.date dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterShortStyle]];
 }
 
 - (void)viewDidLoad {

@@ -35,6 +35,15 @@
     self.definesPresentationContext = true;
     self.tableView.tableHeaderView = self.searchController.searchBar;
     [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted){if (!granted) self.navigationItem.rightBarButtonItem.enabled = NO;}];
+    
+    UIDevice *device = [UIDevice currentDevice];
+    device.proximityMonitoringEnabled = YES;
+    if (device.isProximityMonitoringEnabled) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(proximityChanged)
+                                                     name:UIDeviceProximityStateDidChangeNotification
+                                                   object:nil];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -186,6 +195,14 @@
         [_player play];
         
         [sender setImage:[UIImage imageNamed:@"pauseButton"] forState:UIControlStateNormal];
+    }
+}
+
+- (void)proximityChanged {
+    if ([UIDevice currentDevice].proximityState) {
+        [self startRecording:nil];
+    } else {
+        [self stopRecording:nil];
     }
 }
 

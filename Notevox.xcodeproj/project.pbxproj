@@ -13,6 +13,7 @@
 		ED4956C11E3D2F41001B09D8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED4956C01E3D2F41001B09D8 /* AVFoundation.framework */; };
 		ED9E3B491E3954DC0032087F /* NVCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E3B481E3954DC0032087F /* NVCoreDataManager.m */; };
 		EDAFCD9E1E3F66420011A290 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EDAFCDA01E3F66420011A290 /* Localizable.strings */; };
+		EDD6AF981E9FF07300FEE956 /* NVReminderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD6AF971E9FF07300FEE956 /* NVReminderManager.m */; };
 		EDDCAE951E30F773000FE262 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAE941E30F773000FE262 /* main.m */; };
 		EDDCAE981E30F773000FE262 /* NVAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAE971E30F773000FE262 /* NVAppDelegate.m */; };
 		EDDCAE9B1E30F773000FE262 /* NVMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDCAE9A1E30F773000FE262 /* NVMasterViewController.m */; };
@@ -41,6 +42,8 @@
 		EDAFCD9B1E3F64870011A290 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		EDAFCD9F1E3F66420011A290 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EDAFCDA11E3F66470011A290 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EDD6AF961E9FF07300FEE956 /* NVReminderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVReminderManager.h; sourceTree = "<group>"; };
+		EDD6AF971E9FF07300FEE956 /* NVReminderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVReminderManager.m; sourceTree = "<group>"; };
 		EDDCAE901E30F773000FE262 /* Notevox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notevox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDCAE941E30F773000FE262 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EDDCAE961E30F773000FE262 /* NVAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NVAppDelegate.h; sourceTree = "<group>"; };
@@ -187,6 +190,8 @@
 				EDD6AF951E9FC4EE00FEE956 /* CoreData */,
 				EDDE66291E983D0400B0C35E /* NVReminderNote.h */,
 				EDDE662A1E983D0400B0C35E /* NVReminderNote.m */,
+				EDD6AF961E9FF07300FEE956 /* NVReminderManager.h */,
+				EDD6AF971E9FF07300FEE956 /* NVReminderManager.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -226,7 +231,7 @@
 				TargetAttributes = {
 					EDDCAE8F1E30F773000FE262 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = Y36SSAEYM4;
+						DevelopmentTeam = S6T4VJ437P;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -329,6 +334,7 @@
 				EDDCAEE91E32D44C000FE262 /* NVReminder+Add.m in Sources */,
 				ED2A9C5A1E44852800CB451A /* UIView+Shake.m in Sources */,
 				EDDCAEDC1E323AC1000FE262 /* Notevox.xcdatamodeld in Sources */,
+				EDD6AF981E9FF07300FEE956 /* NVReminderManager.m in Sources */,
 				EDDE662B1E983D0400B0C35E /* NVReminderNote.m in Sources */,
 				EDDCAE9B1E30F773000FE262 /* NVMasterViewController.m in Sources */,
 				EDDCAE951E30F773000FE262 /* main.m in Sources */,
@@ -475,11 +481,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = Y36SSAEYM4;
+				DEVELOPMENT_TEAM = S6T4VJ437P;
 				INFOPLIST_FILE = Notevox/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "A-K.Notevox";
+				PRODUCT_BUNDLE_IDENTIFIER = by.bsuir.linnik.Notevox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -493,11 +499,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = Y36SSAEYM4;
+				DEVELOPMENT_TEAM = S6T4VJ437P;
 				INFOPLIST_FILE = Notevox/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "A-K.Notevox";
+				PRODUCT_BUNDLE_IDENTIFIER = by.bsuir.linnik.Notevox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;

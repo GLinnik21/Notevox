@@ -35,6 +35,7 @@
 
 - (void)createNewReminder:(NVReminderNote *)reminderNote {
     [_sharedCoreDataManager addNewReminderWithReminderNote:reminderNote];
+    [_sharedCoreDataManager saveState];
     [self syncAllRemindersWithCoreData];
 }
 
@@ -50,7 +51,6 @@
 @synthesize allReminders = _allReminders;
 
 - (NSArray<NVReminderNote *> *)allReminders {
-    [self syncAllRemindersWithCoreData];
     return _allReminders;
 }
 
@@ -62,6 +62,7 @@
 }
 
 - (void)syncAllRemindersWithCoreData {
+    [[NSNotificationCenter defaultCenter] postNotificationName:NVReminderManagerDataChanged object:self];
     _allReminders = [[NSMutableArray alloc] initWithArray:[_sharedCoreDataManager getAllReminders]];
     [_allReminders sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         NSDate *firstDate = [obj1 creationDate];
@@ -80,11 +81,12 @@
         NSUUID *tempUUID = [[NSUUID alloc] initWithUUIDString:tempReminder.uniqueID];
         [_sharedCoreDataManager deleteReminderWithUUID:tempUUID];
     }
-    [_sharedCoreDataManager saveState];
+    [self syncAllRemindersWithCoreData];
 }
 
 - (void)deleteReminderWithUUID:(NSUUID *)uuid{
     [_sharedCoreDataManager deleteReminderWithUUID:uuid];
+    [_sharedCoreDataManager saveState];
     [self syncAllRemindersWithCoreData];
 }
 

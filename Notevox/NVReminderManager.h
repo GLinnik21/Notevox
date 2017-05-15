@@ -22,4 +22,6 @@
 @property (strong, readonly) NSMutableArray<NVReminderNote *> *allReminders;
 @property (readonly) NSUInteger numberOfReminders;
 
+#define NVReminderManagerDataChanged @"NVReminderManagerDataChanged"
+
 @end

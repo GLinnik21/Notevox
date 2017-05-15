@@ -28,16 +28,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
     self.searchController.dimsBackgroundDuringPresentation = false;
-    self.definesPresentationContext = true;
     self.tableView.tableHeaderView = self.searchController.searchBar;
     [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted){if (!granted) self.navigationItem.rightBarButtonItem.enabled = NO;}];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateLocalArray)
+                                                 name:NVReminderManagerDataChanged
+                                               object:nil];
+    [self updateLocalArray];
     
     UIDevice *device = [UIDevice currentDevice];
     device.proximityMonitoringEnabled = YES;
@@ -55,7 +58,6 @@
                                                  name:@"reloadData"
                                                object:nil];
     [self reloadTableView];
-    self.reminders = [[NVReminderManager sharedInstance] allReminders];
     [super viewWillAppear:animated];
 }
 
@@ -66,9 +68,8 @@
                                                   object:nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)updateLocalArray {
+    self.reminders = [[NVReminderManager sharedInstance] allReminders];
 }
 
 - (NVCustomTableViewCell *)getCustomCellViewObject:(id)sender {
@@ -313,6 +314,7 @@
     newReminder.audioFileURL = sender;
     
     [[NVReminderManager sharedInstance] createNewReminder:newReminder];
+    [[self tableView] insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
 }
 
 #pragma mark - AVAudioRecorderDelegate

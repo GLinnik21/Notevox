@@ -151,17 +151,14 @@
 - (void)updateReminderWithReminderNote:(NVReminderNote *)reminderNote {
     NVReminder *managedObject = [self getManagedObjectReminderWithUUID:[[NSUUID alloc] initWithUUIDString:reminderNote.uniqueID]];
     [managedObject configureReminderWithDictionary:reminderNote.dictionary];
-    [self saveState];
 }
 
 - (void)deleteReminderWithUUID:(NSUUID *)uuid {
     [self.managedObjectContext deleteObject:[self getManagedObjectReminderWithUUID:uuid]];
-    [self saveState];
 }
 
 - (void)addNewReminderWithReminderNote:(NVReminderNote *)reminderNote {
     [NVReminder addReminderFromDictionary:reminderNote.dictionary withContext:self.managedObjectContext];
-    [self saveState];
 }
 
 ////For UIManagedDocument and iCloud

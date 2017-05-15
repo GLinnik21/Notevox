@@ -21,13 +21,13 @@
 }
 
 - (void)configureReminderWithDictionary:(NSDictionary *)reminderInfo {
-    self.uniqueID = [reminderInfo valueForKey:@"uniqueID"];
+    self.uniqueID = [reminderInfo valueForKey:@"uniqueID"] == [NSNull null] ? nil : [reminderInfo valueForKey:@"uniqueID"];
     self.isCustomSound = [[reminderInfo valueForKey:@"isCustomSound"] boolValue];
     self.isImportant = [[reminderInfo valueForKey:@"isImportant"] boolValue];
     self.audioFileURL = [reminderInfo valueForKey:@"audioFileURL"];
     self.creationDate = [reminderInfo valueForKey:@"creationDate"];
-    self.dateToRemind = [reminderInfo valueForKey:@"dateToRemind"];
-    self.reminderTitle = [reminderInfo valueForKey:@"reminderTitle"];
+    self.dateToRemind = [reminderInfo valueForKey:@"dateToRemind"] == [NSNull null] ? nil : [reminderInfo valueForKey:@"dateToRemind"];
+    self.reminderTitle = [reminderInfo valueForKey:@"reminderTitle"] == [NSNull null] ? nil : [reminderInfo valueForKey:@"reminderTitle"];
     self.repeatCalendar = [[reminderInfo valueForKey:@"repeatCalendar"] intValue];
 }
 

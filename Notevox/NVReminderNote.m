@@ -10,17 +10,17 @@
 
 @implementation NVReminderNote
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
+- (instancetype)initWithDictionary:(NSDictionary *)reminderInfo {
     self = [super init];
     if (self) {
-        self.uniqueID = [dictionary valueForKey:@"uniqueID"];
-        self.isCustomSound = [[dictionary valueForKey:@"isCustomSound"] boolValue];
-        self.isImportant = [[dictionary valueForKey:@"isImportant"] boolValue];
-        self.audioFileURL = [dictionary valueForKey:@"audioFileURL"];
-        self.creationDate = [dictionary valueForKey:@"creationDate"];
-        self.dateToRemind = [dictionary valueForKey:@"dateToRemind"];
-        self.reminderTitle = [dictionary valueForKey:@"reminderTitle"];
-        self.repeatCalendar = [[dictionary valueForKey:@"repeatCalendar"] intValue];
+        self.uniqueID = [reminderInfo valueForKey:@"uniqueID"] == [NSNull null] ? nil : [reminderInfo valueForKey:@"uniqueID"];
+        self.isCustomSound = [[reminderInfo valueForKey:@"isCustomSound"] boolValue];
+        self.isImportant = [[reminderInfo valueForKey:@"isImportant"] boolValue];
+        self.audioFileURL = [reminderInfo valueForKey:@"audioFileURL"];
+        self.creationDate = [reminderInfo valueForKey:@"creationDate"];
+        self.dateToRemind = [reminderInfo valueForKey:@"dateToRemind"] == [NSNull null] ? nil : [reminderInfo valueForKey:@"dateToRemind"];
+        self.reminderTitle = [reminderInfo valueForKey:@"reminderTitle"] == [NSNull null] ? nil : [reminderInfo valueForKey:@"reminderTitle"];
+        self.repeatCalendar = [[reminderInfo valueForKey:@"repeatCalendar"] intValue];
     }
     return self;
 }

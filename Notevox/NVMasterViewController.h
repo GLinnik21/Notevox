@@ -14,12 +14,9 @@
 
 @class NVDetailViewController;
 
-@interface NVMasterViewController : UITableViewController <UITextFieldDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating, AVAudioRecorderDelegate, AVAudioPlayerDelegate, MGSwipeTableCellDelegate>
+@interface NVMasterViewController : UITableViewController <UITextFieldDelegate, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating, AVAudioRecorderDelegate, AVAudioPlayerDelegate, MGSwipeTableCellDelegate>
 
 @property (strong, nonatomic) NVDetailViewController *detailViewController;
-
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @property (nonatomic, strong) UISearchController *searchController;
 

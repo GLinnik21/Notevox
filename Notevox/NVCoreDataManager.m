@@ -133,8 +133,11 @@
     NVReminder *reminder = nil;
     if (reminderArray.count == 1) {
         reminder = reminderArray.firstObject;
+    } else if (!reminderArray.count || !reminderArray) {
+        NSLog(@"%@: No UUID was found\n", [self class]);
+        abort();
     } else {
-        NSLog(@"2 or more reminders were found with the same UUID. How could it be?!\n");
+        NSLog(@"%@: 2 or more reminders were found with the same UUID. How could it be?!\n", [self class]);
         abort();
     }
     return reminder;
@@ -145,7 +148,7 @@
     return reminder;
 }
 
-- (void)setReminderWithReminderNote:(NVReminderNote *)reminderNote {
+- (void)updateReminderWithReminderNote:(NVReminderNote *)reminderNote {
     NVReminder *managedObject = [self getManagedObjectReminderWithUUID:[[NSUUID alloc] initWithUUIDString:reminderNote.uniqueID]];
     [managedObject configureReminderWithDictionary:reminderNote.dictionary];
     [self saveState];
@@ -156,8 +159,8 @@
     [self saveState];
 }
 
-- (void)addNewReminderWithDinctionary:(NSDictionary *)dictionary {
-    [NVReminder addReminderFromDictionary:dictionary withContext:self.managedObjectContext];
+- (void)addNewReminderWithReminderNote:(NVReminderNote *)reminderNote {
+    [NVReminder addReminderFromDictionary:reminderNote.dictionary withContext:self.managedObjectContext];
     [self saveState];
 }
 

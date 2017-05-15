@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "NVReminder+Add.h"
 #import <CoreData/CoreData.h>
+#import "NVReminderNote.h"
 
 @interface NVDetailViewController : UITableViewController <UITextFieldDelegate>
 
-@property (weak) NVReminder *reminder;
+@property (weak) NVReminderNote *reminder;
 
 @end
 

@@ -34,22 +34,40 @@
 }
 
 - (void)createNewReminder:(NVReminderNote *)reminderNote {
-    [_sharedCoreDataManager setReminderWithReminderNote:reminderNote];
+    [_sharedCoreDataManager addNewReminderWithReminderNote:reminderNote];
+    [self syncAllRemindersWithCoreData];
 }
 
 - (void)updateReminderWithReminderNote:(NVReminderNote *)reminder {
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString: reminder.uniqueID];
     if (uuid) {
-        [_sharedCoreDataManager deleteReminderWithUUID:uuid];
-        [_sharedCoreDataManager addNewReminderWithDinctionary:reminder.dictionary];
-        [_sharedCoreDataManager saveState];
+        [_sharedCoreDataManager updateReminderWithReminderNote:reminder];
     } else {
-        NSLog(@"NVReminderManager: no or wrong UUID in reminder with title '%@'", reminder.reminderTitle);
+        NSLog(@"%@: no or wrong UUID in reminder with title '%@'", [self class], reminder.reminderTitle);
     }
 }
 
-- (NSArray<NVReminderNote *>*)getAllReminders {
-    return [_sharedCoreDataManager getAllReminders];
+@synthesize allReminders = _allReminders;
+
+- (NSArray<NVReminderNote *> *)allReminders {
+    [self syncAllRemindersWithCoreData];
+    return _allReminders;
+}
+
+- (NSUInteger)numberOfReminders {
+    if (!_allReminders) {
+        [self syncAllRemindersWithCoreData];
+    }
+    return _allReminders.count;
+}
+
+- (void)syncAllRemindersWithCoreData {
+    _allReminders = [[NSMutableArray alloc] initWithArray:[_sharedCoreDataManager getAllReminders]];
+    [_allReminders sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        NSDate *firstDate = [obj1 creationDate];
+        NSDate *secondDate = [obj2 creationDate];
+        return [secondDate compare:firstDate];
+    }];
 }
 
 - (NVReminderNote *)getReminderWithUUID:(NSUUID *)uuid {
@@ -67,6 +85,7 @@
 
 - (void)deleteReminderWithUUID:(NSUUID *)uuid{
     [_sharedCoreDataManager deleteReminderWithUUID:uuid];
+    [self syncAllRemindersWithCoreData];
 }
 
 @end

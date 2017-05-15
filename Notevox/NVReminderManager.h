@@ -15,9 +15,11 @@
 
 - (void)createNewReminder:(NVReminderNote *)reminderNote;
 - (void)updateReminderWithReminderNote:(NVReminderNote *)reminder;
-- (NSArray<NVReminderNote *> *)getAllReminders;
 - (NVReminderNote *)getReminderWithUUID:(NSUUID *)uuid;
 - (void)deleteReminderWithUUID:(NSUUID *)uuid;
 - (void)deleteAllReminders;
+
+@property (strong, readonly) NSMutableArray<NVReminderNote *> *allReminders;
+@property (readonly) NSUInteger numberOfReminders;
 
 @end

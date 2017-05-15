@@ -12,12 +12,15 @@
 #import "NVAppDelegate.h"
 #import "UIView+Shake.h"
 #import "NSDate+DateTools.h"
+#import "NVReminderManager.h"
 
 @interface NVMasterViewController () {
     AVAudioRecorder *_recorder;
     AVAudioPlayer *_player;
     NVCustomTableViewCell *_previouslyPlayedCell;
 }
+
+@property (strong) NSMutableArray<NVReminderNote *> *reminders;
 
 @end
 
@@ -51,8 +54,8 @@
                                              selector:@selector(reloadTableView)
                                                  name:@"reloadData"
                                                object:nil];
-    [self initializeFetchedResultsController];
     [self reloadTableView];
+    self.reminders = [[NVReminderManager sharedInstance] allReminders];
     [super viewWillAppear:animated];
 }
 
@@ -84,7 +87,7 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     NVCustomTableViewCell *sellectedCell = [self getCustomCellViewObject:textField];
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sellectedCell];
-    NVReminder *reminder = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    NVReminderNote *reminder = [self.reminders objectAtIndex:indexPath.row];
     
     if (textField.text.length > 0) {
         reminder.reminderTitle = textField.text;
@@ -96,7 +99,7 @@
 //TODO: split nontification scheduling and player into different instances
 - (void)rescheduleAllLocalNotifications{
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    NSArray *fetchedData = [_fetchedResultsController fetchedObjects];
+    NSArray *fetchedData = self.reminders;
     NSSortDescriptor *dateToRemindSort = [NSSortDescriptor sortDescriptorWithKey:@"dateToRemind" ascending:YES];
     NSArray *sortedData = [fetchedData sortedArrayUsingDescriptors:@[dateToRemindSort]];
     NSInteger badgeNumber = 1;
@@ -181,7 +184,7 @@
         }
         _previouslyPlayedCell = tempCell;
         
-        NVReminder *reminder = (NVReminder*)[[self fetchedResultsController] objectAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
+        NVReminderNote *reminder = [self.reminders objectAtIndex:sender.tag];
         
         NSString *fileURLString = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         fileURLString = [fileURLString stringByAppendingPathComponent:[NSString stringWithFormat:@"Sounds/%@", reminder.audioFileURL]];
@@ -301,9 +304,7 @@
 
 
 - (void)insertNewObject:(id)sender {
-    NSManagedObjectContext *context = [[NVCoreDataManager sharedInstance] managedObjectContext];
-    
-    NVReminder *newReminder = [NSEntityDescription insertNewObjectForEntityForName:@"Reminder" inManagedObjectContext:context];
+    NVReminderNote *newReminder = [[NVReminderNote alloc] init];
     
     newReminder.uniqueID = [[[NSUUID alloc] init] UUIDString];
     newReminder.reminderTitle = [NSString stringWithFormat:NSLocalizedString(@"untitled", @"")];
@@ -311,33 +312,7 @@
     newReminder.creationDate = [NSDate date];
     newReminder.audioFileURL = sender;
     
-    [[NVCoreDataManager sharedInstance] saveState];
-}
-
-
-- (void)initializeFetchedResultsController {
-    NSFetchRequest *request = [NVReminder fetchRequest];
-    
-    NSSortDescriptor *creationDateSort = [NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO];
-    
-    [request setSortDescriptors:@[creationDateSort]];
-    
-    NSManagedObjectContext *moc = [[NVCoreDataManager sharedInstance] managedObjectContext]; //Retrieve the main queue NSManagedObjectContext
-    
-    //For UISearhController
-    if (self.searchController.searchBar.text.length != 0) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"reminderTitle contains[c] %@", self.searchController.searchBar.text];
-        request.predicate = predicate;
-    }
-    
-    [self setFetchedResultsController:[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:moc sectionNameKeyPath:nil cacheName:nil]];
-    self.fetchedResultsController.delegate = self;
-    
-    NSError *error = nil;
-    if (![self.fetchedResultsController performFetch:&error]) {
-        NSLog(@"Failed to initialize FetchedResultsController: %@\n%@", [error localizedDescription], [error userInfo]);
-        abort();
-    }
+    [[NVReminderManager sharedInstance] createNewReminder:newReminder];
 }
 
 #pragma mark - AVAudioRecorderDelegate
@@ -356,23 +331,20 @@
 
 #pragma mark - Segues
 
-//- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-//    [self performSegueWithIdentifier: @"EditUser" sender: [tableView cellForRowAtIndexPath: indexPath]];
-//}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        NVReminder *reminder = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        NVReminderNote *reminder = [self.reminders objectAtIndex:indexPath.row];
         NVDetailViewController *controller = (NVDetailViewController *)[[segue destinationViewController] topViewController];
         [controller setReminder:reminder];
     }
 }
 #pragma mark - MGSwipeTableCellDelegate
 
--(BOOL) swipeTableCell:(nonnull MGSwipeTableCell*) cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion {
+- (BOOL)swipeTableCell:(nonnull MGSwipeTableCell*) cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    NVReminder *reminder = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    NVReminderNote *reminder = [self.reminders objectAtIndex:indexPath.row];
     if (reminder.isImportant) {
         reminder.isImportant = NO;
     } else {
@@ -387,8 +359,8 @@
     [self.tableView reloadData];
 }
 
-- (void)configureCell:(NVCustomTableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath {
-    NVReminder *reminder = (NVReminder*)[[self fetchedResultsController] objectAtIndexPath:indexPath];
+- (void)configureCell:(NVCustomTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    NVReminderNote *reminder = [self.reminders objectAtIndex:indexPath.row];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.locale = [NSLocale currentLocale];
@@ -421,15 +393,9 @@
         cell.dateLabel.textColor = [UIColor darkGrayColor];;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[[self fetchedResultsController] sections] count];
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    id< NSFetchedResultsSectionInfo> sectionInfo = [[self fetchedResultsController] sections][section];
-    return [sectionInfo numberOfObjects];
+    return [[NVReminderManager sharedInstance] numberOfReminders];
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NVCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReminderCell" forIndexPath:indexPath];
@@ -447,73 +413,17 @@
     return cell;
 }
 
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-
-
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSManagedObjectContext *context = [[NVCoreDataManager sharedInstance] managedObjectContext];
-        
-        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
-        
-        [[NVCoreDataManager sharedInstance] saveState];
+        [[NVReminderManager sharedInstance] deleteReminderWithUUID:[[NSUUID alloc] initWithUUIDString:[[self.reminders objectAtIndex:indexPath.row] uniqueID]]];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
     }
-}
-
-#pragma mark - NSFetchedResultsControllerDelegate
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    [[self tableView] beginUpdates];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [[self tableView] insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-        case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-        case NSFetchedResultsChangeMove:
-        case NSFetchedResultsChangeUpdate:
-            break;
-    }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-        case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-        case NSFetchedResultsChangeUpdate:
-            [self configureCell:[[self tableView] cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
-            break;
-        case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-    }
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-    _previouslyPlayedCell = nil;
-    [_player stop];
-    [self rescheduleAllLocalNotifications];
-    [[self tableView] endUpdates];
 }
 
 #pragma mark - UISearchControllerDelegate
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
     [_player stop];
-    [self initializeFetchedResultsController];
     [self reloadTableView];
 }
 

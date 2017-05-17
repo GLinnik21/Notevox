@@ -20,7 +20,7 @@
     NVCustomTableViewCell *_previouslyPlayedCell;
 }
 
-@property (strong) NSMutableArray<NVReminderNote *> *reminders;
+#define reminders [[NVReminderManager sharedInstance] allReminders]
 
 @end
 
@@ -37,10 +37,9 @@
     [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted){if (!granted) self.navigationItem.rightBarButtonItem.enabled = NO;}];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateLocalArray)
+                                             selector:@selector(rescheduleAllLocalNotifications)
                                                  name:NVReminderManagerDataChanged
                                                object:nil];
-    [self updateLocalArray];
     
     UIDevice *device = [UIDevice currentDevice];
     device.proximityMonitoringEnabled = YES;
@@ -68,10 +67,6 @@
                                                   object:nil];
 }
 
-- (void)updateLocalArray {
-    self.reminders = [[NVReminderManager sharedInstance] allReminders];
-}
-
 - (NVCustomTableViewCell *)getCustomCellViewObject:(id)sender {
     NVCustomTableViewCell *tempCell = (NVCustomTableViewCell *)sender;
     while (![tempCell isKindOfClass:[NVCustomTableViewCell class]]) {
@@ -88,7 +83,7 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     NVCustomTableViewCell *sellectedCell = [self getCustomCellViewObject:textField];
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sellectedCell];
-    NVReminderNote *reminder = [self.reminders objectAtIndex:indexPath.row];
+    NVReminderNote *reminder = [reminders objectAtIndex:indexPath.row];
     
     if (textField.text.length > 0) {
         reminder.reminderTitle = textField.text;
@@ -98,9 +93,14 @@
 
 }
 //TODO: split nontification scheduling and player into different instances
+
+- (IBAction)rescheduleWhenDone:(UIStoryboardSegue *)segue {
+    [self rescheduleAllLocalNotifications];
+}
+
 - (void)rescheduleAllLocalNotifications{
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    NSArray *fetchedData = self.reminders;
+    NSArray *fetchedData = reminders;
     NSSortDescriptor *dateToRemindSort = [NSSortDescriptor sortDescriptorWithKey:@"dateToRemind" ascending:YES];
     NSArray *sortedData = [fetchedData sortedArrayUsingDescriptors:@[dateToRemindSort]];
     NSInteger badgeNumber = 1;
@@ -185,7 +185,7 @@
         }
         _previouslyPlayedCell = tempCell;
         
-        NVReminderNote *reminder = [self.reminders objectAtIndex:sender.tag];
+        NVReminderNote *reminder = [reminders objectAtIndex:sender.tag];
         
         NSString *fileURLString = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         fileURLString = [fileURLString stringByAppendingPathComponent:[NSString stringWithFormat:@"Sounds/%@", reminder.audioFileURL]];
@@ -337,7 +337,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        NVReminderNote *reminder = [self.reminders objectAtIndex:indexPath.row];
+        NVReminderNote *reminder = [reminders objectAtIndex:indexPath.row];
         NVDetailViewController *controller = (NVDetailViewController *)[[segue destinationViewController] topViewController];
         [controller setReminder:reminder];
     }
@@ -346,7 +346,7 @@
 
 - (BOOL)swipeTableCell:(nonnull MGSwipeTableCell*) cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    NVReminderNote *reminder = [self.reminders objectAtIndex:indexPath.row];
+    NVReminderNote *reminder = [reminders objectAtIndex:indexPath.row];
     if (reminder.isImportant) {
         reminder.isImportant = NO;
     } else {
@@ -362,7 +362,7 @@
 }
 
 - (void)configureCell:(NVCustomTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    NVReminderNote *reminder = [self.reminders objectAtIndex:indexPath.row];
+    NVReminderNote *reminder = [reminders objectAtIndex:indexPath.row];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.locale = [NSLocale currentLocale];
@@ -417,7 +417,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [[NVReminderManager sharedInstance] deleteReminderWithUUID:[[NSUUID alloc] initWithUUIDString:[[self.reminders objectAtIndex:indexPath.row] uniqueID]]];
+        [[NVReminderManager sharedInstance] deleteReminderWithUUID:[[NSUUID alloc] initWithUUIDString:[[reminders objectAtIndex:indexPath.row] uniqueID]]];
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
     }
 }

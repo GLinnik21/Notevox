@@ -28,10 +28,6 @@
 
 - (void)configureView {
     // Update the user interface for the detail item.
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:
-                                   UIBarButtonSystemItemDone target:self action:@selector(dismissViewController)];
-    self.navigationItem.rightBarButtonItem = doneButton;
-    
     [self.taskDescription setText:self.reminder.reminderTitle];
     [self.remindWithVoiceSwitch setOn:self.reminder.isCustomSound ? YES : NO];
     
@@ -105,10 +101,6 @@
     }
     self.reminder.reminderTitle = self.taskDescription.text;
     [super viewWillAppear:animated];
-}
-
-- (void)dismissViewController {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
